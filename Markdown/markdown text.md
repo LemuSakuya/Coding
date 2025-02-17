@@ -1,4 +1,4 @@
-# <center><font face="仿宋" font color=orange>Markdown 入门教程</font></center>
+# <font face="仿宋" font color=orange>Markdown 入门教程</font>
 ## <center><font face="" size = 5> LemuSakuya</font></center>
 ### 一、准备工作
     跳过
@@ -63,7 +63,8 @@
         或者
    - [Thank you for your subscribtion][链接](要放在注释前面)
 8. **图片**
-   
+    
+9. 
 
 
 
