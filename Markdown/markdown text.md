@@ -59,12 +59,14 @@
 7. **超链接**
    - [谢谢关注Github喵~]: 
 
-        https://github.com/LemuSakuya/DEV/tree/dev
+        https://github.com/LemuSakuya
         或者
-   - [Thank you for your subscribtion][链接](要放在注释前面)
+   - [Thank you for your subscribtion][链接]
+        (要放在注释前面)
 8. **图片**
+    ![THproject](https://lemusakuyapicture.com/picture/20240818_135310.jpg)
+9. **Latex**
     
-9. 
 
 
 
@@ -72,5 +74,5 @@
 
 
 
-    [链接]: https://github.com/LemuSakuya/DEV/tree/dev
+    [链接]: https://github.com/LemuSakuya
     [^1]: 就是公主殿下啊喵？
