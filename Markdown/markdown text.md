@@ -64,15 +64,17 @@
    - [Thank you for your subscribtion][链接]
         (要放在注释前面)
 8. **图片**
-    ![THproject](https://lemusakuyapicture.com/picture/20240818_135310.jpg)
+    ![THproject](Markdown/Picture/TH8.jpg)
 9. **Latex**
-    
-
-
-
-
-
-
+    - 行内显示数学公式
+    $f(x)=ax+b$
+    - 块内显示数学表达式
+    $$
+    \begin{Bmatrix}
+    a & b \\
+    c & d
+    \end{Bmatrix}
+    $$
 
     [链接]: https://github.com/LemuSakuya
     [^1]: 就是公主殿下啊喵？
