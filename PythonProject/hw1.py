@@ -1,0 +1,10 @@
+print ("what is your name")
+name = input()
+print ("what is your pwd")
+pwd = input()
+print ("what is your sex")
+sex = input()
+
+print ("your name is: ", name)
+print ("your pwd is: ", pwd)
+print ("your sex is: ", sex)
