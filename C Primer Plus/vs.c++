@@ -30,7 +30,7 @@ using namespace std;
 //     cout << *p << " " << a << "  " << p << endl;
 // }
 
-struct point
+struct point //相当于int 
 {
     int x;
     int y;
@@ -78,4 +78,4 @@ int main()
     p -> b = 'C';
     p -> c = "oaskjl";
     cout << (*p).a << " " << (*p).b << "    " << (*p).c << endl;
-} 
+}
