@@ -111,7 +111,7 @@ void freeList (Node *L) {
     }
 
     L -> next = NULL;
-}
+}//释放链表
 
 
 int main() {
