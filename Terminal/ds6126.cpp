@@ -12,9 +12,7 @@ vector<pair<int, int> > tmp;
 
 void dfs(int x, int y) {
     if (x == xe && y == ye) {
-        if (ans.empty()) {
-            ans = tmp;
-        }
+        if (ans.empty() /*|| tmp.size() < ans.size()*/) ans = tmp;
         return;
     }
     for (int i = 0; i < 4; i++) {
