@@ -34,17 +34,19 @@ void listprint (Node *L) {
 void findNodeFS (Node *L, int k) {
     Node *fast = L -> next;
     Node *slow = L -> next;
-    Node *count = L -> next;
     int length = 0;
 
-    while (count -> next != NULL) {
+    while (fast != NULL) {
         length++;
-        count = count -> next;
+        fast = fast -> next;
     }
 
     if (k > length) {
         printf("Your find Node is not exsist\n");
+        return;
     }
+
+    fast = L -> next;
 
     for (int i = 0; i < k; i++) {
         fast = fast -> next;
@@ -60,13 +62,17 @@ void findNodeFS (Node *L, int k) {
 
 int main () {
     Node* list = initList();
-    insertHead(list, 1);
     insertHead(list, 2);
-    insertHead(list, 3);
-    insertHead(list, 4);
-    insertHead(list, 5);
+    insertHead(list, 22);
+    insertHead(list, 3412);
+    insertHead(list, 124);
+    insertHead(list, 111);
+    insertHead(list, 234);
+    insertHead(list, 567);
+    insertHead(list, 890);
+    insertHead(list, 123);
     listprint(list);
-    findNodeFS(list, 2);
+    findNodeFS(list, 3);
     findNodeFS(list, 10);
     return 0;
 
