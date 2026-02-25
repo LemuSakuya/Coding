@@ -144,7 +144,7 @@
 2. **正则表达式**：
    ```python
    import re
-
+   
    text = "The rain in Spain"
    # 查找所有匹配的子字符串
    findall_result = re.findall(r"\bS\w+", text)
@@ -170,7 +170,7 @@
      ```python
      def greet(name, greeting="Hello"):
          print(f"{greeting}, {name}!")
-
+     
      greet("Alice")  # 输出: Hello, Alice!
      greet("Bob", greeting="Hi")  # 输出: Hi, Bob!
      ```
@@ -178,17 +178,17 @@
      ```python
      def sum_all(*args):
          return sum(args)
-
+     
      print(sum_all(1, 2, 3, 4, 5))  # 输出: 15
      ```
    - **参数解包**：
      ```python
      def print_args(a, b, c):
          print(a, b, c)
-
+     
      args = (1, 2, 3)
      print_args(*args)  # 输出: 1 2 3
-
+     
      kwargs = {'a': 1, 'b': 2, 'c': 3}
      print_args(**kwargs)  # 输出: 1 2 3
      ```
@@ -196,11 +196,11 @@
 2. **作用域**：
    ```python
    x = 10  # 全局变量
-
+   
    def modify_x():
        global x
        x += 5
-
+   
    modify_x()
    print(x)  # 输出: 15
    ```
@@ -217,18 +217,18 @@
    class Animal:
        def __init__(self, name):
            self.name = name
-
+   
        def speak(self):
            print(f"{self.name} makes a sound")
-
+   
    class Dog(Animal):
        def __init__(self, name, breed):
            super().__init__(name)
            self.breed = breed
-
+   
        def speak(self):
            print(f"{self.name} barks")
-
+   
    dog = Dog("Buddy", "Golden Retriever")
    dog.speak()  # 输出: Buddy barks
    ```
@@ -240,11 +240,11 @@
            self.public_var = 10
            self._protected_var = 20
            self.__private_var = 30  # 私有变量
-
+   
        @property
        def private_var(self):
            return self.__private_var
-
+   
    obj = MyClass()
    print(obj.public_var)  # 输出: 10
    print(obj._protected_var)  # 输出: 20
@@ -255,18 +255,18 @@
    ```python
    class MyClass:
        class_var = "I am a class variable"
-
+   
        def instance_method(self):
            print(f"Instance method: {self.class_var}")
-
+   
        @classmethod
        def class_method(cls):
            print(f"Class method: {cls.class_var}")
-
+   
        @staticmethod
        def static_method():
            print("Static method")
-
+   
    obj = MyClass()
    obj.instance_method()  # 输出: Instance method: I am a class variable
    MyClass.class_method()  # 输出: Class method: I am a class variable
@@ -278,23 +278,23 @@
    class Animal:
        def speak(self):
            print("Some generic sound")
-
+   
    class Dog(Animal):
        def speak(self):
            super().speak()  # 调用父类方法
            print("Woof!")
-
+   
    class Cat(Animal):
        def speak(self):
            super().speak()  # 调用父类方法
            print("Meow!")
-
+   
    def animal_sound(animal):
        animal.speak()
-
+   
    dog = Dog()
    cat = Cat()
-
+   
    animal_sound(dog)  # 输出: Some generic sound
                       #        Woof!
    animal_sound(cat)  # 输出: Some generic sound
@@ -307,7 +307,7 @@
      ```python
      with open('example.txt', 'w') as f:
          f.write("Hello, World!")
-
+     
      with open('example.txt', 'r') as f:
          content = f.read()
          print(content)  # 输出: Hello, World!
@@ -316,12 +316,12 @@
      ```python
      with open('example.txt', 'w') as f:
          f.writelines(["Line 1\n", "Line 2\n", "Line 3\n"])
-
+     
      with open('example.txt', 'r') as f:
          lines = f.readlines()
          print(lines)  # 输出: ['Line 1\n', 'Line 2\n', 'Line 3\n']
      ```
-   - **文件指针**：
+   - xxxxxxxxxx import re​text = "Call me at 123-456-7890 or 987.654.3210"pattern = r"\b\d{3}[-.]\d{3}[-.]\d{4}\b"matches = re.findall(pattern, text)print(matches)  # 输出: ['123-456-7890', '987.654.3210']python
      ```python
      with open('example.txt', 'r+') as f:
          print(f.read(5))  # 输出: Line 1
@@ -361,22 +361,22 @@
 1. **tkinter基础**：
    ```python
    import tkinter as tk
-
+   
    def on_button_click():
        print("Button was clicked!")
-
+   
    root = tk.Tk()
    root.title("Tkinter Example")
-
+   
    label = tk.Label(root, text="Hello, World!")
    label.pack()
-
+   
    button = tk.Button(root, text="Click Me", command=on_button_click)
    button.pack()
-
+   
    entry = tk.Entry(root)
    entry.pack()
-
+   
    root.mainloop()
    ```
 
@@ -385,13 +385,13 @@
    - **服务器端**：
      ```python
      import socket
-
+     
      server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
      server_socket.bind(('localhost', 8080))
      server_socket.listen(5)
-
+     
      print("Server is listening on port 8080")
-
+     
      while True:
          client_socket, addr = server_socket.accept()
          print(f"Connection from {addr} has been established")
@@ -401,13 +401,13 @@
    - **客户端**：
      ```python
      import socket
-
+     
      client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
      client_socket.connect(('localhost', 8080))
-
+     
      message = client_socket.recv(1024)
      print(message.decode())  # 输出: Welcome to the server!
-
+     
      client_socket.close()
      ```
 
@@ -415,21 +415,21 @@
 1. **多线程**：
    ```python
    import threading
-
+   
    def print_numbers():
        for i in range(5):
            print(i)
-
+   
    def print_letters():
        for letter in 'abcde':
            print(letter)
-
+   
    thread1 = threading.Thread(target=print_numbers)
    thread2 = threading.Thread(target=print_letters)
-
+   
    thread1.start()
    thread2.start()
-
+   
    thread1.join()
    thread2.join()
    ```
@@ -437,16 +437,16 @@
 2. **多进程**：
    ```python
    from multiprocessing import Process, Queue
-
+   
    def worker(q):
        q.put("Hello from the worker process")
-
+   
    q = Queue()
    p = Process(target=worker, args=(q,))
    p.start()
-
+   
    message = q.get()
    print(message)  # 输出: Hello from the worker process
-
+   
    p.join()
    ```

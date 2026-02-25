@@ -1,0 +1,22 @@
+{'dropout': 0.35000000000000003, 'dropout_gat': 0.05, 'fp_2_dim': 300, 'gat_scale': 0.6000000000000001, 'nheads': 6, 'nhid': 65}
+Result auc : 0.9148541114058355 +/- 0.0
+{'dropout': 0.15000000000000002, 'dropout_gat': 0.45, 'fp_2_dim': 300, 'gat_scale': 0.8, 'nheads': 4, 'nhid': 65}
+Result auc : 0.9027409372236959 +/- 0.0
+{'dropout': 0.35000000000000003, 'dropout_gat': 0.6000000000000001, 'fp_2_dim': 450, 'gat_scale': 0.30000000000000004, 'nheads': 4, 'nhid': 75}
+Result auc : 0.9174182139699381 +/- 0.0
+{'dropout': 0.45, 'dropout_gat': 0.05, 'fp_2_dim': 550, 'gat_scale': 0.6000000000000001, 'nheads': 3, 'nhid': 60}
+Result auc : 0.9041556145004421 +/- 0.0
+{'dropout': 0.5, 'dropout_gat': 0.45, 'fp_2_dim': 400, 'gat_scale': 0.5, 'nheads': 6, 'nhid': 75}
+Result auc : 0.9052166224580016 +/- 0.0
+{'dropout': 0.35000000000000003, 'dropout_gat': 0.05, 'fp_2_dim': 550, 'gat_scale': 0.6000000000000001, 'nheads': 5, 'nhid': 45}
+Result auc : 0.9204244031830239 +/- 0.0
+{'dropout': 0.4, 'dropout_gat': 0.45, 'fp_2_dim': 450, 'gat_scale': 0.8, 'nheads': 8, 'nhid': 75}
+Result auc : 0.9015030946065429 +/- 0.0
+{'dropout': 0.35000000000000003, 'dropout_gat': 0.2, 'fp_2_dim': 550, 'gat_scale': 0.4, 'nheads': 6, 'nhid': 45}
+Result auc : 0.9045092838196286 +/- 0.0
+{'dropout': 0.0, 'dropout_gat': 0.35000000000000003, 'fp_2_dim': 600, 'gat_scale': 0.6000000000000001, 'nheads': 3, 'nhid': 70}
+Result auc : 0.91158267020336 +/- 0.0
+{'dropout': 0.30000000000000004, 'dropout_gat': 0.55, 'fp_2_dim': 450, 'gat_scale': 0.2, 'nheads': 8, 'nhid': 55}
+Result auc : 0.9038019451812556 +/- 0.0
+Best Hyperparameters : 
+{'dropout': 0.35000000000000003, 'dropout_gat': 0.05, 'fp_2_dim': 550.0, 'gat_scale': 0.6000000000000001, 'nheads': 5.0, 'nhid': 45.0}
