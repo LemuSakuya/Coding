@@ -1,0 +1,1 @@
+{"name":"Local: test","url":"e:\\VSCode\\Coding\\test.cpp","tests":[{"id":1773227502603,"input":"7\n4 2\ncbca\n3 1\nbca\n5 4\nabcde\n6 3\nzxcvbn\n5 5\naaaaa\n7 3\nabzcaba\n6 2\nabzaba","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\VSCode\\Coding\\test.cpp","group":"local","local":true}
