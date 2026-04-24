@@ -1,0 +1,11 @@
+cd E:\VSCode\Coding\Project
+
+python train.py --data_path E:\VSCode\Coding\Project\Data\BreastCellLines\Bcap37.csv --dataset_type classification --save_path model_save/Bcap37 --log_path log/Bcap37
+
+python predict.py --predict_path Data\LIT-PCBA\ADRB2\test.csv --model_path model_save/Bcap37/Seed_0/model.pt --result_path Bcap37_result.csv
+
+python interpretation_graph.py --predict_path Data\LIT-PCBA\ADRB2\test.csv --model_path model_save/Bcap37/Seed_0/model.pt --figure_path Bcap37_figure
+
+python train.py --data_path Data/MoleculeNet/bace.csv --dataset_type classification --save_path model_save/bace --log_path log/bace
+
+python predict.py --predict_path Data\LIT-PCBA\ADRB2\test.csv --model_path model_save/bace/Seed_0/model.pt --result_path bace_result.csv

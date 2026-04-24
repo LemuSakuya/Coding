@@ -1,0 +1,13 @@
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+opencv-contrib-python>=4.8
+scikit-image>=0.21
+scikit-learn>=1.3
+pillow>=10.0
+pywavelets>=1.4
+imageio>=2.31
+# Project 10 (deep learning) - 可选，想跑 CNN 分类时安装
+torch>=2.1
+torchvision>=0.16
+tqdm>=4.66

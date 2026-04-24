@@ -1,0 +1,1264 @@
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 292    Train size: 233    Val size: 29    Test size: 30
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.0, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_5): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_6): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_7): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=512, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=512, out_features=300, bias=True)
+    (dropout): Dropout(p=0.0, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=300, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=300, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.0, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.0, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.878574
+Validation auc = 0.663158
+Epoch 1
+Train auc = 0.882451
+Validation auc = 0.668421
+Epoch 2
+Train auc = 0.872415
+Validation auc = 0.647368
+Epoch 3
+Train auc = 0.911877
+Validation auc = 0.678947
+Epoch 4
+Train auc = 0.921913
+Validation auc = 0.668421
+Epoch 5
+Train auc = 0.943507
+Validation auc = 0.673684
+Epoch 6
+Train auc = 0.958561
+Validation auc = 0.700000
+Epoch 7
+Train auc = 0.968522
+Validation auc = 0.710526
+Epoch 8
+Train auc = 0.978026
+Validation auc = 0.742105
+Epoch 9
+Train auc = 0.984413
+Validation auc = 0.757895
+Epoch 10
+Train auc = 0.990192
+Validation auc = 0.763158
+Epoch 11
+Train auc = 0.992168
+Validation auc = 0.763158
+Epoch 12
+Train auc = 0.994069
+Validation auc = 0.752632
+Epoch 13
+Train auc = 0.996426
+Validation auc = 0.763158
+Epoch 14
+Train auc = 0.998783
+Validation auc = 0.763158
+Epoch 15
+Train auc = 0.999392
+Validation auc = 0.752632
+Epoch 16
+Train auc = 0.999468
+Validation auc = 0.763158
+Epoch 17
+Train auc = 0.999772
+Validation auc = 0.757895
+Epoch 18
+Train auc = 1.000000
+Validation auc = 0.752632
+Epoch 19
+Train auc = 1.000000
+Validation auc = 0.752632
+Epoch 20
+Train auc = 1.000000
+Validation auc = 0.757895
+Epoch 21
+Train auc = 1.000000
+Validation auc = 0.752632
+Epoch 22
+Train auc = 1.000000
+Validation auc = 0.757895
+Epoch 23
+Train auc = 1.000000
+Validation auc = 0.757895
+Epoch 24
+Train auc = 1.000000
+Validation auc = 0.752632
+Epoch 25
+Train auc = 1.000000
+Validation auc = 0.752632
+Epoch 26
+Train auc = 1.000000
+Validation auc = 0.752632
+Epoch 27
+Train auc = 1.000000
+Validation auc = 0.752632
+Epoch 28
+Train auc = 1.000000
+Validation auc = 0.752632
+Epoch 29
+Train auc = 1.000000
+Validation auc = 0.763158
+Best validation auc = 0.763158 on epoch 10
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.attention_4.W.
+Load parameter: encoder3.encoder.encoder.attention_4.a.
+Load parameter: encoder3.encoder.encoder.attention_5.W.
+Load parameter: encoder3.encoder.encoder.attention_5.a.
+Load parameter: encoder3.encoder.encoder.attention_6.W.
+Load parameter: encoder3.encoder.encoder.attention_6.a.
+Load parameter: encoder3.encoder.encoder.attention_7.W.
+Load parameter: encoder3.encoder.encoder.attention_7.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.862222
+Running 1 folds in total.
+Average test auc = 0.862222 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 292    Train size: 233    Val size: 29    Test size: 30
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.0, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_5): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_6): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_7): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=512, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=512, out_features=300, bias=True)
+    (dropout): Dropout(p=0.0, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=300, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=300, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.0, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.0, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.825882
+Validation auc = 0.568421
+Epoch 1
+Train auc = 0.856752
+Validation auc = 0.636842
+Epoch 2
+Train auc = 0.884884
+Validation auc = 0.678947
+Epoch 3
+Train auc = 0.924650
+Validation auc = 0.663158
+Epoch 4
+Train auc = 0.947156
+Validation auc = 0.694737
+Epoch 5
+Train auc = 0.961451
+Validation auc = 0.705263
+Epoch 6
+Train auc = 0.966773
+Validation auc = 0.736842
+Epoch 7
+Train auc = 0.980231
+Validation auc = 0.747368
+Epoch 8
+Train auc = 0.989279
+Validation auc = 0.742105
+Epoch 9
+Train auc = 0.995058
+Validation auc = 0.742105
+Epoch 10
+Train auc = 0.996578
+Validation auc = 0.742105
+Epoch 11
+Train auc = 0.996122
+Validation auc = 0.726316
+Epoch 12
+Train auc = 0.998099
+Validation auc = 0.731579
+Epoch 13
+Train auc = 0.999240
+Validation auc = 0.731579
+Epoch 14
+Train auc = 0.999544
+Validation auc = 0.742105
+Epoch 15
+Train auc = 0.999468
+Validation auc = 0.747368
+Epoch 16
+Train auc = 0.999468
+Validation auc = 0.747368
+Epoch 17
+Train auc = 0.999924
+Validation auc = 0.747368
+Epoch 18
+Train auc = 0.999924
+Validation auc = 0.747368
+Epoch 19
+Train auc = 0.999924
+Validation auc = 0.747368
+Epoch 20
+Train auc = 1.000000
+Validation auc = 0.757895
+Epoch 21
+Train auc = 1.000000
+Validation auc = 0.747368
+Epoch 22
+Train auc = 1.000000
+Validation auc = 0.747368
+Epoch 23
+Train auc = 1.000000
+Validation auc = 0.747368
+Epoch 24
+Train auc = 1.000000
+Validation auc = 0.742105
+Epoch 25
+Train auc = 1.000000
+Validation auc = 0.742105
+Epoch 26
+Train auc = 1.000000
+Validation auc = 0.742105
+Epoch 27
+Train auc = 1.000000
+Validation auc = 0.742105
+Epoch 28
+Train auc = 1.000000
+Validation auc = 0.742105
+Epoch 29
+Train auc = 1.000000
+Validation auc = 0.742105
+Best validation auc = 0.757895 on epoch 20
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.attention_4.W.
+Load parameter: encoder3.encoder.encoder.attention_4.a.
+Load parameter: encoder3.encoder.encoder.attention_5.W.
+Load parameter: encoder3.encoder.encoder.attention_5.a.
+Load parameter: encoder3.encoder.encoder.attention_6.W.
+Load parameter: encoder3.encoder.encoder.attention_6.a.
+Load parameter: encoder3.encoder.encoder.attention_7.W.
+Load parameter: encoder3.encoder.encoder.attention_7.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.893333
+Running 1 folds in total.
+Average test auc = 0.893333 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 29378    Train size: 23502    Val size: 2937    Test size: 2939
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.0, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_5): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_6): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_7): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=512, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=512, out_features=300, bias=True)
+    (dropout): Dropout(p=0.0, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=300, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=300, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.0, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.0, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.0, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_5): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_6): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_7): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=512, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=512, out_features=300, bias=True)
+    (dropout): Dropout(p=0.0, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=300, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=300, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.0, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.0, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.849244
+Validation auc = 0.791814
+Epoch 1
+Train auc = 0.883522
+Validation auc = 0.797307
+Epoch 2
+Train auc = 0.926250
+Validation auc = 0.855776
+Epoch 3
+Train auc = 0.942957
+Validation auc = 0.855599
+Epoch 4
+Train auc = 0.946903
+Validation auc = 0.860914
+Epoch 5
+Train auc = 0.961617
+Validation auc = 0.872785
+Epoch 6
+Train auc = 0.970618
+Validation auc = 0.864812
+Epoch 7
+Train auc = 0.971341
+Validation auc = 0.847271
+Epoch 8
+Train auc = 0.972597
+Validation auc = 0.847626
+Epoch 9
+Train auc = 0.981521
+Validation auc = 0.845322
+Epoch 10
+Train auc = 0.985568
+Validation auc = 0.853827
+Epoch 11
+Train auc = 0.986896
+Validation auc = 0.853473
+Epoch 12
+Train auc = 0.988138
+Validation auc = 0.861446
+Epoch 13
+Train auc = 0.985549
+Validation auc = 0.832388
+Epoch 14
+Train auc = 0.981937
+Validation auc = 0.829731
+Epoch 15
+Train auc = 0.993113
+Validation auc = 0.849752
+Epoch 16
+Train auc = 0.991766
+Validation auc = 0.856130
+Epoch 17
+Train auc = 0.993733
+Validation auc = 0.855953
+Epoch 18
+Train auc = 0.994507
+Validation auc = 0.851878
+Epoch 19
+Train auc = 0.993899
+Validation auc = 0.852941
+Epoch 20
+Train auc = 0.996381
+Validation auc = 0.856662
+Epoch 21
+Train auc = 0.996706
+Validation auc = 0.852232
+Epoch 22
+Train auc = 0.997294
+Validation auc = 0.854713
+Epoch 23
+Train auc = 0.997451
+Validation auc = 0.855776
+Epoch 24
+Train auc = 0.997190
+Validation auc = 0.849841
+Epoch 25
+Train auc = 0.997368
+Validation auc = 0.856042
+Epoch 26
+Train auc = 0.996582
+Validation auc = 0.851790
+Epoch 27
+Train auc = 0.997522
+Validation auc = 0.854447
+Epoch 28
+Train auc = 0.997655
+Validation auc = 0.849220
+Epoch 29
+Train auc = 0.997912
+Validation auc = 0.852853
+Best validation auc = 0.872785 on epoch 5
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.attention_4.W.
+Load parameter: encoder3.encoder.encoder.attention_4.a.
+Load parameter: encoder3.encoder.encoder.attention_5.W.
+Load parameter: encoder3.encoder.encoder.attention_5.a.
+Load parameter: encoder3.encoder.encoder.attention_6.W.
+Load parameter: encoder3.encoder.encoder.attention_6.a.
+Load parameter: encoder3.encoder.encoder.attention_7.W.
+Load parameter: encoder3.encoder.encoder.attention_7.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.911406
+Running 1 folds in total.
+Average test auc = 0.911406 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.0, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_5): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_6): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_7): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=512, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=512, out_features=300, bias=True)
+    (dropout): Dropout(p=0.0, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=300, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=300, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.0, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.0, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.843090
+Validation auc = 0.784727
+Epoch 1
+Train auc = 0.891985
+Validation auc = 0.796421
+Epoch 2
+Train auc = 0.924727
+Validation auc = 0.852232
+Epoch 3
+Train auc = 0.938690
+Validation auc = 0.843728
+Epoch 4
+Train auc = 0.950732
+Validation auc = 0.858434
+Epoch 5
+Train auc = 0.964511
+Validation auc = 0.863572
+Epoch 6
+Train auc = 0.970772
+Validation auc = 0.865875
+Epoch 7
+Train auc = 0.969184
+Validation auc = 0.836995
+Epoch 8
+Train auc = 0.976151
+Validation auc = 0.850815
+Epoch 9
+Train auc = 0.981922
+Validation auc = 0.854181
+Epoch 10
+Train auc = 0.983441
+Validation auc = 0.857371
+Epoch 11
+Train auc = 0.983229
+Validation auc = 0.850461
+Epoch 12
+Train auc = 0.989452
+Validation auc = 0.863218
+Epoch 13
+Train auc = 0.986563
+Validation auc = 0.841070
+Epoch 14
+Train auc = 0.981926
+Validation auc = 0.838944
+Epoch 15
+Train auc = 0.991426
+Validation auc = 0.857371
+Epoch 16
+Train auc = 0.992396
+Validation auc = 0.862863
+Epoch 17
+Train auc = 0.993466
+Validation auc = 0.860560
+Epoch 18
+Train auc = 0.993718
+Validation auc = 0.860648
+Epoch 19
+Train auc = 0.993817
+Validation auc = 0.856485
+Epoch 20
+Train auc = 0.995713
+Validation auc = 0.857548
+Epoch 21
+Train auc = 0.996175
+Validation auc = 0.862863
+Epoch 22
+Train auc = 0.996478
+Validation auc = 0.863661
+Epoch 23
+Train auc = 0.996667
+Validation auc = 0.860826
+Epoch 24
+Train auc = 0.996884
+Validation auc = 0.859320
+Epoch 25
+Train auc = 0.997555
+Validation auc = 0.860914
+Epoch 26
+Train auc = 0.995571
+Validation auc = 0.859940
+Epoch 27
+Train auc = 0.997137
+Validation auc = 0.857725
+Epoch 28
+Train auc = 0.997359
+Validation auc = 0.859940
+Epoch 29
+Train auc = 0.997841
+Validation auc = 0.857991
+Best validation auc = 0.865875 on epoch 6
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.attention_4.W.
+Load parameter: encoder3.encoder.encoder.attention_4.a.
+Load parameter: encoder3.encoder.encoder.attention_5.W.
+Load parameter: encoder3.encoder.encoder.attention_5.a.
+Load parameter: encoder3.encoder.encoder.attention_6.W.
+Load parameter: encoder3.encoder.encoder.attention_6.a.
+Load parameter: encoder3.encoder.encoder.attention_7.W.
+Load parameter: encoder3.encoder.encoder.attention_7.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.903271
+Running 1 folds in total.
+Average test auc = 0.903271 +/- 0.000000
+Seed 0
+Load args.
+Load data.
+Original fingerprint. Nothing changed.
+Change fingerprint bit : 1
+Change Importance: 0.00022957836271403353
+Change fingerprint bit : 2
+Change Importance: -0.0005099402619260784
+Change fingerprint bit : 3
+Change Importance: 0.0006905119481329658
+Change fingerprint bit : 4
+Change Importance: 0.0003970502612030691
+Change fingerprint bit : 5
+Change Importance: -4.3360068914588545e-05
+Change fingerprint bit : 6
+Change Importance: -0.0003382640536550019
+Change fingerprint bit : 7
+Change Importance: -0.0003038106128364082
+Change fingerprint bit : 8
+Change Importance: 0.0002806438901455932
+Change fingerprint bit : 9
+Change Importance: 0.0013405725026732207
+Change fingerprint bit : 10
+Change Importance: -0.00023151417605854485
+Change fingerprint bit : 11
+Change Importance: -0.00038642688963874683
+Change fingerprint bit : 12
+Change Importance: 0.0016423569789835168
+Change fingerprint bit : 13
+Change Importance: -0.0012586550594839707
+Change fingerprint bit : 14
+Change Importance: -0.012451280233620077
+Change fingerprint bit : 15
+Change Importance: -0.00015773053630274703
+Change fingerprint bit : 16
+Change Importance: -0.0008364688503409434
+Change fingerprint bit : 17
+Change Importance: 0.0005086349502199661
+Change fingerprint bit : 18
+Change Importance: 0.004724620074889663
+Change fingerprint bit : 19
+Change Importance: 0.00019974338623468535
+Change fingerprint bit : 20
+Change Importance: 0.004494961413093135
+Change fingerprint bit : 21
+Change Importance: -0.0011456488089126582
+Change fingerprint bit : 22
+Change Importance: 0.004055559026706457
+Change fingerprint bit : 23
+Change Importance: -0.001358934136471479
+Change fingerprint bit : 24
+Change Importance: -0.0040757636104110095
+Change fingerprint bit : 25
+Change Importance: 0.00024014806736893934
+Change fingerprint bit : 26
+Change Importance: 0.00033873935767958496
+Change fingerprint bit : 27
+Change Importance: 0.0007517864112172035
+Change fingerprint bit : 28
+Change Importance: -0.0017164469731538179
+Change fingerprint bit : 29
+Change Importance: 0.0018360500478914465
+Change fingerprint bit : 30
+Change Importance: -5.13076504335408e-05
+Change fingerprint bit : 31
+Change Importance: 0.00014044347403446844
+Change fingerprint bit : 32
+Change Importance: 2.5475726185775205e-05
+Change fingerprint bit : 33
+Change Importance: 0.0028160130047845677
+Change fingerprint bit : 34
+Change Importance: 0.001638943218929545
+Change fingerprint bit : 35
+Change Importance: -0.0002446895457994258
+Change fingerprint bit : 36
+Change Importance: -0.0009551967805345729
+Change fingerprint bit : 37
+Change Importance: 0.00012112377221284998
+Change fingerprint bit : 38
+Change Importance: -0.004878872396234579
+Change fingerprint bit : 39
+Change Importance: 0.00040333598513392355
+Change fingerprint bit : 40
+Change Importance: -0.007830902723429178
+Change fingerprint bit : 41
+Change Importance: -0.010403049972929124
+Change fingerprint bit : 42
+Change Importance: 0.00230729446870076
+Change fingerprint bit : 43
+Change Importance: 0.001107264709045097
+Change fingerprint bit : 44
+Change Importance: 0.0014668626977676347
+Change fingerprint bit : 45
+Change Importance: -3.2007572447645405e-05
+Change fingerprint bit : 46
+Change Importance: -0.004766508390557811
+Change fingerprint bit : 47
+Change Importance: 0.0001283827023657036
+Change fingerprint bit : 48
+Change Importance: -0.006328649363864403
+Change fingerprint bit : 49
+Change Importance: -0.01041866779862971
+Change fingerprint bit : 50
+Change Importance: 0.0008558986408496727
+Change fingerprint bit : 51
+Change Importance: 0.0032747340558592075
+Change fingerprint bit : 52
+Change Importance: 0.0011602886454222805
+Change fingerprint bit : 53
+Change Importance: -8.318646299482202e-05
+Change fingerprint bit : 54
+Change Importance: -0.0004739829287755404
+Change fingerprint bit : 55
+Change Importance: -0.0007352918038960876
+Change fingerprint bit : 56
+Change Importance: -0.0007367044886420482
+Change fingerprint bit : 57
+Change Importance: -0.004574121126643016
+Change fingerprint bit : 58
+Change Importance: -0.0018217422733990962
+Change fingerprint bit : 59
+Change Importance: -0.0005325861729447157
+Change fingerprint bit : 60
+Change Importance: 0.0006621673732763456
+Change fingerprint bit : 61
+Change Importance: -0.0010921998803317678
+Change fingerprint bit : 62
+Change Importance: -0.001471373985579505
+Change fingerprint bit : 63
+Change Importance: 6.111071083897412e-05
+Change fingerprint bit : 64
+Change Importance: -0.005748612664626729
+Change fingerprint bit : 65
+Change Importance: -0.006732151380805629
+Change fingerprint bit : 66
+Change Importance: 0.0003640372212155296
+Change fingerprint bit : 67
+Change Importance: -0.00018081018343557576
+Change fingerprint bit : 68
+Change Importance: -0.0012207024251372767
+Change fingerprint bit : 69
+Change Importance: -0.0012714068482546081
+Change fingerprint bit : 70
+Change Importance: -0.0014150183306897435
+Change fingerprint bit : 71
+Change Importance: -0.011808435209401336
+Change fingerprint bit : 72
+Change Importance: -0.001287033784151792
+Change fingerprint bit : 73
+Change Importance: -0.0025705351744013116
+Change fingerprint bit : 74
+Change Importance: -0.0020553977657502
+Change fingerprint bit : 75
+Change Importance: -0.0009628605272536395
+Change fingerprint bit : 76
+Change Importance: -0.0005795522398638897
+Change fingerprint bit : 77
+Change Importance: 0.0020892756423154246
+Change fingerprint bit : 78
+Change Importance: -0.0003065038955782917
+Change fingerprint bit : 79
+Change Importance: -0.00016835458604369524
+Change fingerprint bit : 80
+Change Importance: -0.00022100799875329757
+Change fingerprint bit : 81
+Change Importance: 0.0007294977625389998
+Change fingerprint bit : 82
+Change Importance: -0.00145408392550056
+Change fingerprint bit : 83
+Change Importance: 0.00029358781671490197
+Change fingerprint bit : 84
+Change Importance: -0.00041058267489163525
+Change fingerprint bit : 85
+Change Importance: 6.6859287156106895e-06
+Change fingerprint bit : 86
+Change Importance: -0.0001931401485366635
+Change fingerprint bit : 87
+Change Importance: 0.0010732681033744917
+Change fingerprint bit : 88
+Change Importance: 0.0017606002003957566
+Change fingerprint bit : 89
+Change Importance: -0.0002446589993715387
+Change fingerprint bit : 90
+Change Importance: -0.002162132833168018
+Change fingerprint bit : 91
+Change Importance: -0.0007287157581298276
+Change fingerprint bit : 92
+Change Importance: -0.0013055568271985174
+Change fingerprint bit : 93
+Change Importance: 6.060993527068348e-05
+Change fingerprint bit : 94
+Change Importance: 0.0006143355956086949
+Change fingerprint bit : 95
+Change Importance: 0.0020495024781985727
+Change fingerprint bit : 96
+Change Importance: 7.22035777932506e-05
+Change fingerprint bit : 97
+Change Importance: -0.0005903208485791289
+Change fingerprint bit : 98
+Change Importance: 0.0010128996838772442
+Change fingerprint bit : 99
+Change Importance: -6.22286302084385e-05
+Change fingerprint bit : 100
+Change Importance: 0.00169636516092736
+Change fingerprint bit : 101
+Change Importance: 0.00037873676769667464
+Change fingerprint bit : 102
+Change Importance: -0.000780046186841632
+Change fingerprint bit : 103
+Change Importance: -0.0017435153832418004
+Change fingerprint bit : 104
+Change Importance: 0.002292118564080514
+Change fingerprint bit : 105
+Change Importance: -0.0018669053742281783
+Change fingerprint bit : 106
+Change Importance: -0.00020812137374476292
+Change fingerprint bit : 107
+Change Importance: -0.0012654674948567868
+Change fingerprint bit : 108
+Change Importance: 0.0006464301528477101
+Change fingerprint bit : 109
+Change Importance: 0.0004652758769678744
+Change fingerprint bit : 110
+Change Importance: 0.0007964937990865284
+Change fingerprint bit : 111
+Change Importance: -0.00022715044571453014
+Change fingerprint bit : 112
+Change Importance: -0.0011081476543124968
+Change fingerprint bit : 113
+Change Importance: -0.00019600397507130163
+Change fingerprint bit : 114
+Change Importance: 0.0004872147361357215
+Change fingerprint bit : 115
+Change Importance: 0.00030207101678847437
+Change fingerprint bit : 116
+Change Importance: 0.0019419914285496165
+Change fingerprint bit : 117
+Change Importance: -0.0021678413829746
+Change fingerprint bit : 118
+Change Importance: -2.212534693180057e-06
+Change fingerprint bit : 119
+Change Importance: 0.000133539643333902
+Change fingerprint bit : 120
+Change Importance: 2.5644975784222535e-05
+Change fingerprint bit : 121
+Change Importance: -0.0003434940584402524
+Change fingerprint bit : 122
+Change Importance: 6.848642185458553e-05
+Change fingerprint bit : 123
+Change Importance: -0.0003737978496533567
+Change fingerprint bit : 124
+Change Importance: -0.007519827426983816
+Change fingerprint bit : 125
+Change Importance: -0.001090638854470971
+Change fingerprint bit : 126
+Change Importance: 4.048780390181195e-05
+Change fingerprint bit : 127
+Change Importance: 2.8393655678804475e-05
+Change fingerprint bit : 128
+Change Importance: 0.0003332683247717072
+Change fingerprint bit : 129
+Change Importance: 0.0005834520019757372
+Change fingerprint bit : 130
+Change Importance: -0.0002034893822930317
+Change fingerprint bit : 131
+Change Importance: -0.0030625525617343774
+Change fingerprint bit : 132
+Change Importance: 0.00036611692837029697
+Change fingerprint bit : 133
+Change Importance: -0.0005303207415754407
+Change fingerprint bit : 134
+Change Importance: -5.222292181228383e-05
+Change fingerprint bit : 135
+Change Importance: 7.66115291132019e-05
+Change fingerprint bit : 136
+Change Importance: 0.0006867132990486247
+Change fingerprint bit : 137
+Change Importance: -0.002846990719787501
+Change fingerprint bit : 138
+Change Importance: -0.00010528076794080743
+Change fingerprint bit : 139
+Change Importance: -0.0009772758174424467
+Change fingerprint bit : 140
+Change Importance: 0.001406864834610666
+Change fingerprint bit : 141
+Change Importance: 0.0006127988060916634
+Change fingerprint bit : 142
+Change Importance: 0.001275056154780685
+Change fingerprint bit : 143
+Change Importance: -4.404181017342301e-05
+Change fingerprint bit : 144
+Change Importance: 0.0004218544483413078
+Change fingerprint bit : 145
+Change Importance: 0.001655666654169552
+Change fingerprint bit : 146
+Change Importance: -0.00011718841294516835
+Change fingerprint bit : 147
+Change Importance: -0.0003560744140861938
+Change fingerprint bit : 148
+Change Importance: 0.0010109849839548546
+Change fingerprint bit : 149
+Change Importance: -0.00044743663564339453
+Change fingerprint bit : 150
+Change Importance: 0.00044696127376320227
+Change fingerprint bit : 151
+Change Importance: 0.0007538525793097106
+Change fingerprint bit : 152
+Change Importance: 0.0
+Change fingerprint bit : 153
+Change Importance: -8.777751114591448e-05
+Change fingerprint bit : 154
+Change Importance: 0.00043949527456454973
+Change fingerprint bit : 155
+Change Importance: 0.00012846497060320372
+Change fingerprint bit : 156
+Change Importance: 0.0007637649339767294
+Change fingerprint bit : 157
+Change Importance: -1.6880369879679336e-08
+Change fingerprint bit : 158
+Change Importance: -3.1848880450824346e-05
+Change fingerprint bit : 159
+Change Importance: 0.0
+Change fingerprint bit : 160
+Change Importance: -0.00040273173987170896
+Change fingerprint bit : 161
+Change Importance: 4.372548067893556e-05
+Change fingerprint bit : 162
+Change Importance: 0.0
+Change fingerprint bit : 163
+Change Importance: 1.6419000728462585e-06
+Change fingerprint bit : 164
+Change Importance: -8.103499289924265e-06
+Change fingerprint bit : 165
+Change Importance: 4.901341413732219e-06
+Change fingerprint bit : 166
+Change Importance: -1.1230564882336314e-05
+Change fingerprint bit : 167
+Change Importance: 0.0009329964722903927
+Change fingerprint bit : 168
+Change Importance: -0.0022473091324548555
+Change fingerprint bit : 169
+Change Importance: -0.0017191779061822565
+Change fingerprint bit : 170
+Change Importance: -0.00021141287591225355
+Change fingerprint bit : 171
+Change Importance: 0.0003515326642479777
+Change fingerprint bit : 172
+Change Importance: -0.001114259472124346
+Change fingerprint bit : 173
+Change Importance: 0.00021615683839698585
+Change fingerprint bit : 174
+Change Importance: 0.0009414934899593108
+Change fingerprint bit : 175
+Change Importance: 8.27338544427958e-05
+Change fingerprint bit : 176
+Change Importance: -0.0008980590225739493
+Change fingerprint bit : 177
+Change Importance: -0.0010213434262101861
+Change fingerprint bit : 178
+Change Importance: 0.0019039833076650026
+Change fingerprint bit : 179
+Change Importance: 0.0003546072186217386
+Change fingerprint bit : 180
+Change Importance: -0.0033641731123984497
+Change fingerprint bit : 181
+Change Importance: 0.0005712169122369937
+Change fingerprint bit : 182
+Change Importance: 0.004218481222541426
+Change fingerprint bit : 183
+Change Importance: 0.003606605049610967
+Change fingerprint bit : 184
+Change Importance: 0.00036614471674500937
+Change fingerprint bit : 185
+Change Importance: 0.0003370539593713362
+Change fingerprint bit : 186
+Change Importance: -0.00010232710252566779
+Change fingerprint bit : 187
+Change Importance: 0.001166115695681036
+Change fingerprint bit : 188
+Change Importance: -0.000493651054393085
+Change fingerprint bit : 189
+Change Importance: 0.0011533110036941463
+Change fingerprint bit : 190
+Change Importance: 0.0002015196074198755
+Change fingerprint bit : 191
+Change Importance: -0.0003235847443468498
+Change fingerprint bit : 192
+Change Importance: -0.0004247495054305328
+Change fingerprint bit : 193
+Change Importance: 7.110471332455459e-05
+Change fingerprint bit : 194
+Change Importance: 3.866780606670561e-05
+Change fingerprint bit : 195
+Change Importance: -0.0006914907522903024
+Change fingerprint bit : 196
+Change Importance: -0.0002518726921697523
+Change fingerprint bit : 197
+Change Importance: 3.463226524502705e-05
+Change fingerprint bit : 198
+Change Importance: 0.0003612603488348243
+Change fingerprint bit : 199
+Change Importance: 0.00021337563601392384
+Change fingerprint bit : 200
+Change Importance: 0.0003341202963565437
+Change fingerprint bit : 201
+Change Importance: 0.00022906538111971964
+Change fingerprint bit : 202
+Change Importance: 0.0030431911641762843
+Change fingerprint bit : 203
+Change Importance: 0.00300350083492823
+Change fingerprint bit : 204
+Change Importance: 0.0009705889830088354
+Change fingerprint bit : 205
+Change Importance: -0.0025634260868244163
+Change fingerprint bit : 206
+Change Importance: -0.0013869062765741735
+Change fingerprint bit : 207
+Change Importance: 0.00028298106806212697
+Change fingerprint bit : 208
+Change Importance: -0.0005410855161283035
+Change fingerprint bit : 209
+Change Importance: -0.0011101455845661246
+Change fingerprint bit : 210
+Change Importance: -0.000620944720725991
+Change fingerprint bit : 211
+Change Importance: 0.0006156891843612788
+Change fingerprint bit : 212
+Change Importance: 0.00026321846209820254
+Change fingerprint bit : 213
+Change Importance: 0.0011734433541764067
+Change fingerprint bit : 214
+Change Importance: -0.0004312210646706949

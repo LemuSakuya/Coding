@@ -1,0 +1,1 @@
+{"name":"Local: MATI B","url":"e:\\VSCode\\Coding\\MATI B.cpp","tests":[{"id":1773570611097,"input":"10 3","output":"29.9"},{"id":1773570620833,"input":"15 10","output":"124.5"},{"id":1773570627569,"input":"10 6","output":"50"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\VSCode\\Coding\\MATI B.cpp","group":"local","local":true}

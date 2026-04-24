@@ -1,0 +1,1748 @@
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.05, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_5): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=300, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=300, out_features=300, bias=True)
+    (dropout): Dropout(p=0.35000000000000003, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=360, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=240, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.35000000000000003, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.35000000000000003, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.760784
+Validation auc = 0.710489
+Epoch 1
+Train auc = 0.842856
+Validation auc = 0.798016
+Epoch 2
+Train auc = 0.872071
+Validation auc = 0.812899
+Epoch 3
+Train auc = 0.893472
+Validation auc = 0.845145
+Epoch 4
+Train auc = 0.908013
+Validation auc = 0.838767
+Epoch 5
+Train auc = 0.916399
+Validation auc = 0.852055
+Epoch 6
+Train auc = 0.931404
+Validation auc = 0.856485
+Epoch 7
+Train auc = 0.935187
+Validation auc = 0.858434
+Epoch 8
+Train auc = 0.940864
+Validation auc = 0.860206
+Epoch 9
+Train auc = 0.950711
+Validation auc = 0.858611
+Epoch 10
+Train auc = 0.949597
+Validation auc = 0.849043
+Epoch 11
+Train auc = 0.949729
+Validation auc = 0.865875
+Epoch 12
+Train auc = 0.962018
+Validation auc = 0.860560
+Epoch 13
+Train auc = 0.965363
+Validation auc = 0.863040
+Epoch 14
+Train auc = 0.962216
+Validation auc = 0.843196
+Epoch 15
+Train auc = 0.969541
+Validation auc = 0.862155
+Epoch 16
+Train auc = 0.972773
+Validation auc = 0.850992
+Epoch 17
+Train auc = 0.974585
+Validation auc = 0.859142
+Epoch 18
+Train auc = 0.976292
+Validation auc = 0.858700
+Epoch 19
+Train auc = 0.978613
+Validation auc = 0.862066
+Epoch 20
+Train auc = 0.980611
+Validation auc = 0.850549
+Epoch 21
+Train auc = 0.980995
+Validation auc = 0.868976
+Epoch 22
+Train auc = 0.982800
+Validation auc = 0.870748
+Epoch 23
+Train auc = 0.983999
+Validation auc = 0.868267
+Epoch 24
+Train auc = 0.985849
+Validation auc = 0.858345
+Epoch 25
+Train auc = 0.986251
+Validation auc = 0.856928
+Epoch 26
+Train auc = 0.987102
+Validation auc = 0.863129
+Epoch 27
+Train auc = 0.988685
+Validation auc = 0.868799
+Epoch 28
+Train auc = 0.989326
+Validation auc = 0.865609
+Epoch 29
+Train auc = 0.990216
+Validation auc = 0.870216
+Best validation auc = 0.870748 on epoch 22
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.attention_4.W.
+Load parameter: encoder3.encoder.encoder.attention_4.a.
+Load parameter: encoder3.encoder.encoder.attention_5.W.
+Load parameter: encoder3.encoder.encoder.attention_5.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.914854
+Running 1 folds in total.
+Average test auc = 0.914854 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.45, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=300, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=300, out_features=300, bias=True)
+    (dropout): Dropout(p=0.15000000000000002, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=480, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=120, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.15000000000000002, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.15000000000000002, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.746491
+Validation auc = 0.690999
+Epoch 1
+Train auc = 0.830317
+Validation auc = 0.774451
+Epoch 2
+Train auc = 0.886012
+Validation auc = 0.818746
+Epoch 3
+Train auc = 0.904885
+Validation auc = 0.832566
+Epoch 4
+Train auc = 0.915701
+Validation auc = 0.842842
+Epoch 5
+Train auc = 0.924680
+Validation auc = 0.847271
+Epoch 6
+Train auc = 0.938278
+Validation auc = 0.844791
+Epoch 7
+Train auc = 0.945819
+Validation auc = 0.848689
+Epoch 8
+Train auc = 0.946966
+Validation auc = 0.843728
+Epoch 9
+Train auc = 0.958961
+Validation auc = 0.853827
+Epoch 10
+Train auc = 0.964516
+Validation auc = 0.842310
+Epoch 11
+Train auc = 0.960157
+Validation auc = 0.846563
+Epoch 12
+Train auc = 0.972804
+Validation auc = 0.851701
+Epoch 13
+Train auc = 0.972050
+Validation auc = 0.839121
+Epoch 14
+Train auc = 0.966418
+Validation auc = 0.836995
+Epoch 15
+Train auc = 0.978746
+Validation auc = 0.853650
+Epoch 16
+Train auc = 0.979903
+Validation auc = 0.857548
+Epoch 17
+Train auc = 0.980927
+Validation auc = 0.847449
+Epoch 18
+Train auc = 0.984030
+Validation auc = 0.854536
+Epoch 19
+Train auc = 0.984470
+Validation auc = 0.847980
+Epoch 20
+Train auc = 0.987627
+Validation auc = 0.851347
+Epoch 21
+Train auc = 0.988377
+Validation auc = 0.862332
+Epoch 22
+Train auc = 0.989045
+Validation auc = 0.852941
+Epoch 23
+Train auc = 0.990741
+Validation auc = 0.861800
+Epoch 24
+Train auc = 0.990168
+Validation auc = 0.852764
+Epoch 25
+Train auc = 0.991700
+Validation auc = 0.853118
+Epoch 26
+Train auc = 0.989746
+Validation auc = 0.853118
+Epoch 27
+Train auc = 0.992561
+Validation auc = 0.854359
+Epoch 28
+Train auc = 0.993084
+Validation auc = 0.853650
+Epoch 29
+Train auc = 0.993300
+Validation auc = 0.856308
+Best validation auc = 0.862332 on epoch 21
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.902741
+Running 1 folds in total.
+Average test auc = 0.902741 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.6000000000000001, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.6000000000000001, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.6000000000000001, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.6000000000000001, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.6000000000000001, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.6000000000000001, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=450, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=450, out_features=300, bias=True)
+    (dropout): Dropout(p=0.35000000000000003, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=180, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=420, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.35000000000000003, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.35000000000000003, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.730841
+Validation auc = 0.704288
+Epoch 1
+Train auc = 0.855259
+Validation auc = 0.791637
+Epoch 2
+Train auc = 0.881191
+Validation auc = 0.827605
+Epoch 3
+Train auc = 0.900520
+Validation auc = 0.853827
+Epoch 4
+Train auc = 0.904329
+Validation auc = 0.857193
+Epoch 5
+Train auc = 0.920354
+Validation auc = 0.849752
+Epoch 6
+Train auc = 0.931126
+Validation auc = 0.861977
+Epoch 7
+Train auc = 0.940401
+Validation auc = 0.859320
+Epoch 8
+Train auc = 0.947939
+Validation auc = 0.864989
+Epoch 9
+Train auc = 0.952736
+Validation auc = 0.875974
+Epoch 10
+Train auc = 0.956938
+Validation auc = 0.847449
+Epoch 11
+Train auc = 0.960165
+Validation auc = 0.860914
+Epoch 12
+Train auc = 0.964599
+Validation auc = 0.863040
+Epoch 13
+Train auc = 0.969524
+Validation auc = 0.856839
+Epoch 14
+Train auc = 0.967367
+Validation auc = 0.846208
+Epoch 15
+Train auc = 0.973271
+Validation auc = 0.856662
+Epoch 16
+Train auc = 0.976630
+Validation auc = 0.859497
+Epoch 17
+Train auc = 0.977445
+Validation auc = 0.865521
+Epoch 18
+Train auc = 0.979627
+Validation auc = 0.864812
+Epoch 19
+Train auc = 0.981379
+Validation auc = 0.861269
+Epoch 20
+Train auc = 0.983762
+Validation auc = 0.861091
+Epoch 21
+Train auc = 0.985203
+Validation auc = 0.864635
+Epoch 22
+Train auc = 0.986683
+Validation auc = 0.863661
+Epoch 23
+Train auc = 0.988281
+Validation auc = 0.871102
+Epoch 24
+Train auc = 0.988864
+Validation auc = 0.862597
+Epoch 25
+Train auc = 0.989708
+Validation auc = 0.861534
+Epoch 26
+Train auc = 0.989672
+Validation auc = 0.872519
+Epoch 27
+Train auc = 0.991547
+Validation auc = 0.867381
+Epoch 28
+Train auc = 0.991960
+Validation auc = 0.869153
+Epoch 29
+Train auc = 0.991700
+Validation auc = 0.862420
+Best validation auc = 0.875974 on epoch 9
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.917418
+Running 1 folds in total.
+Average test auc = 0.917418 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.05, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=550, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=550, out_features=300, bias=True)
+    (dropout): Dropout(p=0.45, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=360, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=240, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.45, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.45, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.764454
+Validation auc = 0.715627
+Epoch 1
+Train auc = 0.812778
+Validation auc = 0.764352
+Epoch 2
+Train auc = 0.862789
+Validation auc = 0.825301
+Epoch 3
+Train auc = 0.887890
+Validation auc = 0.832211
+Epoch 4
+Train auc = 0.895383
+Validation auc = 0.843551
+Epoch 5
+Train auc = 0.906957
+Validation auc = 0.833274
+Epoch 6
+Train auc = 0.916641
+Validation auc = 0.836641
+Epoch 7
+Train auc = 0.918875
+Validation auc = 0.848689
+Epoch 8
+Train auc = 0.927272
+Validation auc = 0.855776
+Epoch 9
+Train auc = 0.934787
+Validation auc = 0.856485
+Epoch 10
+Train auc = 0.943418
+Validation auc = 0.846208
+Epoch 11
+Train auc = 0.942076
+Validation auc = 0.851347
+Epoch 12
+Train auc = 0.952513
+Validation auc = 0.857725
+Epoch 13
+Train auc = 0.956488
+Validation auc = 0.859851
+Epoch 14
+Train auc = 0.956402
+Validation auc = 0.845765
+Epoch 15
+Train auc = 0.959617
+Validation auc = 0.843285
+Epoch 16
+Train auc = 0.964521
+Validation auc = 0.853916
+Epoch 17
+Train auc = 0.969289
+Validation auc = 0.859408
+Epoch 18
+Train auc = 0.969545
+Validation auc = 0.857636
+Epoch 19
+Train auc = 0.971946
+Validation auc = 0.851612
+Epoch 20
+Train auc = 0.972721
+Validation auc = 0.855687
+Epoch 21
+Train auc = 0.975335
+Validation auc = 0.858345
+Epoch 22
+Train auc = 0.977146
+Validation auc = 0.855865
+Epoch 23
+Train auc = 0.978565
+Validation auc = 0.853738
+Epoch 24
+Train auc = 0.980464
+Validation auc = 0.850018
+Epoch 25
+Train auc = 0.981921
+Validation auc = 0.852853
+Epoch 26
+Train auc = 0.982509
+Validation auc = 0.862420
+Epoch 27
+Train auc = 0.983933
+Validation auc = 0.859231
+Epoch 28
+Train auc = 0.984977
+Validation auc = 0.858877
+Epoch 29
+Train auc = 0.985873
+Validation auc = 0.862420
+Best validation auc = 0.862420 on epoch 26
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.904156
+Running 1 folds in total.
+Average test auc = 0.904156 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.45, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_5): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=400, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=400, out_features=300, bias=True)
+    (dropout): Dropout(p=0.5, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=300, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=300, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.5, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.740406
+Validation auc = 0.701099
+Epoch 1
+Train auc = 0.801024
+Validation auc = 0.761871
+Epoch 2
+Train auc = 0.845880
+Validation auc = 0.812367
+Epoch 3
+Train auc = 0.874289
+Validation auc = 0.821049
+Epoch 4
+Train auc = 0.889382
+Validation auc = 0.833806
+Epoch 5
+Train auc = 0.897702
+Validation auc = 0.841956
+Epoch 6
+Train auc = 0.912512
+Validation auc = 0.846917
+Epoch 7
+Train auc = 0.916976
+Validation auc = 0.852410
+Epoch 8
+Train auc = 0.921813
+Validation auc = 0.853296
+Epoch 9
+Train auc = 0.926613
+Validation auc = 0.861269
+Epoch 10
+Train auc = 0.936357
+Validation auc = 0.850992
+Epoch 11
+Train auc = 0.938946
+Validation auc = 0.858434
+Epoch 12
+Train auc = 0.945765
+Validation auc = 0.852232
+Epoch 13
+Train auc = 0.948753
+Validation auc = 0.855953
+Epoch 14
+Train auc = 0.953816
+Validation auc = 0.844791
+Epoch 15
+Train auc = 0.952950
+Validation auc = 0.849752
+Epoch 16
+Train auc = 0.957642
+Validation auc = 0.859142
+Epoch 17
+Train auc = 0.961138
+Validation auc = 0.855599
+Epoch 18
+Train auc = 0.963420
+Validation auc = 0.858788
+Epoch 19
+Train auc = 0.967150
+Validation auc = 0.857548
+Epoch 20
+Train auc = 0.967661
+Validation auc = 0.861446
+Epoch 21
+Train auc = 0.967611
+Validation auc = 0.866407
+Epoch 22
+Train auc = 0.970489
+Validation auc = 0.858611
+Epoch 23
+Train auc = 0.973370
+Validation auc = 0.861800
+Epoch 24
+Train auc = 0.975033
+Validation auc = 0.857548
+Epoch 25
+Train auc = 0.976058
+Validation auc = 0.857902
+Epoch 26
+Train auc = 0.976946
+Validation auc = 0.860737
+Epoch 27
+Train auc = 0.977938
+Validation auc = 0.858965
+Epoch 28
+Train auc = 0.979268
+Validation auc = 0.857371
+Epoch 29
+Train auc = 0.980428
+Validation auc = 0.855599
+Best validation auc = 0.866407 on epoch 21
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.attention_4.W.
+Load parameter: encoder3.encoder.encoder.attention_4.a.
+Load parameter: encoder3.encoder.encoder.attention_5.W.
+Load parameter: encoder3.encoder.encoder.attention_5.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.905217
+Running 1 folds in total.
+Average test auc = 0.905217 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.05, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.05, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=550, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=550, out_features=300, bias=True)
+    (dropout): Dropout(p=0.35000000000000003, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=360, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=240, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.35000000000000003, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.35000000000000003, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.749487
+Validation auc = 0.718285
+Epoch 1
+Train auc = 0.839904
+Validation auc = 0.788802
+Epoch 2
+Train auc = 0.876416
+Validation auc = 0.831857
+Epoch 3
+Train auc = 0.897810
+Validation auc = 0.831502
+Epoch 4
+Train auc = 0.910745
+Validation auc = 0.844791
+Epoch 5
+Train auc = 0.922426
+Validation auc = 0.849752
+Epoch 6
+Train auc = 0.929488
+Validation auc = 0.849575
+Epoch 7
+Train auc = 0.938355
+Validation auc = 0.857016
+Epoch 8
+Train auc = 0.939419
+Validation auc = 0.849575
+Epoch 9
+Train auc = 0.951493
+Validation auc = 0.860206
+Epoch 10
+Train auc = 0.953838
+Validation auc = 0.854359
+Epoch 11
+Train auc = 0.954217
+Validation auc = 0.863572
+Epoch 12
+Train auc = 0.964918
+Validation auc = 0.852410
+Epoch 13
+Train auc = 0.966482
+Validation auc = 0.856130
+Epoch 14
+Train auc = 0.965619
+Validation auc = 0.843019
+Epoch 15
+Train auc = 0.972001
+Validation auc = 0.847803
+Epoch 16
+Train auc = 0.975552
+Validation auc = 0.854359
+Epoch 17
+Train auc = 0.973991
+Validation auc = 0.853296
+Epoch 18
+Train auc = 0.977869
+Validation auc = 0.855776
+Epoch 19
+Train auc = 0.977394
+Validation auc = 0.851878
+Epoch 20
+Train auc = 0.982308
+Validation auc = 0.853827
+Epoch 21
+Train auc = 0.983138
+Validation auc = 0.856839
+Epoch 22
+Train auc = 0.984942
+Validation auc = 0.857371
+Epoch 23
+Train auc = 0.986651
+Validation auc = 0.855245
+Epoch 24
+Train auc = 0.986467
+Validation auc = 0.859497
+Epoch 25
+Train auc = 0.988185
+Validation auc = 0.859497
+Epoch 26
+Train auc = 0.987687
+Validation auc = 0.860914
+Epoch 27
+Train auc = 0.990136
+Validation auc = 0.858257
+Epoch 28
+Train auc = 0.990212
+Validation auc = 0.860383
+Epoch 29
+Train auc = 0.991104
+Validation auc = 0.855776
+Best validation auc = 0.863572 on epoch 11
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.attention_4.W.
+Load parameter: encoder3.encoder.encoder.attention_4.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.920424
+Running 1 folds in total.
+Average test auc = 0.920424 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.45, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_5): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_6): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_7): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.45, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=450, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=450, out_features=300, bias=True)
+    (dropout): Dropout(p=0.4, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=480, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=120, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.4, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.4, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.743723
+Validation auc = 0.733168
+Epoch 1
+Train auc = 0.820688
+Validation auc = 0.788271
+Epoch 2
+Train auc = 0.868996
+Validation auc = 0.813962
+Epoch 3
+Train auc = 0.895532
+Validation auc = 0.840007
+Epoch 4
+Train auc = 0.893821
+Validation auc = 0.832743
+Epoch 5
+Train auc = 0.914436
+Validation auc = 0.847980
+Epoch 6
+Train auc = 0.927072
+Validation auc = 0.843373
+Epoch 7
+Train auc = 0.932473
+Validation auc = 0.855776
+Epoch 8
+Train auc = 0.935235
+Validation auc = 0.853650
+Epoch 9
+Train auc = 0.944300
+Validation auc = 0.858257
+Epoch 10
+Train auc = 0.947068
+Validation auc = 0.839830
+Epoch 11
+Train auc = 0.948767
+Validation auc = 0.855422
+Epoch 12
+Train auc = 0.956317
+Validation auc = 0.851878
+Epoch 13
+Train auc = 0.959668
+Validation auc = 0.857371
+Epoch 14
+Train auc = 0.960814
+Validation auc = 0.851347
+Epoch 15
+Train auc = 0.965745
+Validation auc = 0.851169
+Epoch 16
+Train auc = 0.967165
+Validation auc = 0.849220
+Epoch 17
+Train auc = 0.970970
+Validation auc = 0.855776
+Epoch 18
+Train auc = 0.971821
+Validation auc = 0.864015
+Epoch 19
+Train auc = 0.974105
+Validation auc = 0.847183
+Epoch 20
+Train auc = 0.975097
+Validation auc = 0.854093
+Epoch 21
+Train auc = 0.976447
+Validation auc = 0.860648
+Epoch 22
+Train auc = 0.978526
+Validation auc = 0.856573
+Epoch 23
+Train auc = 0.979807
+Validation auc = 0.867913
+Epoch 24
+Train auc = 0.982387
+Validation auc = 0.859763
+Epoch 25
+Train auc = 0.983125
+Validation auc = 0.852853
+Epoch 26
+Train auc = 0.982875
+Validation auc = 0.846651
+Epoch 27
+Train auc = 0.983246
+Validation auc = 0.853561
+Epoch 28
+Train auc = 0.985159
+Validation auc = 0.854270
+Epoch 29
+Train auc = 0.986107
+Validation auc = 0.854270
+Best validation auc = 0.867913 on epoch 23
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.attention_4.W.
+Load parameter: encoder3.encoder.encoder.attention_4.a.
+Load parameter: encoder3.encoder.encoder.attention_5.W.
+Load parameter: encoder3.encoder.encoder.attention_5.a.
+Load parameter: encoder3.encoder.encoder.attention_6.W.
+Load parameter: encoder3.encoder.encoder.attention_6.a.
+Load parameter: encoder3.encoder.encoder.attention_7.W.
+Load parameter: encoder3.encoder.encoder.attention_7.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.901503
+Running 1 folds in total.
+Average test auc = 0.901503 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.2, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.2, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.2, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.2, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.2, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.2, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_5): GATLayer(
+          (dropout): Dropout(p=0.2, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.2, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=550, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=550, out_features=300, bias=True)
+    (dropout): Dropout(p=0.35000000000000003, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=240, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=360, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.35000000000000003, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.35000000000000003, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.759787
+Validation auc = 0.722537
+Epoch 1
+Train auc = 0.846997
+Validation auc = 0.790043
+Epoch 2
+Train auc = 0.878632
+Validation auc = 0.827427
+Epoch 3
+Train auc = 0.903049
+Validation auc = 0.839830
+Epoch 4
+Train auc = 0.906578
+Validation auc = 0.843019
+Epoch 5
+Train auc = 0.921555
+Validation auc = 0.846208
+Epoch 6
+Train auc = 0.934083
+Validation auc = 0.848512
+Epoch 7
+Train auc = 0.939498
+Validation auc = 0.852941
+Epoch 8
+Train auc = 0.943346
+Validation auc = 0.856130
+Epoch 9
+Train auc = 0.950945
+Validation auc = 0.849575
+Epoch 10
+Train auc = 0.955534
+Validation auc = 0.844259
+Epoch 11
+Train auc = 0.958774
+Validation auc = 0.850638
+Epoch 12
+Train auc = 0.965264
+Validation auc = 0.864458
+Epoch 13
+Train auc = 0.966424
+Validation auc = 0.851524
+Epoch 14
+Train auc = 0.966517
+Validation auc = 0.835755
+Epoch 15
+Train auc = 0.974230
+Validation auc = 0.854359
+Epoch 16
+Train auc = 0.975062
+Validation auc = 0.854802
+Epoch 17
+Train auc = 0.977733
+Validation auc = 0.855687
+Epoch 18
+Train auc = 0.981084
+Validation auc = 0.855510
+Epoch 19
+Train auc = 0.982094
+Validation auc = 0.854624
+Epoch 20
+Train auc = 0.982968
+Validation auc = 0.850018
+Epoch 21
+Train auc = 0.982464
+Validation auc = 0.860648
+Epoch 22
+Train auc = 0.986216
+Validation auc = 0.868622
+Epoch 23
+Train auc = 0.987649
+Validation auc = 0.862597
+Epoch 24
+Train auc = 0.987014
+Validation auc = 0.861003
+Epoch 25
+Train auc = 0.987995
+Validation auc = 0.853738
+Epoch 26
+Train auc = 0.988230
+Validation auc = 0.857991
+Epoch 27
+Train auc = 0.990395
+Validation auc = 0.858522
+Epoch 28
+Train auc = 0.991375
+Validation auc = 0.853207
+Epoch 29
+Train auc = 0.991698
+Validation auc = 0.858522
+Best validation auc = 0.868622 on epoch 22
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.attention_4.W.
+Load parameter: encoder3.encoder.encoder.attention_4.a.
+Load parameter: encoder3.encoder.encoder.attention_5.W.
+Load parameter: encoder3.encoder.encoder.attention_5.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.904509
+Running 1 folds in total.
+Average test auc = 0.904509 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.35000000000000003, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.35000000000000003, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.35000000000000003, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.35000000000000003, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.35000000000000003, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=600, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=600, out_features=300, bias=True)
+    (dropout): Dropout(p=0.0, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=360, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=240, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.0, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.0, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.789717
+Validation auc = 0.725018
+Epoch 1
+Train auc = 0.876300
+Validation auc = 0.788625
+Epoch 2
+Train auc = 0.916128
+Validation auc = 0.846386
+Epoch 3
+Train auc = 0.933855
+Validation auc = 0.839298
+Epoch 4
+Train auc = 0.940264
+Validation auc = 0.849220
+Epoch 5
+Train auc = 0.955465
+Validation auc = 0.866052
+Epoch 6
+Train auc = 0.955355
+Validation auc = 0.854181
+Epoch 7
+Train auc = 0.965909
+Validation auc = 0.845854
+Epoch 8
+Train auc = 0.969618
+Validation auc = 0.844968
+Epoch 9
+Train auc = 0.979099
+Validation auc = 0.846917
+Epoch 10
+Train auc = 0.980173
+Validation auc = 0.849929
+Epoch 11
+Train auc = 0.984549
+Validation auc = 0.850461
+Epoch 12
+Train auc = 0.987250
+Validation auc = 0.855245
+Epoch 13
+Train auc = 0.983001
+Validation auc = 0.826187
+Epoch 14
+Train auc = 0.979890
+Validation auc = 0.833097
+Epoch 15
+Train auc = 0.991689
+Validation auc = 0.848866
+Epoch 16
+Train auc = 0.990899
+Validation auc = 0.853650
+Epoch 17
+Train auc = 0.992324
+Validation auc = 0.856308
+Epoch 18
+Train auc = 0.994093
+Validation auc = 0.854713
+Epoch 19
+Train auc = 0.992304
+Validation auc = 0.850461
+Epoch 20
+Train auc = 0.995323
+Validation auc = 0.860028
+Epoch 21
+Train auc = 0.996181
+Validation auc = 0.858434
+Epoch 22
+Train auc = 0.996346
+Validation auc = 0.859851
+Epoch 23
+Train auc = 0.996904
+Validation auc = 0.856130
+Epoch 24
+Train auc = 0.996711
+Validation auc = 0.855865
+Epoch 25
+Train auc = 0.996981
+Validation auc = 0.853473
+Epoch 26
+Train auc = 0.995741
+Validation auc = 0.856130
+Epoch 27
+Train auc = 0.997277
+Validation auc = 0.856662
+Epoch 28
+Train auc = 0.997573
+Validation auc = 0.855422
+Epoch 29
+Train auc = 0.997849
+Validation auc = 0.857371
+Best validation auc = 0.866052 on epoch 5
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.911583
+Running 1 folds in total.
+Average test auc = 0.911583 +/- 0.000000
+Seed 0
+Start loading data
+Splitting dataset with Seed = 0.
+Dataset size: 1513    Train size: 1210    Val size: 151    Test size: 152
+Training Model
+FpgnnModel(
+  (sigmoid): Sigmoid()
+  (encoder3): GAT(
+    (encoder): GATEncoder(
+      (encoder): GATOne(
+        (dropout): Dropout(p=0.55, inplace=False)
+        (attention_0): GATLayer(
+          (dropout): Dropout(p=0.55, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_1): GATLayer(
+          (dropout): Dropout(p=0.55, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_2): GATLayer(
+          (dropout): Dropout(p=0.55, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_3): GATLayer(
+          (dropout): Dropout(p=0.55, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_4): GATLayer(
+          (dropout): Dropout(p=0.55, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_5): GATLayer(
+          (dropout): Dropout(p=0.55, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_6): GATLayer(
+          (dropout): Dropout(p=0.55, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (attention_7): GATLayer(
+          (dropout): Dropout(p=0.55, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+        (out_att): GATLayer(
+          (dropout): Dropout(p=0.55, inplace=False)
+          (leakyrelu): LeakyReLU(negative_slope=0.2)
+        )
+      )
+    )
+  )
+  (encoder2): FPN(
+    (fc1): Linear(in_features=1489, out_features=450, bias=True)
+    (act_func): ReLU()
+    (fc2): Linear(in_features=450, out_features=300, bias=True)
+    (dropout): Dropout(p=0.30000000000000004, inplace=False)
+  )
+  (fc_gat): Linear(in_features=300, out_features=120, bias=True)
+  (fc_fpn): Linear(in_features=300, out_features=480, bias=True)
+  (act_func): ReLU()
+  (ffn): Sequential(
+    (0): Dropout(p=0.30000000000000004, inplace=False)
+    (1): Linear(in_features=600, out_features=300, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.30000000000000004, inplace=False)
+    (4): Linear(in_features=300, out_features=1, bias=True)
+  )
+)
+Epoch 0
+Train auc = 0.790382
+Validation auc = 0.739015
+Epoch 1
+Train auc = 0.864341
+Validation auc = 0.787562
+Epoch 2
+Train auc = 0.892249
+Validation auc = 0.833274
+Epoch 3
+Train auc = 0.914978
+Validation auc = 0.847626
+Epoch 4
+Train auc = 0.917976
+Validation auc = 0.846386
+Epoch 5
+Train auc = 0.925422
+Validation auc = 0.860560
+Epoch 6
+Train auc = 0.943236
+Validation auc = 0.858257
+Epoch 7
+Train auc = 0.950108
+Validation auc = 0.853296
+Epoch 8
+Train auc = 0.954063
+Validation auc = 0.864901
+Epoch 9
+Train auc = 0.961485
+Validation auc = 0.854093
+Epoch 10
+Train auc = 0.964887
+Validation auc = 0.847892
+Epoch 11
+Train auc = 0.961548
+Validation auc = 0.857991
+Epoch 12
+Train auc = 0.972251
+Validation auc = 0.852498
+Epoch 13
+Train auc = 0.972435
+Validation auc = 0.847714
+Epoch 14
+Train auc = 0.969568
+Validation auc = 0.840273
+Epoch 15
+Train auc = 0.977677
+Validation auc = 0.857991
+Epoch 16
+Train auc = 0.980680
+Validation auc = 0.867027
+Epoch 17
+Train auc = 0.980930
+Validation auc = 0.856219
+Epoch 18
+Train auc = 0.981368
+Validation auc = 0.864192
+Epoch 19
+Train auc = 0.983460
+Validation auc = 0.854270
+Epoch 20
+Train auc = 0.986588
+Validation auc = 0.861534
+Epoch 21
+Train auc = 0.987726
+Validation auc = 0.870571
+Epoch 22
+Train auc = 0.988414
+Validation auc = 0.867736
+Epoch 23
+Train auc = 0.988757
+Validation auc = 0.860648
+Epoch 24
+Train auc = 0.990600
+Validation auc = 0.856219
+Epoch 25
+Train auc = 0.991714
+Validation auc = 0.854270
+Epoch 26
+Train auc = 0.992103
+Validation auc = 0.857991
+Epoch 27
+Train auc = 0.992423
+Validation auc = 0.867204
+Epoch 28
+Train auc = 0.993079
+Validation auc = 0.863661
+Epoch 29
+Train auc = 0.993707
+Validation auc = 0.864724
+Best validation auc = 0.870571 on epoch 21
+Load parameter: encoder3.encoder.encoder.attention_0.W.
+Load parameter: encoder3.encoder.encoder.attention_0.a.
+Load parameter: encoder3.encoder.encoder.attention_1.W.
+Load parameter: encoder3.encoder.encoder.attention_1.a.
+Load parameter: encoder3.encoder.encoder.attention_2.W.
+Load parameter: encoder3.encoder.encoder.attention_2.a.
+Load parameter: encoder3.encoder.encoder.attention_3.W.
+Load parameter: encoder3.encoder.encoder.attention_3.a.
+Load parameter: encoder3.encoder.encoder.attention_4.W.
+Load parameter: encoder3.encoder.encoder.attention_4.a.
+Load parameter: encoder3.encoder.encoder.attention_5.W.
+Load parameter: encoder3.encoder.encoder.attention_5.a.
+Load parameter: encoder3.encoder.encoder.attention_6.W.
+Load parameter: encoder3.encoder.encoder.attention_6.a.
+Load parameter: encoder3.encoder.encoder.attention_7.W.
+Load parameter: encoder3.encoder.encoder.attention_7.a.
+Load parameter: encoder3.encoder.encoder.out_att.W.
+Load parameter: encoder3.encoder.encoder.out_att.a.
+Load parameter: encoder2.fc1.weight.
+Load parameter: encoder2.fc1.bias.
+Load parameter: encoder2.fc2.weight.
+Load parameter: encoder2.fc2.bias.
+Load parameter: fc_gat.weight.
+Load parameter: fc_gat.bias.
+Load parameter: fc_fpn.weight.
+Load parameter: fc_fpn.bias.
+Load parameter: ffn.1.weight.
+Load parameter: ffn.1.bias.
+Load parameter: ffn.4.weight.
+Load parameter: ffn.4.bias.
+Seed 0 : test auc = 0.903802
+Running 1 folds in total.
+Average test auc = 0.903802 +/- 0.000000
