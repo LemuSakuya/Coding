@@ -24,9 +24,13 @@
     ├── 01_key_led_flow/
     │   ├── README.md
     │   └── main.c
-    └── 02_timer_interrupt_counter/
+    ├── 02_timer_interrupt_counter/
+    │   ├── README.md
+    │   └── main.c
+    └── 03_seven_segment_display/
         ├── README.md
-        └── main.c
+        ├── main.c
+        └── notes_for_report.md
 ```
 
 ---
