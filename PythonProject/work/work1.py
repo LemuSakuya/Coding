@@ -1,13 +1,13 @@
 import os
-import matplotlib  # type: ignore[import-not-found]
+import matplotlib
 
 matplotlib.use('Agg')
 
 # 导入numpy
-import numpy as np  # type: ignore[import-not-found]
+import numpy as np
 
 # 导入matplotlib
-import matplotlib.pyplot as plt  # type: ignore[import-untyped]
+import matplotlib.pyplot as plt
 
 ########### Begin ############
 # 建立宽度10高度5的画布；
