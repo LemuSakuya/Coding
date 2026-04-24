@@ -1,0 +1,1 @@
+{"name":"Local: MATI A","url":"e:\\VSCode\\Coding\\MATI A.cpp","tests":[{"id":1773570210781,"input":"5 a 1\nabaca","output":"a"},{"id":1773570229590,"input":"5 a 2\nabaca","output":"aba"},{"id":1773570237156,"input":"5 a 3\nabaca","output":"abaca"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\VSCode\\Coding\\MATI A.cpp","group":"local","local":true}
