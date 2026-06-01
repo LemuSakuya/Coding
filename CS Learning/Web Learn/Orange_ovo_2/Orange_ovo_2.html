@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新媒体视域下抑郁症传播与大众认知研究</title>
+    <!-- 引入外部资源 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: "Smiley Sans";
+            src: url("./fonts/smiley-sans/SmileySans-Oblique.ttf.woff2") format("woff2");
+            font-weight: 400 900;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#256D85',
+                        secondary: '#756AB6',
+                        success: '#2F9E73',
+                        warning: '#D9902F',
+                        danger: '#D95D72',
+                        dark: '#20323D'
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                background:
+                    linear-gradient(180deg, #f3faf8 0%, #f6f4fb 48%, #fffaf2 100%);
+                color: #24323B;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+                    "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            h1, h2 {
+                color: #20323D;
+                font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+                font-weight: 900;
+                letter-spacing: 0;
+            }
+            h3, h4 {
+                color: #20323D;
+                font-family: "Smiley Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+                font-weight: 800;
+                letter-spacing: 0;
+            }
+        }
+
+        @layer components {
+            .hero-section {
+                background:
+                    linear-gradient(135deg, rgba(216, 240, 235, 0.92) 0%, rgba(232, 239, 249, 0.96) 46%, rgba(255, 244, 223, 0.9) 100%),
+                    linear-gradient(90deg, rgba(37, 109, 133, 0.08) 1px, transparent 1px),
+                    linear-gradient(0deg, rgba(37, 109, 133, 0.08) 1px, transparent 1px);
+                background-size: auto, 44px 44px, 44px 44px;
+            }
+            .surface-card {
+                background: rgba(255, 254, 250, 0.86);
+                border: 1px solid rgba(190, 215, 209, 0.72);
+                box-shadow: 0 18px 45px rgba(37, 67, 77, 0.09);
+            }
+            #background, #chaohua, #suggestions {
+                background: linear-gradient(180deg, #fffefa 0%, #f5fbf9 100%) !important;
+            }
+            #survey, #stories, section.py-16 {
+                background: linear-gradient(180deg, #eef7f5 0%, #f7f4fb 100%) !important;
+            }
+            .chart-container, .radar-container {
+                background: rgba(255, 254, 250, 0.58);
+                border: 1px solid rgba(204, 225, 220, 0.7);
+                border-radius: 16px;
+                box-sizing: border-box;
+                padding: 12px;
+                box-shadow: 0 18px 42px rgba(37, 67, 77, 0.10);
+            }
+            .story-note {
+                position: relative;
+                max-width: 760px;
+                margin: 0 auto 48px;
+                padding: 24px 28px 24px 32px;
+                color: #20323D;
+                background:
+                    linear-gradient(180deg, rgba(255, 253, 238, 0.96) 0%, rgba(246, 252, 250, 0.96) 100%);
+                border: 1px solid rgba(190, 215, 209, 0.82);
+                border-left: 5px solid #3FA7A6;
+                border-radius: 8px;
+                box-shadow: 0 16px 34px rgba(37, 67, 77, 0.10);
+                font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+                font-weight: 700;
+                line-height: 1.85;
+                text-align: left;
+            }
+            .story-note::before {
+                content: "";
+                position: absolute;
+                top: -12px;
+                left: 28px;
+                width: 92px;
+                height: 22px;
+                background: rgba(208, 244, 236, 0.72);
+                border: 1px solid rgba(142, 191, 183, 0.38);
+                box-shadow: 0 6px 14px rgba(37, 67, 77, 0.06);
+                transform: rotate(-1.5deg);
+            }
+            table {
+                background: rgba(255, 254, 250, 0.72);
+            }
+            #home h1 {
+                letter-spacing: 0;
+                line-height: 1.16;
+                text-shadow:
+                    0 2px 0 rgba(217, 144, 47, 0.22),
+                    0 6px 16px rgba(32, 50, 61, 0.12);
+            }
+            nav span.text-primary,
+            blockquote {
+                font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+                letter-spacing: 0;
+            }
+            #navbar a,
+            #mobile-menu a,
+            ul.list-disc li,
+            #copy-btn,
+            a[href^="javascript:shareTo"],
+            footer {
+                font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+                font-weight: 700;
+                letter-spacing: 0;
+            }
+            .source-note {
+                color: #607B84;
+                font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+                font-style: italic;
+                font-weight: 600;
+                line-height: 1.7;
+                letter-spacing: 0;
+            }
+            .survey-summary p {
+                font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+                font-weight: 700;
+                line-height: 1.9;
+                letter-spacing: 0;
+            }
+            .background-copy {
+                font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+                font-weight: 900;
+                line-height: 1.9;
+                letter-spacing: 0;
+            }
+            #home p,
+            #home a,
+            #home .text-gray-500 {
+                font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+                font-weight: 700;
+                letter-spacing: 0;
+            }
+            .closing-copy {
+                font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+                font-weight: 700;
+                line-height: 1.9;
+                letter-spacing: 0;
+            }
+            .story-body p {
+                font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+                font-weight: 700;
+                line-height: 1.9;
+                letter-spacing: 0;
+            }
+            .info-note,
+            .info-note p {
+                font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+                font-weight: 700;
+                line-height: 1.9;
+                letter-spacing: 0;
+            }
+            .chaohua-summary p {
+                font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+                font-weight: 700;
+                line-height: 1.9;
+                letter-spacing: 0;
+            }
+        }
+
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .scroll-smooth {
+                scroll-behavior: smooth;
+            }
+            .chart-container {
+                height: 400px;
+                width: 100%;
+            }
+            .radar-container {
+                height: 500px;
+                width: 100%;
+            }
+            .subpage-radar {
+                width: min(100%, 560px);
+                aspect-ratio: 1 / 1;
+                height: auto !important;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #network-chart {
+                width: 100%;
+                max-width: 1120px;
+                height: 640px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            /* 页面切换过渡动画 */
+            .story-page {
+                transition: opacity 0.4s ease, transform 0.4s ease;
+                opacity: 1;
+                transform: translateY(0);
+                visibility: visible;
+            }
+            .story-page.hidden {
+                opacity: 0;
+                transform: translateY(30px);
+                visibility: hidden;
+                pointer-events: none;
+                position: absolute;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+    <body class="text-slate-800 scroll-smooth">
+    <!-- 固定导航栏 -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow-md shadow-teal-900/10 border-b border-teal-100/70 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-primary">抑郁症传播研究</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors">首页</a>
+                    <a href="#background" class="text-gray-700 hover:text-primary transition-colors">研究背景</a>
+                    <a href="#survey" class="text-gray-700 hover:text-primary transition-colors">问卷调查</a>
+                    <a href="#chaohua" class="text-gray-700 hover:text-primary transition-colors">超话分析</a>
+                    <a href="#stories" class="text-gray-700 hover:text-primary transition-colors">人物故事</a>
+                    <a href="#suggestions" class="text-gray-700 hover:text-primary transition-colors">建议方法</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary">首页</a>
+                <a href="#background" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary">研究背景</a>
+                <a href="#survey" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary">问卷调查</a>
+                <a href="#chaohua" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary">超话分析</a>
+                <a href="#stories" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary">人物故事</a>
+                <a href="#suggestions" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary">建议方法</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. 首页板块 -->
+    <section id="home" class="hero-section min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-dark">
+                新媒体视域下抑郁症的传播特征与公众认知研究
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                基于数据挖掘、文本分析与深度访谈的综合实证研究
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mb-16">
+                <a href="#background" class="px-8 py-3 bg-primary text-white rounded-full shadow-lg shadow-teal-900/20 hover:shadow-xl hover:bg-primary/90 transition-all duration-300">
+                    开始探索
+                </a>
+                <a href="#stories" class="px-8 py-3 bg-white/75 text-primary border border-primary/40 rounded-full shadow-lg shadow-teal-900/10 hover:shadow-xl hover:bg-white transition-all duration-300">
+                    查看人物故事
+                </a>
+            </div>
+            <div class="text-gray-500">
+                <p>项目团队：网新班数据新闻三组</p>
+                <p>指导老师：段峰峰</p>
+                <p>2026年6月</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 研究背景板块 -->
+    <section id="background" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">研究背景</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <div class="background-copy">
+                    <h3 class="text-2xl font-semibold mb-6">抑郁症已成为全球性公共卫生问题</h3>
+                    <p class="text-gray-700 mb-4">
+                        根据世界卫生组织(WHO)数据，全球约有2.8亿人患有抑郁症，占全球人口的3.8%。在中国，抑郁症患者人数已超过9500万，且发病率呈逐年上升趋势。
+                    </p>
+                    <p class="text-gray-700 mb-4">
+                        15-29岁人群中，抑郁症已成为第二大死亡原因。然而，由于社会污名化和认知不足，仅有不到10%的患者能够获得专业治疗。
+                    </p>
+                    <p class="text-gray-700">
+                        随着新媒体的快速发展，微博、抖音等社交平台已成为抑郁症患者表达情绪、寻求支持的主要阵地，深刻改变了抑郁症的传播方式与社会认知。
+                    </p>
+                </div>
+                <div>
+                    <div class="chart-container" id="incidence-chart"></div>
+                    <p class="source-note text-sm mt-2">数据来源：世界卫生组织(WHO) 2025年全球精神健康报告</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <div class="chart-container" id="age-distribution-chart"></div>
+                    <p class="source-note text-sm mt-2">数据来源：国家卫健委 2025年中国精神卫生调查</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">研究目的与意义</h3>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li>探究新媒体环境下抑郁症的传播特征与规律</li>
+                        <li>分析大众对抑郁症的认知现状与存在的偏见</li>
+                        <li>揭示微博超话等社区对抑郁症群体的双重影响</li>
+                        <li>为改善抑郁症社会认知、完善心理健康服务提供科学依据</li>
+                        <li>提出针对性的平台治理与社会干预建议</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 问卷调查分析板块 -->
+    <section id="survey" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">问卷调查分析</h2>
+            
+            <!-- 新增：SPSS信效度分析板块 -->
+            <div class="mb-16 surface-card p-8 rounded-xl">
+                <h3 class="text-2xl font-semibold mb-8">量表信效度分析（基于SPSS）</h3>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xl font-medium mb-4">效度分析结果</h4>
+                        <table class="w-full border-collapse border border-teal-100">
+                            <thead>
+                                <tr class="bg-teal-50/70">
+                                    <th class="border border-teal-100 px-4 py-2 text-left">指标</th>
+                                    <th class="border border-teal-100 px-4 py-2 text-right">数值</th>
+                                    <th class="border border-teal-100 px-4 py-2 text-left">说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-teal-100 px-4 py-2">KMO值</td>
+                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">0.691</td>
+                                    <td class="border border-teal-100 px-4 py-2">>0.6，适合因子分析</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-teal-100 px-4 py-2">巴特球形检验p值</td>
+                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">0.000</td>
+                                    <td class="border border-teal-100 px-4 py-2"><0.05，显著</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-teal-100 px-4 py-2">累积方差解释率</td>
+                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">40.55%</td>
+                                    <td class="border border-teal-100 px-4 py-2">中等水平</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-teal-100 px-4 py-2">因子载荷范围</td>
+                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">0.56-0.72</td>
+                                    <td class="border border-teal-100 px-4 py-2">>0.5，项目有效</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-sm text-gray-600 mt-4">
+                            结论：量表效度处于可接受范围，数据适合进行因子分析。
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-medium mb-4">信度分析结果</h4>
+                        <table class="w-full border-collapse border border-teal-100">
+                            <thead>
+                                <tr class="bg-teal-50/70">
+                                    <th class="border border-teal-100 px-4 py-2 text-left">指标</th>
+                                    <th class="border border-teal-100 px-4 py-2 text-right">数值</th>
+                                    <th class="border border-teal-100 px-4 py-2 text-left">说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-teal-100 px-4 py-2">样本量</td>
+                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">167</td>
+                                    <td class="border border-teal-100 px-4 py-2">有效样本</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-teal-100 px-4 py-2">项目数</td>
+                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">4</td>
+                                    <td class="border border-teal-100 px-4 py-2">核心题项</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-teal-100 px-4 py-2">Cronbach's α系数</td>
+                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">0.606</td>
+                                    <td class="border border-teal-100 px-4 py-2">接近0.6，勉强可接受</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-sm text-gray-600 mt-4">
+                            结论：量表内部一致性处于勉强可接受范围。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8">样本基本信息</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <div class="chart-container h-80" id="gender-chart"></div>
+                        <p class="source-note text-sm mt-2">数据来源：本研究问卷调查（n=167）</p>
+                    </div>
+                    <div>
+                        <div class="chart-container h-80" id="age-chart"></div>
+                        <p class="source-note text-sm mt-2">数据来源：本研究问卷调查（n=167）</p>
+                    </div>
+                    <div>
+                        <div class="chart-container h-80" id="experience-chart"></div>
+                        <p class="source-note text-sm mt-2">数据来源：本研究问卷调查（n=167）</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8">大众抑郁症基础认知现状</h3>
+                <div class="chart-container" id="cognition-chart"></div>
+                <p class="source-note text-sm mt-2">数据来源：本研究问卷调查（n=167）</p>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8">交叉分析</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="chart-container" id="gender-social-chart"></div>
+                        <p class="source-note text-sm mt-2">数据来源：本研究问卷调查（n=167）</p>
+                    </div>
+                    <div>
+                        <div class="chart-container" id="experience-treatment-chart"></div>
+                        <p class="source-note text-sm mt-2">数据来源：本研究问卷调查（n=167）</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8">相关性分析</h3>
+                <div class="chart-container" id="correlation-chart"></div>
+                <p class="source-note text-sm mt-2">数据来源：本研究问卷调查（n=167）</p>
+                <div class="mt-6 surface-card p-6 rounded-lg">
+                    <h4 class="font-semibold mb-4">核心发现</h4>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li>自身抑郁经历与社交媒体接触频率呈显著正相关(r=0.32, p<0.01)</li>
+                        <li>疾病认知程度与社交接纳意愿呈显著正相关(r=0.45, p<0.001)</li>
+                        <li>媒体接触频率与认知改变程度呈显著正相关(r=0.28, p<0.05)</li>
+                        <li>性别与社交接纳意愿无显著相关性</li>
+                        <li>平台干预支持度与认知变化呈显著正相关(r=0.31, p<0.01)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="survey-summary surface-card p-8 rounded-lg">
+                <h3 class="text-2xl font-semibold mb-4">问卷调查小结</h3>
+                <p class="text-gray-700 mb-4">
+                    本次调查共回收有效问卷167份，样本以18-25岁在校学生为主(91.62%)，女性占比70.66%。调查结果显示，大众对抑郁症的认知仍存在较大提升空间，约30%的受访者认为抑郁症是"意志力薄弱"的表现。
+                </p>
+                <p class="text-gray-700 mb-4">
+                    有抑郁经历的人群对抑郁症的认知更为准确，也更愿意接纳抑郁症患者。新媒体接触频率与大众认知改变呈正相关，表明社交媒体在抑郁症科普方面具有重要作用。
+                </p>
+                <p class="text-gray-700">
+                    同时，研究发现疾病认知程度越高，社交接纳意愿越强，说明科学科普能够有效减少社会污名化。76.65%的受访者支持社交媒体平台加强抑郁症相关内容的安全提示与干预机制。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 微博超话深度分析板块 -->
+    <section id="chaohua" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">微博超话深度分析</h2>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8">数据来源与采集说明</h3>
+                <p class="info-note text-gray-700 mb-4 bg-teal-50/70 border border-teal-100 p-6 rounded-lg">
+                    本研究采集了2026年4月26日至5月4日期间"抑郁症超话"的498条有效帖子，包含标题、发布时间、评论内容、评论数和点赞数等信息。
+                </p>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8">正负向情绪词云对比</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xl font-medium mb-4 text-center text-success">正向情绪词云</h4>
+                        <div class="chart-container" id="positive-wordcloud"></div>
+                        <p class="source-note text-sm mt-2">数据来源：微博抑郁症超话（2026.04.26-2026.05.04）</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-medium mb-4 text-center text-danger">负向情绪词云</h4>
+                        <div class="chart-container" id="negative-wordcloud"></div>
+                        <p class="source-note text-sm mt-2">数据来源：微博抑郁症超话（2026.04.26-2026.05.04）</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8">情感倾向分析</h3>
+                <div class="chart-container" id="sentiment-chart"></div>
+                <p class="source-note text-sm mt-2">数据来源：微博抑郁症超话（2026.04.26-2026.05.04，n=498）</p>
+                <div class="info-note mt-6 bg-teal-50/70 border border-teal-100 p-6 rounded-lg">
+                    <p class="text-gray-700">
+                        分析结果显示，超话整体平均情绪值为<strong><em>-2.09</em></strong>，呈现明显的负面倾向。90%以上的帖子情绪值集中在-40至+20分区间，几乎没有极端正面情绪的内容。
+                        负面情绪主要表现为绝望、痛苦、焦虑和孤独，而少量正面情绪则来自于病友间的互相鼓励和康复希望。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold mb-8">文本网络分析</h3>
+                <div class="chart-container" id="network-chart"></div>
+                <p class="source-note text-sm mt-2">数据来源：微博抑郁症超话（2026.04.26-2026.05.04，n=498）</p>
+                <div class="mt-4 text-sm text-gray-600 font-bold">
+                    <p><span class="inline-block w-8 h-1 bg-primary mr-2"></span>实线：强关联（Jaccard系数&gt;0.08）</p>
+                    <p><span class="inline-block w-8 h-1 border-t-2 border-dashed border-slate-400 mr-2"></span>虚线：弱关联（Jaccard系数≤0.08）</p>
+                </div>
+            </div>
+            
+            <div class="chaohua-summary surface-card p-8 rounded-lg">
+                <h3 class="text-2xl font-semibold mb-4">超话分析小结</h3>
+                <p class="text-gray-700 mb-4">
+                    微博抑郁症超话作为抑郁症患者的主要线上聚集地，具有明显的"情感宣泄平台"和"病友互助社区"双重属性。一方面，它为患者提供了一个安全的情绪表达空间，让他们能够获得理解和支持；
+                    另一方面，社区内也存在极端情绪传染、虚假医疗信息传播等负面风险。
+                </p>
+                <p class="text-gray-700">
+                    超话内容主要围绕原生家庭创伤、学业职场压力、疾病本身痛苦和社会偏见等主题展开。用户在超话中不仅分享自己的患病经历和治疗过程，也会交流自救方法和医疗资源，
+                    形成了独特的社区文化和支持网络。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 人物故事分享板块（优化版） -->
+    <section id="stories" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">人物故事分享</h2>
+            
+            <!-- 人物故事主页面：五维图+分类按钮 -->
+            <div id="stories-main" class="story-page">
+                <p class="story-note">
+                    通过三位不同年龄段、不同状态的抑郁症患者真实故事，具象化呈现新媒体对抑郁群体的双重影响
+                </p>
+                
+                <!-- 五维属性对比图（核心展示） -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-semibold text-center mb-6">受访者五维属性对比</h3>
+                    <div class="radar-container" id="comparison-radar"></div>
+                    <p class="source-note text-sm mt-2 text-center">数据来源：本研究深度访谈（2026年5月）</p>
+                    <p class="text-gray-600 mt-4 text-center max-w-3xl mx-auto">
+                        基于<strong>情绪稳定性、媒体依赖度、社交活跃度、自我掌控感、生活满意度</strong>五个核心维度，
+                        我们将受访者归纳为三种典型类型。点击下方对应按钮，查看完整人物故事。
+                    </p>
+                </div>
+                
+                <!-- 分类按钮组（替代原卡片） -->
+                <div class="flex flex-wrap justify-center gap-6">
+                    <button class="category-btn px-8 py-4 bg-success text-white rounded-xl shadow-lg hover:shadow-xl hover:bg-success/90 transition-all duration-300 flex flex-col items-center" data-target="xuejie">
+                        <span class="text-xl font-bold mb-2">主动掌控型</span>
+                        <span class="text-sm opacity-90">康复者 · 学姐</span>
+                    </button>
+                    <button class="category-btn px-8 py-4 bg-secondary text-white rounded-xl shadow-lg hover:shadow-xl hover:bg-secondary/90 transition-all duration-300 flex flex-col items-center" data-target="jinlan">
+                        <span class="text-xl font-bold mb-2">被动沉溺型</span>
+                        <span class="text-sm opacity-90">自闭+抑郁 · 金兰</span>
+                    </button>
+                    <button class="category-btn px-8 py-4 bg-danger text-white rounded-xl shadow-lg hover:shadow-xl hover:bg-danger/90 transition-all duration-300 flex flex-col items-center" data-target="tayan">
+                        <span class="text-xl font-bold mb-2">伤害主导型</span>
+                        <span class="text-sm opacity-90">高中生抑郁 · 她厌</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 学姐子页面 -->
+            <div id="xuejie-story" class="story-page hidden">
+                <button class="back-btn mb-6 px-4 py-2 bg-teal-100 text-primary rounded-lg hover:bg-teal-200 transition-colors">
+                    <i class="fa fa-arrow-left mr-2"></i>返回人物列表
+                </button>
+                
+                <div class="surface-card rounded-xl p-8">
+                    <div class="flex flex-col md:flex-row gap-8 mb-8">
+                        <div class="md:w-1/3">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-success to-primary flex items-center justify-center text-white font-bold text-2xl mr-4">
+                                    学
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold">学姐</h3>
+                                    <p class="text-gray-500">26岁 · 康复 · 主动掌控型</p>
+                                </div>
+                            </div>
+                            <div class="radar-container subpage-radar" id="xuejie-radar"></div>
+                            <p class="source-note text-sm mt-2">数据来源：本研究深度访谈</p>
+                            
+                            <div class="mt-6 grid grid-cols-2 gap-4">
+                                <div class="bg-teal-50/70 border border-teal-100 p-4 rounded-lg">
+                                    <p class="text-gray-500 text-sm">日使用时长</p>
+                                    <p class="text-xl font-bold">3-8小时</p>
+                                </div>
+                                <div class="bg-teal-50/70 border border-teal-100 p-4 rounded-lg">
+                                    <p class="text-gray-500 text-sm">依赖度评分</p>
+                                    <p class="text-xl font-bold">2-3分</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="md:w-2/3">
+                            <blockquote class="text-xl italic text-gray-700 border-l-4 border-success pl-4 mb-6">
+                                "新媒体对现在的我影响较小，但在我小时候它是我可以依靠的浮木"
+                            </blockquote>
+                            
+                            <div class="story-body prose max-w-none text-gray-700 space-y-4">
+                                <p>
+                                    我现在对手机和新媒体的依赖程度很低，大概只有2到3分。工作的时候每天用3到5小时，不工作宅家也就5到8小时，而且我会固定时间段刷。小红书、微博、抖音是主要的，更多是社交互动。
+                                </p>
+                                <p>
+                                    但以前不是这样的。小时候，我性格孤僻，朋友很少，还经历过抑郁期。那时候，新媒体就像茫茫大海里漂过来的一根浮木——我拼命抓住它，怕错过任何信息，怕失去线上的朋友。曾经我也会因为抖音上那些冒犯和攻击的言论而难受，尤其是作为一个女生，什么都没做就会收到骚扰。抑郁期的时候，我也会陷入越刷越难过的循环。
+                                </p>
+                                <p>
+                                    随着成长，我在现实生活中的支点慢慢多起来了。现在，我线上认识的朋友一定会转到线下见面，我对人真诚大方，不会有什么转变。线上社交的优势是圈子更广，能认识形形色色的人；不足是虚假信息太多，骗子也多，人人戴着面具。但我现在几乎不会因为错过信息而焦虑了。
+                                </p>
+                                <p>
+                                    如果要给新媒体对我的情绪影响打分，积极和消极都是2到3分——它对我的生活几乎没有很强的吸引力。我觉得，线上社交永远无法替代线下的生活体验。人只有走到自然里、走到现实中去与人接触，才会有真正的感触。特别是对年纪小、认知还不成熟的人来说，新媒体的消极影响往往更大，需要身边的朋友和家人去引导。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 金兰子页面 -->
+            <div id="jinlan-story" class="story-page hidden">
+                <button class="back-btn mb-6 px-4 py-2 bg-teal-100 text-primary rounded-lg hover:bg-teal-200 transition-colors">
+                    <i class="fa fa-arrow-left mr-2"></i>返回人物列表
+                </button>
+                
+                <div class="surface-card rounded-xl p-8">
+                    <div class="flex flex-col md:flex-row gap-8 mb-8">
+                        <div class="md:w-1/3">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-secondary to-danger flex items-center justify-center text-white font-bold text-2xl mr-4">
+                                    金
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold">金兰</h3>
+                                    <p class="text-gray-500">20岁 · 自闭+抑郁 · 被动沉溺型</p>
+                                </div>
+                            </div>
+                            <div class="radar-container subpage-radar" id="jinlan-radar"></div>
+                            <p class="source-note text-sm mt-2">数据来源：本研究深度访谈</p>
+                            
+                            <div class="mt-6 grid grid-cols-2 gap-4">
+                                <div class="bg-violet-50/70 border border-violet-100 p-4 rounded-lg">
+                                    <p class="text-gray-500 text-sm">日使用时长</p>
+                                    <p class="text-xl font-bold">10+小时</p>
+                                </div>
+                                <div class="bg-violet-50/70 border border-violet-100 p-4 rounded-lg">
+                                    <p class="text-gray-500 text-sm">依赖度评分</p>
+                                    <p class="text-xl font-bold">10分</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="md:w-2/3">
+                            <blockquote class="text-xl italic text-gray-700 border-l-4 border-secondary pl-4 mb-6">
+                                "自闭人的天堂，不用面对面交流"
+                            </blockquote>
+                            
+                            <div class="story-body prose max-w-none text-gray-700 space-y-4">
+                                <p>
+                                    我是一名深度的二次元爱好者，经常面临圈层冲突，面对现实焦虑时会通过刷手机来缓解，这种逃避反而会加剧焦虑，但对新媒体对情绪的影响仍保持积极的态度。我在新媒体中关注的二次元内容较多，他们长期陪伴着我，很怀念之前的二次元文化，对于当前新质量颇有失望，比如《燕云十六声》，我原本期待的是纯粹的武侠体验，但游戏却转向了过多的江湖人情世故，甚至游戏只能抽服装不能抽武器，这显然与武侠主题背道而驰。我认为游戏为了赚钱而偏离了核心受众的期待，这种商业化的妥协让我逐渐失去了兴趣。
+                                </p>
+                                <p>
+                                    我认为线上社交最大的优势是可控性，可以通过拉黑或谩骂来宣泄情绪，而线下社交则因环境限制难以回避讨厌的人。在网络中结识了有相同兴趣的好友，也发展为了线下见面。我在线上认识的男性在线下见面时反差很大，原本以为会有距离感，但实际相处很自然。紧急情况下的见面让我无暇顾及社交拘束，这种处境冲淡了社交焦虑。
+                                </p>
+                                <p>
+                                    我经常在小红书看到许多新鲜的内容，错过这些时，会感觉不高兴。小红书或者b站上面一些男女对立的圈子，或者是喜欢的游戏相关的争议，我对此抱有不同的观点，所以我看了就会有点不舒服。我和在网上的性格是完全一致。有个东西叫做masking自闭症，在社交过程中会戴上面具，但是我不会，因为我就是要过我喜欢的生活，我不喜欢masking，给我带来的只有身心上的痛苦。
+                                </p>
+                                <p>
+                                    总体来说，新媒体对于自闭症来说简直就是天堂，不用面对社交的压力，又能保持必要的情感连接。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 她厌子页面 -->
+            <div id="tayan-story" class="story-page hidden">
+                <button class="back-btn mb-6 px-4 py-2 bg-teal-100 text-primary rounded-lg hover:bg-teal-200 transition-colors">
+                    <i class="fa fa-arrow-left mr-2"></i>返回人物列表
+                </button>
+                
+                <div class="surface-card rounded-xl p-8">
+                    <div class="flex flex-col md:flex-row gap-8 mb-8">
+                        <div class="md:w-1/3">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full bg-gradient-to-r from-danger to-warning flex items-center justify-center text-white font-bold text-2xl mr-4">
+                                    厌
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold">她厌</h3>
+                                    <p class="text-gray-500">高中生 · 抑郁 · 伤害主导型</p>
+                                </div>
+                            </div>
+                            <div class="radar-container subpage-radar" id="tayan-radar"></div>
+                            <p class="source-note text-sm mt-2">数据来源：本研究深度访谈</p>
+                            
+                            <div class="mt-6 grid grid-cols-2 gap-4">
+                                <div class="bg-rose-50/70 border border-rose-100 p-4 rounded-lg">
+                                    <p class="text-gray-500 text-sm">日使用时长</p>
+                                    <p class="text-xl font-bold">放假11-12小时</p>
+                                </div>
+                                <div class="bg-rose-50/70 border border-rose-100 p-4 rounded-lg">
+                                    <p class="text-gray-500 text-sm">依赖度评分</p>
+                                    <p class="text-xl font-bold">7分</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="md:w-2/3">
+                            <blockquote class="text-xl italic text-gray-700 border-l-4 border-danger pl-4 mb-6">
+                                "双刃剑，但我还没能力掌控它"
+                            </blockquote>
+                            
+                            <div class="story-body prose max-w-none text-gray-700 space-y-4">
+                                <p>
+                                    我是一名普通的高中生。放假的时候，我几乎把大半时间都泡在手机上，从晚上八点一直刷到凌晨，小红书、B站，还有一个叫"名人朋友圈"的软件——那是一个语擦平台，我可以扮演林黛玉，写同人文，也写人物小传。对我来说，社交几乎全在线上完成。
+                                </p>
+                                <p>
+                                    我给自己对新媒体的依赖打了7分。情绪低落时，我会在QQ空间或微博上记录自己的状态，发完又删掉；也会去小红书搜索有没有和我一样的人，寻找共鸣。那些用文字认真记录日常、记录微小瞬间的内容，总能打动我，让我感到被治愈。可反过来，同样患有抑郁症的朋友发的那些话，也会让我陷入更深的低迷。我试过越刷越难过、越难过越想刷的循环，大概每周一次。
+                                </p>
+                                <p>
+                                    新媒体对我而言是一把双刃剑。我通过"名人朋友圈"认识了一位相处一年半的好朋友，她学习好，会鼓励我，给我学习资料，我们还写过两本交换日记。也有人寄过书、寄过小礼物。但消极影响同样真实——一个玩了一年的朋友和我闹掰了，他在圈子里骂了我很久，让我情绪和身体都受到了很大影响，过了两个月才慢慢好起来。
+                                </p>
+                                <p>
+                                    我线上展示的自己与线下有75%的差别——线上我更完整地展示自己。如果问我新媒体对我的生活有什么影响，我会说：它是一把双刃剑，而我确实还没有能力掌握好它。
+                                </p>
+                                <p>
+                                    她在网络上看到了太多负面内容，那些自残、自杀的信息像病毒一样传染给了她。她知道这不好，但她无法控制自己不去看。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 建议与优化方法板块 -->
+    <section id="suggestions" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">建议与优化方法</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 平台层面 -->
+                <div class="bg-teal-50/80 border border-teal-100 rounded-xl p-6 shadow-md shadow-teal-900/10 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mb-4">
+                        <i class="fa fa-globe text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">平台层面</h3>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li>完善超话内容审核机制，及时过滤极端负面内容</li>
+                        <li>建立抑郁症内容危机干预系统，识别自杀风险并预警</li>
+                        <li>推送科学的抑郁症科普内容，减少污名化</li>
+                        <li>为用户提供心理健康资源链接和求助渠道</li>
+                        <li>优化算法推荐，避免负面信息过度推送</li>
+                    </ul>
+                </div>
+                
+                <!-- 媒体层面 -->
+                <div class="bg-violet-50/80 border border-violet-100 rounded-xl p-6 shadow-md shadow-violet-900/10 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white mb-4">
+                        <i class="fa fa-newspaper-o text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">媒体层面</h3>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li>科学报道抑郁症，避免过度渲染和标签化</li>
+                        <li>多传播抑郁症患者康复的正面案例</li>
+                        <li>邀请专业人士进行科普，提高内容权威性</li>
+                        <li>避免消费抑郁症患者，尊重患者隐私</li>
+                        <li>开展心理健康主题宣传活动</li>
+                    </ul>
+                </div>
+                
+                <!-- 社会层面 -->
+                <div class="bg-emerald-50/80 border border-emerald-100 rounded-xl p-6 shadow-md shadow-emerald-900/10 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-success rounded-full flex items-center justify-center text-white mb-4">
+                        <i class="fa fa-users text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">社会层面</h3>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li>完善心理健康服务体系，增加专业医疗资源</li>
+                        <li>将心理健康教育纳入学校课程体系</li>
+                        <li>加强公众科普教育，消除社会偏见和污名化</li>
+                        <li>建立社区心理健康支持网络</li>
+                        <li>为抑郁症患者提供就业支持和社会融入帮助</li>
+                    </ul>
+                </div>
+                
+                <!-- 个人层面 -->
+                <div class="bg-amber-50/80 border border-amber-100 rounded-xl p-6 shadow-md shadow-amber-900/10 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-warning rounded-full flex items-center justify-center text-white mb-4">
+                        <i class="fa fa-user text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">个人层面</h3>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li>患者应科学就医，遵医嘱治疗，不擅自停药</li>
+                        <li>合理使用社交媒体，避免过度沉溺负面内容</li>
+                        <li>培养健康的兴趣爱好，建立现实生活支点</li>
+                        <li>大众应提高对抑郁症的认知，给予患者理解和包容</li>
+                        <li>发现身边人有心理问题时，及时提供帮助和支持</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <h3 class="text-2xl font-bold mb-4">结语</h3>
+                <p class="closing-copy text-gray-700 max-w-3xl mx-auto">
+                    抑郁症不是"矫情"，也不是"意志力薄弱"，而是一种需要科学治疗的疾病。在数字时代，新媒体既是抑郁症传播的载体，也是患者寻求支持的平台。
+                    我们希望通过本研究，能够让更多人了解抑郁症患者的真实处境，消除社会偏见，共同营造一个更加包容、温暖的社会环境，让每一个在黑暗中挣扎的灵魂都能看到希望的光芒。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 分享功能板块 -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold mb-8">分享这份调研</h2>
+            
+            <div class="surface-card rounded-xl p-8 mb-8">
+                <div class="flex flex-col md:flex-row items-center gap-4 mb-8">
+                    <div class="relative flex-1 w-full">
+                        <input 
+                            type="text" 
+                            id="share-link" 
+                            value="https://depression-research.example.com" 
+                            readonly
+                            class="w-full px-4 py-3 bg-white/70 rounded-lg border border-teal-100 focus:outline-none focus:ring-2 focus:ring-primary"
+                        >
+                        <button 
+                            id="copy-btn" 
+                            class="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-300"
+                        >
+                            复制链接
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4">
+                    <!-- 微博分享 -->
+                    <a 
+                        href="javascript:shareToWeibo()" 
+                        class="flex items-center gap-2 px-6 py-3 bg-[#E6162D] text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                    >
+                        <i class="fa fa-weibo"></i>
+                        分享到微博
+                    </a>
+                    
+                    <!-- 微信分享 -->
+                    <a 
+                        href="javascript:shareToWeChat()" 
+                        class="flex items-center gap-2 px-6 py-3 bg-[#07C160] text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                    >
+                        <i class="fa fa-wechat"></i>
+                        分享到微信
+                    </a>
+                    
+                    <!-- QQ分享 -->
+                    <a 
+                        href="javascript:shareToQQ()" 
+                        class="flex items-center gap-2 px-6 py-3 bg-[#12B7F5] text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                    >
+                        <i class="fa fa-qq"></i>
+                        分享到QQ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>新媒体视域下抑郁症传播与大众认知研究 © 2026</p>
+            <p class="text-gray-400 mt-2">所有数据仅供学术研究使用</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 部分 -->
+    <script>
+        // 全局声明子页面雷达图变量（解决渲染问题）
+        let xuejieRadar, jinlanRadar, tayanRadar;
+        const themeColors = {
+            primary: '#256D85',
+            secondary: '#756AB6',
+            success: '#2F9E73',
+            warning: '#D9902F',
+            danger: '#D95D72',
+            muted: '#8EA3A6',
+            cyan: '#3FA7A6'
+        };
+        const chartTextStyle = {
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
+        };
+        const chartInk = '#20323D';
+        const chartMuted = '#6E8288';
+        const chartSoftLine = '#DDEBE8';
+        const chartPalette = [
+            themeColors.primary,
+            themeColors.secondary,
+            themeColors.success,
+            themeColors.warning,
+            themeColors.danger,
+            themeColors.cyan,
+            '#E8B05B',
+            '#B45C7A'
+        ];
+        const chartTitle = {
+            left: 'center',
+            top: 8,
+            textStyle: {
+                color: chartInk,
+                fontSize: 16,
+                fontWeight: 700
+            }
+        };
+        const baseTooltip = {
+            backgroundColor: 'rgba(255, 254, 250, 0.96)',
+            borderColor: '#CFE2DE',
+            borderWidth: 1,
+            padding: [10, 12],
+            textStyle: {
+                color: chartInk,
+                fontSize: 12,
+                ...chartTextStyle
+            },
+            extraCssText: 'box-shadow: 0 12px 30px rgba(32, 50, 61, 0.12); border-radius: 10px;'
+        };
+        const baseLegend = {
+            bottom: 0,
+            icon: 'circle',
+            itemWidth: 10,
+            itemHeight: 10,
+            itemGap: 16,
+            textStyle: {
+                color: chartMuted,
+                fontSize: 12,
+                ...chartTextStyle
+            }
+        };
+        const baseGrid = {
+            top: 78,
+            left: 48,
+            right: 32,
+            bottom: 52,
+            containLabel: true
+        };
+        const categoryAxisStyle = {
+            axisLine: { lineStyle: { color: chartSoftLine } },
+            axisTick: { show: false },
+            axisLabel: { color: chartMuted, fontSize: 12, interval: 0 },
+            splitLine: { show: false }
+        };
+        const valueAxisStyle = {
+            axisLine: { show: false },
+            axisTick: { show: false },
+            axisLabel: { color: chartMuted, fontSize: 12 },
+            splitLine: { lineStyle: { color: chartSoftLine, type: 'dashed' } },
+            nameTextStyle: { color: chartMuted, padding: [0, 0, 0, 6] }
+        };
+        const pieItemStyle = {
+            borderColor: '#fffefa',
+            borderWidth: 3,
+            borderRadius: 6
+        };
+        const pieLabelStyle = {
+            color: chartInk,
+            fontSize: 12,
+            lineHeight: 18,
+            formatter: '{b}\n{d}%'
+        };
+        const pieLabelLineStyle = {
+            length: 12,
+            length2: 8,
+            lineStyle: { color: '#AFC9C5' }
+        };
+        function roundedBar(color) {
+            return {
+                color,
+                borderRadius: [8, 8, 2, 2]
+            };
+        }
+        function radarStyle(indicator, radius) {
+            return {
+                indicator,
+                radius,
+                splitNumber: 5,
+                axisName: {
+                    color: '#20323D',
+                    fontSize: 14,
+                    fontWeight: 800,
+                    ...chartTextStyle
+                },
+                axisLine: { lineStyle: { color: '#C9E2DE', width: 1.4 } },
+                splitLine: { lineStyle: { color: '#C9E2DE', width: 1.4 } },
+                splitArea: {
+                    areaStyle: {
+                        color: ['rgba(237, 248, 246, 0.75)', 'rgba(247, 244, 251, 0.55)']
+                    }
+                }
+            };
+        }
+        echarts.registerTheme('inkTheme', {
+                textStyle: chartTextStyle,
+                color: chartPalette,
+                title: {
+                    textStyle: {
+                    fontFamily: '"Noto Serif SC", "Songti SC", "STSong", "SimSun", serif',
+                    fontWeight: 700
+                }
+            }
+        });
+        function createHeartMask() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1000;
+            canvas.height = 760;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#000';
+            ctx.beginPath();
+            const points = [];
+            for (let i = 0; i <= 360; i++) {
+                const t = i * Math.PI / 180;
+                const x = 16 * Math.pow(Math.sin(t), 3);
+                const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+                points.push({
+                    x: 500 + x * 28,
+                    y: 420 - y * 28
+                });
+            }
+            ctx.moveTo(points[0].x, points[0].y);
+            points.slice(1).forEach(point => ctx.lineTo(point.x, point.y));
+            ctx.closePath();
+            ctx.fill();
+            return canvas;
+        }
+        const heartMask = createHeartMask();
+
+        // 移动端菜单切换
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.add('bg-white/95');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.remove('bg-white/95');
+            }
+        });
+
+        // 人物故事切换（分类按钮版）
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                document.getElementById('stories-main').classList.add('hidden');
+                const storyElement = document.getElementById(`${target}-story`);
+                storyElement.classList.remove('hidden');
+                
+                // 修复子页面雷达图渲染问题（显示后重新计算尺寸）
+                setTimeout(() => {
+                    if (target === 'xuejie') {
+                        xuejieRadar.resize();
+                    } else if (target === 'jinlan') {
+                        jinlanRadar.resize();
+                    } else if (target === 'tayan') {
+                        tayanRadar.resize();
+                    }
+                }, 10); // 延迟10ms确保DOM更新完成
+                
+                // 滚动到人物故事板块顶部
+                window.scrollTo({top: document.getElementById('stories').offsetTop - 80, behavior: 'smooth'});
+            });
+        });
+
+        // 返回人物列表（回到人物故事主页面，不跳到页面顶部）
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[id$="-story"]').forEach(story => {
+                    story.classList.add('hidden');
+                });
+                document.getElementById('stories-main').classList.remove('hidden');
+                
+                requestAnimationFrame(() => {
+                    const storiesTop = document.getElementById('stories').getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({top: storiesTop, behavior: 'smooth'});
+                });
+            });
+        });
+
+        // 复制链接功能
+        document.getElementById('copy-btn').addEventListener('click', function() {
+            const linkInput = document.getElementById('share-link');
+            linkInput.select();
+            navigator.clipboard.writeText(linkInput.value).then(() => {
+                const originalText = this.textContent;
+                this.textContent = '已复制';
+                setTimeout(() => {
+                    this.textContent = originalText;
+                }, 2000);
+            });
+        });
+
+        // 社交媒体分享函数
+        function shareToWeibo() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent('新媒体视域下抑郁症传播与大众认知研究');
+            window.open(`https://service.weibo.com/share/share.php?url=${url}&title=${title}`, '_blank');
+        }
+
+        function shareToWeChat() {
+            alert('请点击右上角"..."分享到微信');
+        }
+
+        function shareToQQ() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent('新媒体视域下抑郁症传播与大众认知研究');
+            window.open(`https://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}`, '_blank');
+        }
+
+        // ECharts 图表初始化
+        window.addEventListener('load', function() {
+            // 1. 研究背景 - 发病率趋势图
+            const incidenceChart = echarts.init(document.getElementById('incidence-chart'), 'inkTheme');
+            incidenceChart.setOption({
+                title: { ...chartTitle, text: '近10年中国抑郁症发病率变化趋势' },
+                grid: baseGrid,
+                tooltip: {
+                    ...baseTooltip,
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'line',
+                        lineStyle: { color: themeColors.primary, width: 1, type: 'dashed' }
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    ...categoryAxisStyle,
+                    data: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '发病率(%)',
+                    ...valueAxisStyle
+                },
+                series: [{
+                    name: '发病率',
+                    data: [4.2, 4.5, 4.8, 5.1, 5.8, 6.2, 6.5, 6.8, 7.1, 7.5],
+                    type: 'line',
+                    smooth: true,
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    lineStyle: {
+                        color: themeColors.primary,
+                        width: 3,
+                        shadowBlur: 8,
+                        shadowColor: 'rgba(37, 109, 133, 0.18)'
+                    },
+                    itemStyle: {
+                        color: '#fffefa',
+                        borderColor: themeColors.primary,
+                        borderWidth: 3
+                    },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(37, 109, 133, 0.28)' },
+                            { offset: 0.72, color: 'rgba(63, 167, 166, 0.10)' },
+                            { offset: 1, color: 'rgba(255, 254, 250, 0.02)' }
+                        ])
+                    }
+                }]
+            });
+
+            // 2. 研究背景 - 年龄分布图
+            const ageChart = echarts.init(document.getElementById('age-distribution-chart'), 'inkTheme');
+            ageChart.setOption({
+                title: { ...chartTitle, text: '抑郁症患者年龄分布' },
+                tooltip: { ...baseTooltip, trigger: 'item', formatter: '{b}<br/>{c}% / {d}%' },
+                legend: baseLegend,
+                series: [{
+                    name: '年龄分布',
+                    type: 'pie',
+                    radius: ['46%', '70%'],
+                    center: ['50%', '50%'],
+                    avoidLabelOverlap: false,
+                    itemStyle: pieItemStyle,
+                    label: pieLabelStyle,
+                    labelLine: pieLabelLineStyle,
+                    emphasis: {
+                        scaleSize: 8,
+                        itemStyle: {
+                            shadowBlur: 14,
+                            shadowColor: 'rgba(32, 50, 61, 0.15)'
+                        }
+                    },
+                    data: [
+                        { value: 25, name: '18岁以下' },
+                        { value: 40, name: '18-30岁' },
+                        { value: 20, name: '31-45岁' },
+                        { value: 10, name: '46-60岁' },
+                        { value: 5, name: '60岁以上' }
+                    ],
+                    color: [themeColors.primary, themeColors.secondary, themeColors.success, themeColors.warning, themeColors.danger]
+                }]
+            });
+
+            // 3. 问卷调查 - 性别分布
+            const genderChart = echarts.init(document.getElementById('gender-chart'), 'inkTheme');
+            genderChart.setOption({
+                title: { ...chartTitle, text: '样本性别分布' },
+                tooltip: { ...baseTooltip, trigger: 'item', formatter: '{b}<br/>{c} 人 / {d}%' },
+                legend: baseLegend,
+                series: [{
+                    name: '性别',
+                    type: 'pie',
+                    radius: ['42%', '68%'],
+                    center: ['50%', '50%'],
+                    itemStyle: pieItemStyle,
+                    label: pieLabelStyle,
+                    labelLine: pieLabelLineStyle,
+                    data: [
+                        { value: 118, name: '女性' },
+                        { value: 44, name: '男性' },
+                        { value: 5, name: '其他' }
+                    ],
+                    color: [themeColors.secondary, themeColors.primary, themeColors.muted]
+                }]
+            });
+
+            // 4. 问卷调查 - 年龄分布
+            const surveyAgeChart = echarts.init(document.getElementById('age-chart'), 'inkTheme');
+            surveyAgeChart.setOption({
+                title: { ...chartTitle, text: '样本年龄分布' },
+                tooltip: { ...baseTooltip, trigger: 'item', formatter: '{b}<br/>{c} 人 / {d}%' },
+                legend: baseLegend,
+                series: [{
+                    name: '年龄',
+                    type: 'pie',
+                    radius: ['42%', '68%'],
+                    center: ['50%', '50%'],
+                    itemStyle: pieItemStyle,
+                    label: pieLabelStyle,
+                    labelLine: pieLabelLineStyle,
+                    data: [
+                        { value: 4, name: '18岁以下' },
+                        { value: 153, name: '18-25岁' },
+                        { value: 10, name: '26-35岁' }
+                    ],
+                    color: [themeColors.success, themeColors.primary, themeColors.secondary]
+                }]
+            });
+
+            // 5. 问卷调查 - 抑郁经历分布
+            const experienceChart = echarts.init(document.getElementById('experience-chart'), 'inkTheme');
+            experienceChart.setOption({
+                title: { ...chartTitle, text: '样本抑郁经历分布' },
+                tooltip: { ...baseTooltip, trigger: 'item', formatter: '{b}<br/>{c} 人 / {d}%' },
+                legend: { ...baseLegend, bottom: 0 },
+                series: [{
+                    name: '抑郁经历',
+                    type: 'pie',
+                    radius: ['42%', '68%'],
+                    center: ['50%', '50%'],
+                    itemStyle: pieItemStyle,
+                    label: pieLabelStyle,
+                    labelLine: pieLabelLineStyle,
+                    data: [
+                        { value: 9, name: '确诊抑郁症' },
+                        { value: 37, name: '自感有抑郁倾向' },
+                        { value: 106, name: '无抑郁经历' },
+                        { value: 15, name: '不确定' }
+                    ],
+                    color: [themeColors.danger, themeColors.warning, themeColors.success, themeColors.muted]
+                }]
+            });
+
+            // 6. 问卷调查 - 基础认知
+            const cognitionChart = echarts.init(document.getElementById('cognition-chart'), 'inkTheme');
+            cognitionChart.setOption({
+                title: { ...chartTitle, text: '大众对抑郁症的认知情况' },
+                grid: { ...baseGrid, bottom: 72 },
+                tooltip: {
+                    ...baseTooltip,
+                    trigger: 'axis',
+                    axisPointer: { type: 'shadow', shadowStyle: { color: 'rgba(37, 109, 133, 0.06)' } },
+                    valueFormatter: value => `${value}%`
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['是疾病需要治疗', '是意志力薄弱', '是矫情想太多', '不知道'],
+                    ...categoryAxisStyle,
+                    axisLabel: { ...categoryAxisStyle.axisLabel, rotate: 18 }
+                },
+                yAxis: { type: 'value', name: '占比(%)', ...valueAxisStyle },
+                series: [{
+                    name: '占比',
+                    data: [88.62, 20, 10, 5],
+                    type: 'bar',
+                    barMaxWidth: 48,
+                    label: {
+                        show: true,
+                        position: 'top',
+                        color: chartInk,
+                        fontSize: 12,
+                        formatter: '{c}%'
+                    },
+                    itemStyle: {
+                        color: function(params) {
+                            const colors = [themeColors.success, themeColors.warning, themeColors.danger, themeColors.muted];
+                            return colors[params.dataIndex];
+                        },
+                        borderRadius: [8, 8, 2, 2]
+                    }
+                }]
+            });
+
+            // 7. 问卷调查 - 性别×社交意愿
+            const genderSocialChart = echarts.init(document.getElementById('gender-social-chart'), 'inkTheme');
+            genderSocialChart.setOption({
+                title: { ...chartTitle, text: '不同性别对抑郁症患者的社交接纳意愿' },
+                grid: { ...baseGrid, bottom: 72 },
+                tooltip: {
+                    ...baseTooltip,
+                    trigger: 'axis',
+                    axisPointer: { type: 'shadow', shadowStyle: { color: 'rgba(37, 109, 133, 0.06)' } },
+                    valueFormatter: value => `${value}%`
+                },
+                legend: baseLegend,
+                xAxis: { type: 'category', data: ['非常愿意', '愿意', '不确定', '不愿意', '非常不愿意'], ...categoryAxisStyle },
+                yAxis: { type: 'value', name: '占比(%)', ...valueAxisStyle },
+                series: [
+                    { name: '女性', type: 'bar', data: [25, 45, 20, 8, 2], barMaxWidth: 34, itemStyle: roundedBar(themeColors.secondary) },
+                    { name: '男性', type: 'bar', data: [20, 40, 25, 12, 3], barMaxWidth: 34, itemStyle: roundedBar(themeColors.primary) }
+                ]
+            });
+
+            // 8. 问卷调查 - 抑郁经历×治疗认同
+            const experienceTreatmentChart = echarts.init(document.getElementById('experience-treatment-chart'), 'inkTheme');
+            experienceTreatmentChart.setOption({
+                title: { ...chartTitle, text: '不同抑郁经历对治疗的认同度' },
+                grid: { ...baseGrid, bottom: 72 },
+                tooltip: {
+                    ...baseTooltip,
+                    trigger: 'axis',
+                    axisPointer: { type: 'shadow', shadowStyle: { color: 'rgba(37, 109, 133, 0.06)' } },
+                    valueFormatter: value => `${value}%`
+                },
+                legend: baseLegend,
+                xAxis: { type: 'category', data: ['非常认同', '认同', '一般', '不认同', '非常不认同'], ...categoryAxisStyle },
+                yAxis: { type: 'value', name: '占比(%)', ...valueAxisStyle },
+                series: [
+                    { name: '有抑郁经历', type: 'bar', data: [60, 30, 8, 2, 0], barMaxWidth: 34, itemStyle: roundedBar(themeColors.danger) },
+                    { name: '无抑郁经历', type: 'bar', data: [40, 35, 18, 5, 2], barMaxWidth: 34, itemStyle: roundedBar(themeColors.success) }
+                ]
+            });
+
+            // 9. 问卷调查 - 相关性热力图
+            const correlationChart = echarts.init(document.getElementById('correlation-chart'), 'inkTheme');
+            const variables = ['性别', '抑郁经历', '疾病认知', '媒体接触', '社交接纳', '平台干预'];
+            const correlationData = [
+                [0, 0, 0.08, 0.12, 0.15, 0.09],
+                [0, 0, 0.32, 0.45, 0.28, 0.31],
+                [0.08, 0.32, 0, 0.21, 0.45, 0.25],
+                [0.12, 0.45, 0.21, 0, 0.28, 0.35],
+                [0.15, 0.28, 0.45, 0.28, 0, 0.22],
+                [0.09, 0.31, 0.25, 0.35, 0.22, 0]
+            ];
+            
+            correlationChart.setOption({
+                title: { ...chartTitle, text: '变量相关性分析热力图' },
+                grid: {
+                    top: 72,
+                    left: 76,
+                    right: 36,
+                    bottom: 82,
+                    containLabel: true
+                },
+                tooltip: {
+                    ...baseTooltip,
+                    formatter: function(params) {
+                        return `${variables[params.data[0]]} × ${variables[params.data[1]]}<br/>相关系数: <strong>${params.data[2].toFixed(2)}</strong>`;
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: variables,
+                    ...categoryAxisStyle,
+                    splitArea: { show: true, areaStyle: { color: ['rgba(255, 254, 250, 0.7)', 'rgba(245, 251, 249, 0.7)'] } }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: variables,
+                    ...categoryAxisStyle,
+                    splitArea: { show: true, areaStyle: { color: ['rgba(255, 254, 250, 0.7)', 'rgba(245, 251, 249, 0.7)'] } }
+                },
+                visualMap: {
+                    min: 0,
+                    max: 0.5,
+                    calculable: true,
+                    orient: 'horizontal',
+                    left: 'center',
+                    bottom: 14,
+                    itemWidth: 16,
+                    itemHeight: 140,
+                    textStyle: {
+                        color: chartMuted,
+                        fontSize: 12,
+                        ...chartTextStyle
+                    },
+                    formatter: function(value) {
+                        return value.toFixed(2);
+                    },
+                    inRange: {
+                        color: ['#F5FBF9', '#D4ECE5', '#8FCDBD', '#3FA7A6', '#256D85']
+                    }
+                },
+                series: [{
+                    name: '相关系数',
+                    type: 'heatmap',
+                    data: (function() {
+                        const data = [];
+                        for (let i = 0; i < variables.length; i++) {
+                            for (let j = 0; j < variables.length; j++) {
+                                data.push([i, j, correlationData[i][j]]);
+                            }
+                        }
+                        return data;
+                    })(),
+                    itemStyle: {
+                        borderWidth: 2,
+                        borderColor: '#fffefa',
+                        borderRadius: 6
+                    },
+                    label: {
+                        show: true,
+                        color: chartInk,
+                        fontSize: 12,
+                        formatter: function(params) {
+                            return params.value[2].toFixed(2);
+                        }
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            borderColor: themeColors.warning,
+                            borderWidth: 2,
+                            shadowBlur: 0
+                        }
+                    }
+                }]
+            });
+
+            // 10. 超话分析 - 正向情绪词阵（固定格子爱心）
+            const positiveWordcloud = echarts.init(document.getElementById('positive-wordcloud'), 'inkTheme');
+            const positiveWordData = [
+                { name: '好', value: 182 }, { name: '精神', value: 45 }, { name: '知道', value: 43 },
+                { name: '希望', value: 39 }, { name: '发现', value: 36 }, { name: '爱', value: 34 },
+                { name: '特别', value: 31 }, { name: '价值', value: 30 }, { name: '朋友', value: 29 },
+                { name: '活着', value: 27 }, { name: '努力', value: 25 }, { name: '喜欢', value: 24 },
+                { name: '开心', value: 23 }, { name: '治疗', value: 23 }, { name: '创造', value: 21 },
+                { name: '主动', value: 21 }, { name: '幸福', value: 19 }, { name: '真正', value: 17 },
+                { name: '坚守', value: 17 }, { name: '接受', value: 16 }, { name: '明明', value: 16 },
+                { name: '拥有', value: 16 }, { name: '理解', value: 16 }, { name: '学习', value: 14 },
+                { name: '坚持', value: 14 }, { name: '本质', value: 14 }, { name: '获得', value: 13 },
+                { name: '期待', value: 13 }, { name: '不同', value: 13 }, { name: '健康', value: 11 },
+                { name: '爱你', value: 11 }, { name: '支持', value: 10 }, { name: '自由', value: 10 },
+                { name: '决定', value: 10 }, { name: '心疼', value: 10 }, { name: '关心', value: 10 },
+                { name: '谢谢', value: 10 }, { name: '追求', value: 10 }, { name: '休息', value: 9 },
+                { name: '快乐', value: 9 }, { name: '现实', value: 9 }, { name: '允许', value: 9 },
+                { name: '实现', value: 8 }, { name: '热爱', value: 8 }, { name: '简单', value: 8 },
+                { name: '康复', value: 7 }, { name: '爱情', value: 7 }, { name: '真诚', value: 7 },
+                { name: '赋予', value: 7 }, { name: '能力', value: 7 }, { name: '动力', value: 7 },
+                { name: '温柔', value: 7 }, { name: '音乐', value: 7 }, { name: '愿意', value: 7 },
+                { name: '心灵', value: 7 }, { name: '在乎', value: 6 }, { name: '最重要的', value: 6 },
+                { name: '践行', value: 6 }
+            ];
+            const positiveWordMap = Object.fromEntries(positiveWordData.map(item => [item.name, item.value]));
+            const positiveHeartRows = [
+                ['最重要的', '休息', '音乐', '温柔', '愿意', '心灵'],
+                ['谢谢', '关心', '爱你', '健康', '理解', '允许', '现实', '快乐'],
+                ['追求', '自由', '支持', '开心', '治疗', '创造', '主动', '幸福', '真正'],
+                ['坚守', '明明', '拥有', '朋友', '精神', '好', '知道', '希望', '发现', '爱', '特别'],
+                ['价值', '活着', '努力', '喜欢', '接受', '学习', '坚持', '本质', '获得', '期待'],
+                ['不同', '决定', '心疼', '实现', '热爱', '简单', '康复', '爱情', '真诚'],
+                ['赋予', '能力', '动力', '在乎'],
+                ['践行']
+            ];
+            function positiveGreen(value) {
+                if (value >= 100) return '#0B6B3A';
+                if (value >= 40) return '#138A52';
+                if (value >= 20) return '#2F9E73';
+                if (value >= 10) return '#58B98F';
+                return '#8BD1B2';
+            }
+            function positiveFontSize(value) {
+                return Math.max(14, Math.min(56, 10 + Math.sqrt(value) * 3.15));
+            }
+            function renderPositiveHeartGrid() {
+                const width = positiveWordcloud.getWidth();
+                const height = positiveWordcloud.getHeight();
+                const centerX = width / 2;
+                const startY = height * 0.22;
+                const rowGap = Math.min(46, height * 0.095);
+                const elements = [];
+                positiveHeartRows.forEach((row, rowIndex) => {
+                    const rowGapX = Math.min(78, width * 0.78 / Math.max(row.length - 1, 1));
+                    const rowWidth = (row.length - 1) * rowGapX;
+                    const y = startY + rowIndex * rowGap;
+                    row.forEach((word, wordIndex) => {
+                        const value = positiveWordMap[word] || 6;
+                        elements.push({
+                            type: 'text',
+                            x: centerX - rowWidth / 2 + wordIndex * rowGapX,
+                            y,
+                            z: value,
+                            style: {
+                                text: word,
+                                fill: positiveGreen(value),
+                                fontSize: positiveFontSize(value),
+                                fontWeight: 800,
+                                fontFamily: '"Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif',
+                                align: 'center',
+                                verticalAlign: 'middle'
+                            }
+                        });
+                    });
+                });
+                positiveWordcloud.setOption({
+                    tooltip: { show: false },
+                    graphic: elements
+                }, true);
+            }
+            renderPositiveHeartGrid();
+
+            // 11. 超话分析 - 负向心形词云
+            const negativeWordcloud = echarts.init(document.getElementById('negative-wordcloud'), 'inkTheme');
+            negativeWordcloud.setOption({
+                tooltip: { ...baseTooltip, trigger: 'item', formatter: '{b}<br/>词频：{c}' },
+                series: [{
+                    type: 'wordCloud',
+                    shape: 'circle',
+                    maskImage: heartMask,
+                    left: 'center',
+                    top: 'center',
+                    width: '90%',
+                    height: '90%',
+                    sizeRange: [13, 62],
+                    rotationRange: [-18, 18],
+                    rotationStep: 18,
+                    gridSize: 5,
+                    drawOutOfBound: false,
+                    textStyle: {
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif',
+                        fontWeight: 'bold',
+                        color: function() {
+                            const colors = [themeColors.danger, themeColors.warning, '#B45C7A', '#C86F5B', '#8C4966'];
+                            return colors[Math.floor(Math.random() * colors.length)];
+                        }
+                    },
+                    emphasis: {
+                        focus: 'self',
+                        textStyle: {
+                            textShadowBlur: 0,
+                            color: themeColors.danger
+                        }
+                    },
+                    data: [
+                        { name: '抑郁', value: 120 },
+                        { name: '焦虑', value: 110 },
+                        { name: '痛苦', value: 100 },
+                        { name: '没有', value: 95 },
+                        { name: '难过', value: 90 },
+                        { name: '失眠', value: 85 },
+                        { name: '孤独', value: 80 },
+                        { name: '崩溃', value: 75 },
+                        { name: '压力', value: 70 },
+                        { name: '癌症', value: 65 },
+                        { name: '内耗', value: 60 },
+                        { name: '无法', value: 55 },
+                        { name: '控制', value: 50 },
+                        { name: '难受', value: 45 },
+                        { name: '绝望', value: 40 }
+                    ]
+                }]
+            });
+
+            // 12. 超话分析 - 情绪值散点图
+            const sentimentChart = echarts.init(document.getElementById('sentiment-chart'), 'inkTheme');
+            sentimentChart.setOption({
+                title: { ...chartTitle, text: '超话帖子情绪值分布' },
+                grid: {
+                    top: 86,
+                    left: 64,
+                    right: 48,
+                    bottom: 82,
+                    containLabel: true
+                },
+                tooltip: {
+                    ...baseTooltip,
+                    trigger: 'item',
+                    formatter: function(params) {
+                        return `情绪值: ${params.data[0]}<br/>帖子数: ${params.data[1]}`;
+                    }
+                },
+                xAxis: {
+                    type: 'value',
+                    name: '情绪分值',
+                    nameLocation: 'middle',
+                    nameGap: 42,
+                    min: -50,
+                    max: 50,
+                    ...valueAxisStyle,
+                    nameTextStyle: {
+                        color: chartMuted,
+                        fontSize: 12,
+                        padding: [8, 0, 0, 0]
+                    },
+                    axisLabel: {
+                        ...valueAxisStyle.axisLabel,
+                        formatter: function(value) {
+                            if (value === -40) return '非常不满意';
+                            if (value === 0) return '0分';
+                            if (value === 40) return '非常满意';
+                            return value;
+                        }
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '帖子条数',
+                    nameLocation: 'middle',
+                    nameGap: 48,
+                    ...valueAxisStyle
+                },
+                series: [{
+                    symbolSize: function(data) {
+                        return Math.max(8, Math.min(24, 7 + data[1] / 5));
+                    },
+                    data: [
+                        [-50, 1], [-40, 1], [-36, 2], [-33, 1], [-30, 3], [-28, 1],
+                        [-26, 2], [-25, 1], [-24, 1], [-23, 2], [-22, 3], [-21, 1],
+                        [-19, 2], [-17, 2], [-16, 2], [-15, 4], [-14, 6], [-13, 2],
+                        [-12, 5], [-11, 6], [-10, 2], [-9, 6], [-8, 4], [-6, 17],
+                        [-5, 10], [-4, 28], [-3, 29], [-2, 47], [-1, 71], [0, 91], [1, 52],
+                        [2,18], [3,20], [4,5], [5,4], [6,7], [7,4], [8,1], [9,2], [10,1],
+                        [12,1], [14,1], [15,4], [16,1], [17,1], [19,3], [21,2], [24,1],
+                        [33,1], [50,2]
+                    ],
+                    type: 'scatter',
+                    itemStyle: {
+                        color: themeColors.primary,
+                        opacity: 0.72,
+                        borderColor: '#fffefa',
+                        borderWidth: 2
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            opacity: 0.96,
+                            shadowBlur: 12,
+                            shadowColor: 'rgba(37, 109, 133, 0.22)'
+                        }
+                    },
+                    markLine: {
+                        symbol: 'none',
+                        silent: true,
+                        lineStyle: {
+                            color: themeColors.primary,
+                            width: 2,
+                            type: 'dashed'
+                        },
+                        label: {
+                            show: true,
+                            position: 'insideEndTop',
+                            formatter: '平均情绪值: -2.00',
+                            color: themeColors.primary,
+                            backgroundColor: 'rgba(255, 254, 250, 0.86)',
+                            borderColor: '#CFE2DE',
+                            borderWidth: 1,
+                            borderRadius: 8,
+                            padding: [4, 8],
+                            fontSize: 14,
+                            fontWeight: 'bold'
+                        },
+                        data: [{ xAxis: -2 }]
+                    }
+                }]
+            });
+
+            // 13. 超话分析 - 文本网络分析图（基于共现与Jaccard系数）
+            const networkChart = echarts.init(document.getElementById('network-chart'), 'inkTheme', {
+                devicePixelRatio: Math.max(window.devicePixelRatio || 1, 2)
+            });
+            const networkEdges = [
+                ['抑郁症', '痛苦', 489, 41, 180, 0.257],
+                ['抑郁症', '没有', 489, 96, 80, 0.090],
+                ['抑郁症', '睡不着', 489, 22, 18, 0.033],
+                ['抑郁症', '家庭', 489, 17, 12, 0.020],
+                ['痛苦', '崩溃', 41, 15, 12, 0.273],
+                ['痛苦', '想死', 41, 17, 9, 0.184],
+                ['没有', '意义', 96, 16, 14, 0.082],
+                ['没有', '希望', 96, 30, 8, 0.034],
+                ['自己', '废物', 147, 8, 6, 0.030],
+                ['自己', '没用', 147, 9, 5, 0.022],
+                ['工作', '不想', 29, 44, 16, 0.111],
+                ['工作', '压力', 29, 13, 5, 0.064],
+                ['家庭', '父母', 17, 22, 12, 0.156],
+                ['家庭', '不理解', 17, 7, 4, 0.045],
+                ['吃药', '副作用', 16, 1, 2, 0.029],
+                ['吃药', '医生', 16, 17, 6, 0.073],
+                ['想死', '意义', 17, 16, 10, 0.128],
+                ['想死', '绝望', 17, 18, 6, 0.068],
+                ['睡不着', '焦虑', 22, 30, 8, 0.082],
+                ['睡不着', '失眠', 22, 12, 6, 0.071],
+                ['治疗', '医生', 11, 17, 5, 0.078],
+                ['治疗', '康复', 11, 7, 3, 0.056],
+                ['康复', '希望', 7, 30, 2, 0.023],
+                ['坚持', '努力', 14, 25, 4, 0.041],
+                ['坚持', '放弃', 14, 12, 3, 0.038]
+            ];
+            const nodeFrequency = {};
+            networkEdges.forEach(([source, target, sourceCount, targetCount]) => {
+                nodeFrequency[source] = Math.max(nodeFrequency[source] || 0, sourceCount);
+                nodeFrequency[target] = Math.max(nodeFrequency[target] || 0, targetCount);
+            });
+            const nodeColorMap = {
+                '抑郁症': '#D9902F',
+                '痛苦': '#D95D72',
+                '没有': '#5B9DB2',
+                '自己': '#756AB6',
+                '工作': '#E8B05B',
+                '家庭': '#8D83C4',
+                '吃药': '#6CB99A',
+                '想死': '#D95D72',
+                '睡不着': '#5B9DB2',
+                '治疗': '#2F9E73',
+                '康复': '#2F9E73',
+                '坚持': '#D9902F'
+            };
+            const nodePositions = {
+                '抑郁症': [560, 315],
+                '痛苦': [705, 315],
+                '崩溃': [820, 235],
+                '想死': [820, 385],
+                '意义': [955, 320],
+                '绝望': [955, 405],
+                '没有': [425, 260],
+                '希望': [425, 390],
+                '家庭': [300, 390],
+                '父母': [190, 330],
+                '不理解': [190, 450],
+                '睡不着': [525, 500],
+                '焦虑': [660, 515],
+                '失眠': [660, 595],
+                '工作': [205, 145],
+                '不想': [330, 120],
+                '压力': [330, 190],
+                '自己': [210, 560],
+                '废物': [90, 515],
+                '没用': [90, 605],
+                '吃药': [760, 95],
+                '医生': [890, 120],
+                '副作用': [890, 45],
+                '治疗': [1010, 120],
+                '康复': [1010, 210],
+                '坚持': [725, 550],
+                '努力': [860, 525],
+                '放弃': [860, 610]
+            };
+            const networkNodes = Object.entries(nodeFrequency).map(([name, count]) => ({
+                name,
+                value: count,
+                symbolSize: Math.max(26, Math.min(62, 20 + Math.sqrt(count) * 1.8)),
+                x: nodePositions[name][0],
+                y: nodePositions[name][1],
+                fixed: true,
+                itemStyle: { color: nodeColorMap[name] || '#A8D2DE' },
+                label: name === '抑郁症' ? { color: '#142C35', fontWeight: 900 } : undefined
+            }));
+            const networkLinks = networkEdges.map(([source, target, sourceCount, targetCount, coCount, jaccard]) => {
+                const isStrong = jaccard > 0.08;
+                return {
+                    source,
+                    target,
+                    sourceCount,
+                    targetCount,
+                    coCount,
+                    jaccard,
+                    value: jaccard,
+                    lineStyle: {
+                        width: isStrong ? 2.8 : 1.4,
+                        type: isStrong ? 'solid' : 'dashed',
+                        color: isStrong ? '#8BBEB6' : '#D4E6E2',
+                        opacity: isStrong ? 0.94 : 0.72
+                    }
+                };
+            });
+            networkChart.setOption({
+                title: {
+                    ...chartTitle,
+                    text: '超话文本内容网络分析',
+                    textStyle: {
+                        ...chartTitle.textStyle,
+                        fontSize: 18,
+                        color: '#142C35',
+                        fontWeight: 900
+                    }
+                },
+                tooltip: {
+                    ...baseTooltip,
+                    formatter: function(params) {
+                        if (params.dataType === 'edge') {
+                            return `${params.data.source} × ${params.data.target}<br/>共现条数：${params.data.coCount}<br/>Jaccard系数：${params.data.jaccard.toFixed(3)}<br/>关联强度：${params.data.jaccard > 0.08 ? '强' : '弱'}`;
+                        }
+                        return `${params.data.name}<br/>节点词频：${params.data.value}`;
+                    }
+                },
+                series: [{
+                    type: 'graph',
+                    layout: 'none',
+                    roam: false,
+                    left: 28,
+                    right: 28,
+                    top: 76,
+                    bottom: 24,
+                    symbol: 'circle',
+                    label: {
+                        show: true,
+                        position: 'right',
+                        color: '#142C35',
+                        fontSize: 14,
+                        fontWeight: 800,
+                        backgroundColor: 'rgba(255, 254, 250, 0.86)',
+                        borderRadius: 6,
+                        padding: [2, 5],
+                        textBorderColor: 'rgba(255, 254, 250, 0.96)',
+                        textBorderWidth: 2
+                    },
+                    itemStyle: {
+                        borderColor: '#fffefa',
+                        borderWidth: 3,
+                        opacity: 0.96
+                    },
+                    lineStyle: {
+                        color: '#9FC8C0',
+                        width: 2.2,
+                        curveness: 0.14,
+                        opacity: 0.92
+                    },
+                    edgeSymbol: ['none', 'none'],
+                    edgeSymbolSize: 0,
+                    data: networkNodes,
+                    emphasis: {
+                        focus: 'adjacency',
+                        label: {
+                            color: chartInk,
+                            fontWeight: 700
+                        },
+                        lineStyle: {
+                            width: 3,
+                            opacity: 0.95
+                        }
+                    },
+                    links: networkLinks
+                }]
+            });
+
+            // 14. 人物故事 - 三人对比雷达图
+            const crispChartOptions = {
+                devicePixelRatio: Math.max(window.devicePixelRatio || 1, 2)
+            };
+            const comparisonRadar = echarts.init(document.getElementById('comparison-radar'), 'inkTheme', crispChartOptions);
+            const radarIndicator = [
+                { name: '情绪稳定性', max: 10 },
+                { name: '媒体依赖度', max: 10 },
+                { name: '社交活跃度', max: 10 },
+                { name: '自我掌控感', max: 10 },
+                { name: '生活满意度', max: 10 }
+            ];
+            
+            comparisonRadar.setOption({
+                title: { ...chartTitle, text: '三位受访者五维属性对比' },
+                tooltip: { ...baseTooltip },
+                legend: { ...baseLegend, data: ['学姐', '金兰', '她厌'] },
+                radar: radarStyle(radarIndicator, '56%'),
+                series: [{
+                    type: 'radar',
+                    symbol: 'circle',
+                    symbolSize: 6,
+                    emphasis: {
+                        lineStyle: { width: 4 }
+                    },
+                    data: [
+                        {
+                            value: [8, 2, 7, 9, 8],
+                            name: '学姐',
+                            lineStyle: { color: themeColors.success, width: 3 },
+                            areaStyle: { color: 'rgba(47, 158, 115, 0.20)' },
+                            itemStyle: { color: themeColors.success, borderColor: '#fffefa', borderWidth: 2 }
+                        },
+                        {
+                            value: [4, 8, 5, 3, 6],
+                            name: '金兰',
+                            lineStyle: { color: themeColors.secondary, width: 3 },
+                            areaStyle: { color: 'rgba(117, 106, 182, 0.20)' },
+                            itemStyle: { color: themeColors.secondary, borderColor: '#fffefa', borderWidth: 2 }
+                        },
+                        {
+                            value: [2, 10, 2, 3, 2],
+                            name: '她厌',
+                            lineStyle: { color: themeColors.danger, width: 3 },
+                            areaStyle: { color: 'rgba(217, 93, 114, 0.20)' },
+                            itemStyle: { color: themeColors.danger, borderColor: '#fffefa', borderWidth: 2 }
+                        }
+                    ]
+                }]
+            });
+
+            // 15. 学姐个人雷达图（放大版）
+            xuejieRadar = echarts.init(document.getElementById('xuejie-radar'), 'inkTheme', crispChartOptions);
+            xuejieRadar.setOption({
+                tooltip: { ...baseTooltip },
+                radar: radarStyle(radarIndicator, '56%'),
+                series: [{
+                    type: 'radar',
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [{
+                        value: [8, 2, 7, 9, 8],
+                        name: '学姐',
+                        lineStyle: { color: themeColors.success, width: 3.5 },
+                        areaStyle: { color: 'rgba(47, 158, 115, 0.28)' },
+                        itemStyle: { color: themeColors.success, borderColor: '#fffefa', borderWidth: 2 }
+                    }]
+                }]
+            });
+
+            // 16. 金兰个人雷达图（放大版）
+            jinlanRadar = echarts.init(document.getElementById('jinlan-radar'), 'inkTheme', crispChartOptions);
+            jinlanRadar.setOption({
+                tooltip: { ...baseTooltip },
+                radar: radarStyle(radarIndicator, '56%'),
+                series: [{
+                    type: 'radar',
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [{
+                        value: [4, 8, 5, 3, 6],
+                        name: '金兰',
+                        lineStyle: { color: themeColors.secondary, width: 3.5 },
+                        areaStyle: { color: 'rgba(117, 106, 182, 0.28)' },
+                        itemStyle: { color: themeColors.secondary, borderColor: '#fffefa', borderWidth: 2 }
+                    }]
+                }]
+            });
+
+            // 17. 她厌个人雷达图（放大版）
+            tayanRadar = echarts.init(document.getElementById('tayan-radar'), 'inkTheme', crispChartOptions);
+            tayanRadar.setOption({
+                tooltip: { ...baseTooltip },
+                radar: radarStyle(radarIndicator, '56%'),
+                series: [{
+                    type: 'radar',
+                    symbol: 'circle',
+                    symbolSize: 8,
+                    data: [{
+                        value: [2, 10, 2, 3, 2],
+                        name: '她厌',
+                        lineStyle: { color: themeColors.danger, width: 3.5 },
+                        areaStyle: { color: 'rgba(217, 93, 114, 0.28)' },
+                        itemStyle: { color: themeColors.danger, borderColor: '#fffefa', borderWidth: 2 }
+                    }]
+                }]
+            });
+
+            // 窗口大小变化时重绘所有图表
+            window.addEventListener('resize', function() {
+                incidenceChart.resize();
+                ageChart.resize();
+                genderChart.resize();
+                surveyAgeChart.resize();
+                experienceChart.resize();
+                cognitionChart.resize();
+                genderSocialChart.resize();
+                experienceTreatmentChart.resize();
+                correlationChart.resize();
+                positiveWordcloud.resize();
+                renderPositiveHeartGrid();
+                negativeWordcloud.resize();
+                sentimentChart.resize();
+                networkChart.resize();
+                comparisonRadar.resize();
+                xuejieRadar.resize();
+                jinlanRadar.resize();
+                tayanRadar.resize();
+            });
+        });
+    </script>
+</body>
+</html>

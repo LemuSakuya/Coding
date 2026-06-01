@@ -1,0 +1,1569 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新媒体时代的双面镜：抑郁症患者的数字生存图景</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#64748b',
+                        secondary: '#8b5cf6',
+                        warm: '#f8fafc',
+                        darkBg: '#0f172a',
+                        darkText: '#e2e8f0'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .scroll-smooth {
+                scroll-behavior: smooth;
+            }
+            .animate-fade-in-up {
+                animation: fadeInUp 0.6s ease-out forwards;
+            }
+            .animate-fade-in-up-delay-1 {
+                animation: fadeInUp 0.6s ease-out 0.2s forwards;
+                opacity: 0;
+            }
+            .animate-fade-in-up-delay-2 {
+                animation: fadeInUp 0.6s ease-out 0.4s forwards;
+                opacity: 0;
+            }
+            .animate-fade-in-up-delay-3 {
+                animation: fadeInUp 0.6s ease-out 0.6s forwards;
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease-out;
+        }
+
+        .chart-container {
+            height: 400px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-warm dark:bg-darkBg text-gray-800 dark:text-darkText scroll-smooth">
+    <!-- 滚动进度条 -->
+    <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-secondary z-50 transition-all duration-150" style="width: 0%"></div>
+
+    <!-- 顶部导航栏 -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                数字生存图景
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="p-3 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur shadow-lg hover:shadow-xl transition-all duration-300" aria-label="切换深色/浅色模式">
+                    <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"></path>
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-gray-600 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 左侧章节导航 -->
+    <aside id="side-nav" class="fixed left-4 top-1/2 -translate-y-1/2 z-30 hidden lg:block">
+        <nav class="flex flex-col gap-3">
+            <a href="#hero" class="nav-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-secondary transition-all duration-300" data-section="hero" title="首页" aria-label="跳到首页"></a>
+            <a href="#macro" class="nav-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-secondary transition-all duration-300" data-section="macro" title="宏观图景" aria-label="跳到宏观图景"></a>
+            <a href="#cognition" class="nav-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-secondary transition-all duration-300" data-section="cognition" title="认知之镜" aria-label="跳到认知之镜"></a>
+            <a href="#double-edge" class="nav-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-secondary transition-all duration-300" data-section="double-edge" title="双刃剑" aria-label="跳到双刃剑"></a>
+            <a href="#stories" class="nav-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-secondary transition-all duration-300" data-section="stories" title="个体故事" aria-label="跳到个体故事"></a>
+            <a href="#model" class="nav-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-secondary transition-all duration-300" data-section="model" title="量化分析" aria-label="跳到量化分析"></a>
+            <a href="#guide" class="nav-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-secondary transition-all duration-300" data-section="guide" title="生存指南" aria-label="跳到生存指南"></a>
+            <a href="#ending" class="nav-dot w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-secondary transition-all duration-300" data-section="ending" title="尾声" aria-label="跳到尾声"></a>
+        </nav>
+    </aside>
+
+    <!-- 首屏Hero区 -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-slate-900 dark:via-purple-900/20 dark:to-slate-900"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up bg-gradient-to-r from-gray-800 to-purple-600 dark:from-white dark:to-purple-300 bg-clip-text text-transparent">
+                9500万人的数字挣扎
+            </h1>
+            <p class="text-2xl md:text-3xl font-medium text-gray-600 dark:text-gray-300 mb-8 animate-fade-in-up-delay-1">
+                当抑郁症遇上新媒体
+            </p>
+            <p class="text-lg text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto animate-fade-in-up-delay-2">
+                我们用11份调研数据，还原数字时代抑郁症群体的真实生存图景
+            </p>
+            <div class="animate-fade-in-up-delay-3">
+                <a href="#macro" class="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                    开始探索
+                    <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 宏观图景：被阴影笼罩的人群 -->
+    <section id="macro" class="py-12 px-6 section-hidden">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">宏观图景：被阴影笼罩的人群</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    抑郁症早已不是小众疾病，它正在我们身边蔓延
+                </p>
+            </div>
+
+            <!-- 年龄分层患病率 -->
+            <div class="mb-10">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-2">不同年龄段的抑郁障碍患病率</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">数据来源：国家卫健委、Lancet Psychiatry</p>
+                    <div id="ageChart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <!-- 性别与城乡差异 -->
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-2">性别与城乡患病率差异</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">数据来源：国民抑郁症蓝皮书</p>
+                    <div id="genderCityChart" class="chart-container"></div>
+                </div>
+
+                <!-- 职业风险 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-2">不同职业的抑郁风险排名</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">数据来源：国民抑郁症蓝皮书</p>
+                    <div id="jobChart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <!-- 治疗困境 -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div>
+                        <div class="text-4xl font-bold text-secondary mb-2">9.5%</div>
+                        <p class="text-gray-600 dark:text-gray-400">总体治疗率</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold text-purple-500 mb-2">0.5%</div>
+                        <p class="text-gray-600 dark:text-gray-400">充分治疗率</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-bold text-red-400 mb-2">72%</div>
+                        <p class="text-gray-600 dark:text-gray-400">总体复发率</p>
+                    </div>
+                </div>
+                <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-6">数据来源：国家卫健委</p>
+            </div>
+
+            <div class="mt-8 text-center">
+                <p class="text-lg text-gray-600 dark:text-gray-400">
+                    <span class="font-semibold">专业解读：</span>
+                    青少年正在成为重灾区，其中城市女性群体面临更高的抑郁风险
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 认知之镜：我们真的理解他们吗？ -->
+    <section id="cognition" class="py-12 px-6 bg-gray-50 dark:bg-gray-900/50 section-hidden">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">认知之镜：我们真的理解他们吗？</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    我们的善意，有没有找对方向？
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+                <!-- 大众认知态度 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-2">大众对抑郁症的认知态度</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">数据来源：本研究165份问卷调查（多选）</p>
+                    <div id="vennContainer" class="chart-container flex flex-col items-center justify-center gap-3 relative">
+                        <div id="vennTooltip" class="absolute pointer-events-none opacity-0 transition-opacity duration-150 bg-white dark:bg-gray-700 rounded-lg shadow-xl px-3 py-2 text-xs z-20 whitespace-nowrap border border-gray-200 dark:border-gray-600">
+                            <div class="text-gray-500 dark:text-gray-300 mb-1">认知态度</div>
+                            <div class="flex items-center gap-2">
+                                <span id="vennTooltipDot" class="inline-block w-2.5 h-2.5 rounded-full"></span>
+                                <span id="vennTooltipName" class="text-gray-800 dark:text-gray-100"></span>
+                                <span id="vennTooltipValue" class="font-bold text-gray-900 dark:text-white ml-3"></span>
+                            </div>
+                        </div>
+
+                        <svg viewBox="0 0 400 220" class="flex-1 w-full min-h-0" preserveAspectRatio="xMidYMid meet">
+                            <circle id="vennGreen" cx="170" cy="110" r="100" fill="#10b981" fill-opacity="0.28" stroke="#10b981" stroke-width="2" class="cursor-pointer transition-all duration-200 hover:[fill-opacity:0.45]"/>
+                            <circle id="vennOrange" cx="290" cy="110" r="50" fill="#f59e0b" fill-opacity="0.45" stroke="#f59e0b" stroke-width="2" class="cursor-pointer transition-all duration-200 hover:[fill-opacity:0.65]"/>
+                            <path id="vennOverlap" d="M 261.25 69.09 A 100 100 0 0 1 261.25 150.91 A 50 50 0 0 1 261.25 69.09 Z" fill="rgba(180,83,9,0.01)" class="cursor-pointer transition-all duration-200 hover:[fill:rgba(180,83,9,0.25)]"/>
+
+                            <text x="115" y="108" text-anchor="middle" font-size="24" font-weight="700" class="fill-green-700 dark:fill-green-300 pointer-events-none">81.82%</text>
+                            <text x="115" y="130" text-anchor="middle" font-size="11" class="fill-green-600 dark:fill-green-300/80 pointer-events-none">仅认可疾病</text>
+
+                            <text x="248" y="108" text-anchor="middle" font-size="14" font-weight="700" class="fill-orange-800 dark:fill-amber-100 pointer-events-none">6.67%</text>
+                            <text x="248" y="126" text-anchor="middle" font-size="10" class="fill-orange-800 dark:fill-amber-100 pointer-events-none">两者皆选</text>
+
+                            <text x="310" y="108" text-anchor="middle" font-size="13" font-weight="700" class="fill-amber-700 dark:fill-amber-300 pointer-events-none">11.51%</text>
+                            <text x="310" y="125" text-anchor="middle" font-size="9" class="fill-amber-600 dark:fill-amber-300/80 pointer-events-none">仅意志薄弱</text>
+                        </svg>
+
+                        <div class="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm pb-1 px-2">
+                            <div class="flex items-center gap-2">
+                                <span class="inline-block w-3.5 h-3.5 rounded-full" style="background:rgba(16,185,129,0.35);border:2px solid #10b981"></span>
+                                <span class="text-gray-700 dark:text-gray-300">认可抑郁症是疾病</span>
+                                <span class="font-bold text-green-600 dark:text-green-300">88.49%</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="inline-block w-3.5 h-3.5 rounded-full" style="background:rgba(245,158,11,0.5);border:2px solid #f59e0b"></span>
+                                <span class="text-gray-700 dark:text-gray-300">认为是个人意志薄弱</span>
+                                <span class="font-bold text-amber-600 dark:text-amber-300">18.18%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 社交态度 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-2">面对抑郁症内容的第一反应</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">数据来源：本研究165份问卷调查</p>
+                    <div id="attitudeChart" class="chart-container"></div>
+                </div>
+            </div>
+
+            <!-- 超话情感分布 -->
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-2">微博抑郁症超话情感分布</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">数据来源：本研究超话文本挖掘</p>
+                    <div id="emotionChart" class="chart-container"></div>
+                </div>
+
+                <!-- 高频词云 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                    <h3 class="text-xl font-semibold mb-2">超话高频词：正负情绪对比</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">数据来源：本研究超话文本挖掘</p>
+                    <div class="chart-container grid grid-cols-2 gap-4">
+                        <div class="rounded-xl bg-red-50 dark:bg-red-900/20 p-3 flex flex-col">
+                            <div class="text-sm font-semibold text-red-500 mb-1 text-center">负面高频词</div>
+                            <div id="wordCloudNeg" class="flex-1 min-h-0"></div>
+                        </div>
+                        <div class="rounded-xl bg-green-50 dark:bg-green-900/20 p-3 flex flex-col">
+                            <div class="text-sm font-semibold text-green-600 mb-1 text-center">正面高频词</div>
+                            <div id="wordCloudPos" class="flex-1 min-h-0"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="text-lg text-gray-600 dark:text-gray-400">
+                    <span class="font-semibold">解读：</span>
+                    我们有9成的善意，但近半数人，连开口安慰都怕说错话；在微博相关超话中，负面情绪的声浪较高
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 双刃剑：新媒体的正负博弈 -->
+    <section id="double-edge" class="py-12 px-6 section-hidden">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">双刃剑：新媒体的正负博弈</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    社交媒体，到底是避难所，还是情绪放大器？
+                </p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+                <h3 class="text-xl font-semibold mb-2">新媒体对抑郁症群体的双面影响</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">数据来源：本研究165份问卷调查</p>
+                <div id="doubleEdgeChart" class="chart-container"></div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <p class="text-lg text-gray-600 dark:text-gray-400">
+                    <span class="font-semibold">数据解读：</span>
+                    新媒体对抑郁症群体呈现高度一致的双面影响：70% 的人同时获得过情感支持，也遭受过情绪伤害。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 三个女孩的数字人生 -->
+    <section id="stories" class="py-12 px-6 bg-gray-50 dark:bg-gray-900/50 section-hidden">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">三个女孩的数字人生</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    同样的屏幕，照出了完全不同的人生
+                </p>
+            </div>
+
+            <!-- 人物卡片轮播 -->
+            <div class="relative">
+                <div class="overflow-x-auto pb-4" id="story-carousel">
+                    <div class="flex gap-6 min-w-max px-4">
+                        <!-- 学姐 -->
+                        <div class="w-full md:w-[400px] flex-shrink-0">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 h-full">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center text-white text-xl font-bold">
+                                        学
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-semibold">学姐</h3>
+                                        <p class="text-sm text-gray-500">26岁 · 康复 · 主动掌控型</p>
+                                    </div>
+                                </div>
+
+                                <blockquote class="text-gray-600 dark:text-gray-300 italic mb-6 border-l-4 border-secondary pl-4">
+                                    "新媒体对现在的我影响较小，但在我小时候它是我可以依靠的'浮木'"
+                                </blockquote>
+
+                                <div id="radar-xuejie" class="h-48 mb-6"></div>
+
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <span class="text-gray-500">日使用时长</span>
+                                        <p class="font-semibold">3-8小时</p>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">依赖度评分</span>
+                                        <p class="font-semibold">2-3分</p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                                        她学会了把新媒体当作工具，在最困难的时候，网络上的同温层给了她支撑。康复后，她开始用自己的经历帮助更多人。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 金兰 -->
+                        <div class="w-full md:w-[400px] flex-shrink-0">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 h-full">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-xl font-bold">
+                                        金
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-semibold">金兰</h3>
+                                        <p class="text-sm text-gray-500">20岁 · 自闭+抑郁 · 被动沉溺型</p>
+                                    </div>
+                                </div>
+
+                                <blockquote class="text-gray-600 dark:text-gray-300 italic mb-6 border-l-4 border-purple-500 pl-4">
+                                    "自闭人的天堂，不用面对面交流"
+                                </blockquote>
+
+                                <div id="radar-jinlan" class="h-48 mb-6"></div>
+
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <span class="text-gray-500">日使用时长</span>
+                                        <p class="font-semibold">10+小时</p>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">依赖度评分</span>
+                                        <p class="font-semibold">10分</p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                                        对她来说，网络是唯一能让她感到安全的地方。她在这里找到了理解，但也越来越依赖这个虚拟世界，现实中的社交能力正在退化。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 她厌 -->
+                        <div class="w-full md:w-[400px] flex-shrink-0">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 h-full">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-red-400 to-orange-500 flex items-center justify-center text-white text-xl font-bold">
+                                        厌
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-semibold">她厌</h3>
+                                        <p class="text-sm text-gray-500">高中生 · 抑郁 · 伤害主导型</p>
+                                    </div>
+                                </div>
+
+                                <blockquote class="text-gray-600 dark:text-gray-300 italic mb-6 border-l-4 border-red-400 pl-4">
+                                    "双刃剑，但我还没能力掌控它"
+                                </blockquote>
+
+                                <div id="radar-tayan" class="h-48 mb-6"></div>
+
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <span class="text-gray-500">日使用时长</span>
+                                        <p class="font-semibold">放假11-12小时</p>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">依赖度评分</span>
+                                        <p class="font-semibold">7分</p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                                        她在网络上看到了太多负面内容，那些自残、自杀的信息像病毒一样传染给了她。她知道这不好，但她无法控制自己不去看。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 滚动提示 -->
+                <div class="text-center mt-4 text-sm text-gray-500">
+                    <span class="inline-flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+                        </svg>
+                        左右滑动查看更多
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 量化之析：构建回归模型（加权拟合） -->
+    <section id="model" class="py-12 px-6 section-hidden">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">量化之析：构建回归模型（加权拟合）</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    Y为生活境遇评分    X<sub>+</sub>为新媒体积极因素    X<sub>-</sub>为新媒体消极因素
+                </p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-12">
+                <!-- 模型公式 -->
+                <div class="text-center mb-10">
+                    <div class="inline-block px-6 py-3 bg-gray-100 dark:bg-gray-700 rounded-lg font-mono text-lg">
+                        Y = 0.25X<sub>+</sub> + 0.22X<sub>-</sub>
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                        积极影响系数略高于消极，不同个体之间差异极大
+                    </p>
+                </div>
+
+                <!-- 滑块模拟器 -->
+                <div class="space-y-8">
+                    <!-- 积极支持滑块 -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="font-medium">你从新媒体获得的积极支持</label>
+                            <span id="positive-value" class="text-green-500 font-semibold">1.75</span>
+                        </div>
+                        <input type="range" id="positive-slider" min="0" max="5" step="0.1" value="1.75" 
+                            class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-green-500">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>几乎没有</span>
+                            <span>非常多</span>
+                        </div>
+                    </div>
+
+                    <!-- 消极伤害滑块 -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <label class="font-medium">你遭遇的消极伤害</label>
+                            <span id="negative-value" class="text-red-500 font-semibold">-1.83</span>
+                        </div>
+                        <input type="range" id="negative-slider" min="-5" max="0" step="0.1" value="-1.83" 
+                            class="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-red-500">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span>严重伤害</span>
+                            <span>几乎没有</span>
+                        </div>
+                    </div>
+
+                    <!-- 预设按钮 -->
+                    <div class="flex flex-wrap gap-3 justify-center pt-4">
+                        <button onclick="setPreset('xuejie')" class="px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">
+                            学姐的状态
+                        </button>
+                        <button onclick="setPreset('jinlan')" class="px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors">
+                            金兰的状态
+                        </button>
+                        <button onclick="setPreset('tayan')" class="px-4 py-2 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors">
+                            她厌的状态
+                        </button>
+                    </div>
+
+                    <!-- 结果展示 -->
+                    <div class="mt-8 p-6 bg-gradient-to-r from-gray-50 to-purple-50 dark:from-gray-700 dark:to-purple-900/20 rounded-xl text-center">
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-2">你的综合生活境遇得分</div>
+                        <div id="score-display" class="text-4xl font-bold text-secondary mb-2">--</div>
+                        <div id="status-tag" class="inline-block px-4 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full text-sm">
+                            等待计算
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <p class="text-lg text-gray-600 dark:text-gray-400">
+                        <span class="font-semibold">专业解读：</span>
+                        新媒体本身没有好坏，它的影响，取决于你如何与它互动
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- 生存指南：数字时代的自我关怀 -->
+    <section id="guide" class="py-12 px-6 bg-gray-50 dark:bg-gray-900/50 section-hidden">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">生存指南：数字时代的自我关怀</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    基于我们的研究，我们为你整理了这份指南
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 items-start">
+                <!-- 善用积极功能 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                    <button class="guide-card w-full p-6 text-left" onclick="toggleCard(this)">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold">善用积极功能</h3>
+                            </div>
+                            <svg class="w-5 h-5 transform transition-transform card-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="guide-content hidden px-6 pb-6">
+                        <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500 mt-1">•</span>
+                                <span>打造治愈内容库：关注那些能给你带来温暖和力量的账号</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500 mt-1">•</span>
+                                <span>寻找同温层支持：加入积极的互助小组，找到能理解你的人</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500 mt-1">•</span>
+                                <span>利用匿名宣泄：在安全的平台释放你的情绪，不要压抑自己</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 规避消极风险 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                    <button class="guide-card w-full p-6 text-left" onclick="toggleCard(this)">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold">规避消极风险</h3>
+                            </div>
+                            <svg class="w-5 h-5 transform transition-transform card-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="guide-content hidden px-6 pb-6">
+                        <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500 mt-1">•</span>
+                                <span>数字断舍离：定期清理你的关注列表，取关那些让你焦虑的内容</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500 mt-1">•</span>
+                                <span>关闭算法茧房：主动打破信息闭环，不要只看同类内容</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500 mt-1">•</span>
+                                <span>远离触发内容：看到自残、自杀相关内容时，立刻划走并举报</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 建立社交边界 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                    <button class="guide-card w-full p-6 text-left" onclick="toggleCard(this)">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold">建立社交边界</h3>
+                            </div>
+                            <svg class="w-5 h-5 transform transition-transform card-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="guide-content hidden px-6 pb-6">
+                        <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">•</span>
+                                <span>保护隐私：不要在网络上过度暴露你的敏感信息</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">•</span>
+                                <span>尝试线上转线下：当你在网上认识了值得信任的朋友，试着见面聊聊</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-500 mt-1">•</span>
+                                <span>学会说不：对于那些消耗你的关系，勇敢地拒绝</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 最重要的事 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+                    <button class="guide-card w-full p-6 text-left" onclick="toggleCard(this)">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold">最重要的事</h3>
+                            </div>
+                            <svg class="w-5 h-5 transform transition-transform card-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="guide-content hidden px-6 pb-6">
+                        <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500 mt-1">•</span>
+                                <span>永远不要拒绝专业帮助：网络支持不能替代医生和心理咨询师</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500 mt-1">•</span>
+                                <span>遵医嘱服药：不要因为网上的谣言就擅自停药</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500 mt-1">•</span>
+                                <span>危机时刻请拨打援助热线：你值得被拯救</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 尾声：你不是一个人 -->
+    <section id="ending" class="py-12 px-6 section-hidden">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl p-8 md:p-16 text-white">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">你不是一个人</h2>
+                <p class="text-xl mb-10 opacity-90">
+                    如果你正在经历痛苦，请记住，你不是一个人在战斗
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-10">
+                    <div class="bg-white/20 backdrop-blur rounded-xl p-6">
+                        <div class="text-2xl font-bold mb-2">12320 转 5</div>
+                        <p class="opacity-90">全国心理援助热线</p>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur rounded-xl p-6">
+                        <div class="text-2xl font-bold mb-2">400-161-9995</div>
+                        <p class="opacity-90">希望24小时危机干预热线</p>
+                    </div>
+                </div>
+
+                <button onclick="sharePage()" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-purple-600 rounded-full font-semibold hover:scale-105 transition-transform">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                    </svg>
+                    分享给需要的人
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据来源附录 -->
+    <footer class="py-12 px-6 bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <h3 class="text-lg font-semibold mb-6 text-center">数据来源</h3>
+            <div class="grid md:grid-cols-2 gap-8 text-sm text-gray-600 dark:text-gray-400">
+                <div>
+                    <h4 class="font-medium mb-3">本研究一手调研</h4>
+                    <ul class="space-y-1">
+                        <li>• 165份有效问卷调查</li>
+                        <li>• 3位受访者深度访谈</li>
+                        <li>• 微博抑郁症超话文本挖掘</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium mb-3">权威公开数据</h4>
+                    <ul class="space-y-1">
+                        <li>• 国家卫健委心理健康数据</li>
+                        <li>• Lancet Psychiatry 流行病学研究</li>
+                        <li>• 《国民抑郁症蓝皮书》</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-500">
+                本报告符合WCAG 2.1无障碍标准，致力于为所有用户提供平等的信息访问
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 深色模式切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            applyChartTheme();
+        });
+
+        const chartRegistry = [];
+
+        function isDarkMode() {
+            return html.classList.contains('dark');
+        }
+
+        function getChartTextColor() {
+            return isDarkMode() ? '#cbd5e1' : '#475569';
+        }
+
+        function getChartAxisLineColor() {
+            return isDarkMode() ? '#475569' : '#cbd5e1';
+        }
+
+        function applyChartTheme() {
+            const dark = isDarkMode();
+            const textColor = getChartTextColor();
+            const axisLineColor = getChartAxisLineColor();
+            const tooltipBg     = dark ? 'rgba(31, 41, 55, 0.95)'  : 'rgba(255, 255, 255, 0.98)';
+            const tooltipText   = dark ? '#e2e8f0'                 : '#1f2937';
+            const tooltipBorder = dark ? 'rgba(255,255,255,0.1)'   : 'rgba(0,0,0,0.08)';
+
+            chartRegistry.forEach(chart => {
+                if (!chart) return;
+                const currentOpt = chart.getOption();
+                if (!currentOpt) return;
+                const update = {
+                    textStyle: { color: textColor },
+                    tooltip: {
+                        backgroundColor: tooltipBg,
+                        borderColor: tooltipBorder,
+                        borderWidth: 1,
+                        textStyle: { color: tooltipText },
+                        extraCssText: 'box-shadow: 0 6px 16px rgba(0,0,0,0.25); border-radius: 8px;'
+                    }
+                };
+                if (currentOpt.xAxis && currentOpt.xAxis.length > 0) {
+                    update.xAxis = {
+                        axisLabel: { color: textColor },
+                        axisLine: { lineStyle: { color: axisLineColor } },
+                        nameTextStyle: { color: textColor }
+                    };
+                }
+                if (currentOpt.yAxis && currentOpt.yAxis.length > 0) {
+                    update.yAxis = {
+                        axisLabel: { color: textColor },
+                        axisLine: { lineStyle: { color: axisLineColor } },
+                        nameTextStyle: { color: textColor }
+                    };
+                }
+                if (currentOpt.legend && currentOpt.legend.length > 0 && currentOpt.legend[0].show !== false) {
+                    update.legend = { textStyle: { color: textColor } };
+                }
+                chart.setOption(update);
+            });
+        }
+
+        // 滚动进度条
+        function updateProgressBar() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+        }
+
+        // 导航栏背景变化
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/80', 'dark:bg-gray-800/80', 'backdrop-blur', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-white/80', 'dark:bg-gray-800/80', 'backdrop-blur', 'shadow-lg');
+            }
+        }
+
+        // 章节导航高亮
+        function updateSideNav() {
+            const sections = ['hero', 'macro', 'cognition', 'double-edge', 'stories', 'model', 'guide', 'ending'];
+            const scrollPos = window.scrollY + 200;
+            
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const top = section.offsetTop;
+                    const bottom = top + section.offsetHeight;
+                    
+                    if (scrollPos >= top && scrollPos < bottom) {
+                        document.querySelectorAll('.nav-dot').forEach(dot => {
+                            dot.classList.remove('bg-secondary', 'scale-125');
+                            dot.classList.add('bg-gray-300', 'dark:bg-gray-600');
+                        });
+                        const activeDot = document.querySelector(`.nav-dot[data-section="${sectionId}"]`);
+                        if (activeDot) {
+                            activeDot.classList.remove('bg-gray-300', 'dark:bg-gray-600');
+                            activeDot.classList.add('bg-secondary', 'scale-125');
+                        }
+                    }
+                }
+            });
+        }
+
+        // 滚动动画观察器
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('section-hidden');
+                    entry.target.classList.add('section-visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // 节流函数
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+
+        // 滚动事件处理
+        window.addEventListener('scroll', throttle(() => {
+            updateProgressBar();
+            updateNavbar();
+            updateSideNav();
+        }, 16));
+
+        // 初始化所有图表
+        function initCharts() {
+            // ECharts 主题配置
+            const colorPalette = ['#8b5cf6', '#64748b', '#a78bfa', '#c4b5fd', '#ddd6fe'];
+            
+            // 1. 年龄分层患病率图表
+            const ageChart = echarts.init(document.getElementById('ageChart'));
+            const ageOption = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: 60,
+                    right: '4%',
+                    top: 40,
+                    bottom: 30,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['青少年群体', '壮年群体',  '中年群体', '老年群体'],
+                    axisLabel: {
+                        interval: 0
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '患病率(%)',
+                    nameLocation: 'middle',
+                    nameGap: 40,
+                    nameRotate: 90,
+                    max: 20,
+                    axisLabel: { formatter: '{value}%' }
+                },
+                series: [{
+                    name: '患病率',
+                    type: 'bar',
+                    data: [17.5,4.7,5.8,7.2],
+                    itemStyle: {
+                        color: function(params) {
+                            const colors = ['#f472b6', '#60a5fa', '#34d399', '#8b5cf6', '#f59e0b'];
+                            return colors[params.dataIndex];
+                        },
+                        borderRadius: [4, 4, 0, 0]
+                    },
+                    animationDuration: 1500
+                }]
+            };
+            ageChart.setOption(ageOption);
+
+            // 2. 性别与城乡差异图表
+            const genderCityChart = echarts.init(document.getElementById('genderCityChart'));
+            const genderCityOption = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    top: 40,
+                    bottom: 45,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    name: '患病率(%)',
+                    nameLocation: 'middle',
+                    nameGap: 28,
+                    max: 6.00,
+                    axisLabel: { formatter: '{value}%' }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ['女性', '男性', '农村', '城市']
+                },
+                series: [{
+                    name: '患病率',
+                    type: 'bar',
+                    data: [5.1, 3.6, 3.5, 4.2],
+                    itemStyle: {
+                        color: function(params) {
+                            const colors = ['#ec4899', '#3b82f6', '#10b981', '#8b5cf6'];
+                            return colors[params.dataIndex];
+                        },
+                        borderRadius: [0, 4, 4, 0]
+                    },
+                    animationDuration: 1500
+                }]
+            };
+            genderCityChart.setOption(genderCityOption);
+
+            // 3. 职业风险图表
+            const jobChart = echarts.init(document.getElementById('jobChart'));
+            const jobOption = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    top: 40,
+                    bottom: 45,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    name: '风险率(%)',
+                    nameLocation: 'middle',
+                    nameGap: 28,
+                    max: 30,
+                    axisLabel: { formatter: '{value}%' }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: ['服务', '教育', '医疗', '金融', '互联网/IT'].reverse()
+                },
+                series: [{
+                    name: '抑郁风险',
+                    type: 'bar',
+                    data: [16.2, 18.0, 19.0, 22.0, 27.0].reverse(),
+                    itemStyle: {
+                        color: function(params) {
+                            const colors = ['#94a3b8', '#64748b', '#8b5cf6', '#a78bfa', '#c084fc'];
+                            return colors[params.dataIndex];
+                        },
+                        borderRadius: [0, 4, 4, 0]
+                    },
+                    animationDuration: 1500
+                }]
+            };
+            jobChart.setOption(jobOption);
+
+            // 4. 大众认知态度图表
+
+            // 5. 社交态度图表
+            const attitudeChart = echarts.init(document.getElementById('attitudeChart'));
+            const attitudeOption = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: 60,
+                    right: '4%',
+                    top: 40,
+                    bottom: 30,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['想提供帮助', '不知如何回应', '选择远离'],
+                    axisLabel: {
+                        interval: 0
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '占比(%)',
+                    nameLocation: 'middle',
+                    nameGap: 40,
+                    nameRotate: 90,
+                    axisLabel: { formatter: '{value}%' }
+                },
+                series: [{
+                    name: '占比',
+                    type: 'bar',
+                    data: [45.45, 43.64, 1.82],
+                    itemStyle: {
+                        color: function(params) {
+                            const colors = ['#8b5cf6', '#64748b', '#ef4444'];
+                            return colors[params.dataIndex];
+                        },
+                        borderRadius: [4, 4, 0, 0]
+                    },
+                    animationDuration: 1500
+                }]
+            };
+            attitudeChart.setOption(attitudeOption);
+
+            // 6. 超话情感分布图表
+            const emotionChart = echarts.init(document.getElementById('emotionChart'));
+            const emotionOption = {
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    bottom: 0,
+                    left: 'center'
+                },
+                series: [{
+                    name: '情感分布',
+                    type: 'pie',
+                    radius: ['45%', '70%'],
+                    avoidLabelOverlap: true,
+                    itemStyle: {
+                        borderRadius: 6,
+                        borderColor: 'transparent',
+                        borderWidth: 2
+                    },
+                    data: [
+                        {value: 76.91, name: '负面情绪'},
+                        {value: 13.25, name: '中性'},
+                        {value: 9.84, name: '正面情绪'}
+                    ],
+                    color: ['#ef4444', '#64748b', '#10b981'],
+                    label: {
+                        formatter: '{b}: {d}%',
+                        color: 'inherit',
+                        fontSize: 13,
+                        fontWeight: 500,
+                        textBorderWidth: 0,
+                        textShadowBlur: 0
+                    },
+                    labelLine: {
+                        smooth: true,
+                        length: 10,
+                        length2: 14,
+                        lineStyle: { width: 1 }
+                    },
+                    emphasis: {
+                        scale: true,
+                        scaleSize: 6,
+                        label: {
+                            fontSize: 14,
+                            fontWeight: 'bold'
+                        }
+                    },
+                    animationDuration: 1500
+                }]
+            };
+            emotionChart.setOption(emotionOption);
+
+            // 7. 双刃剑对比图表
+            const doubleEdgeChart = echarts.init(document.getElementById('doubleEdgeChart'));
+            const doubleEdgeOption = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    data: ['正面影响', '负面影响'],
+                    top: 0
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    top: 40,
+                    bottom: 45,
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    name: '占比(%)',
+                    nameLocation: 'middle',
+                    nameGap: 28,
+                    min: -100,
+                    max: 100,
+                    axisLabel: { formatter: '{value}%' }
+                },
+                yAxis: {
+                    type: 'category',
+                    inverse: true,
+                    data: [
+                        '获得情绪支持',
+                        '减少孤独感',
+                        '匿名宣泄',
+                        '网络暴力',
+                        '攀比自卑',
+                        '负面行为模仿'
+                    ]
+                },
+                series: [
+                    {
+                        name: '正面影响',
+                        type: 'bar',
+                        data: [72.12, 70.3, 69.7, null, null, null],
+                        itemStyle: {
+                            color: '#10b981',
+                            borderRadius: [0, 4, 4, 0]
+                        },
+                        animationDuration: 1500
+                    },
+                    {
+                        name: '负面影响',
+                        type: 'bar',
+                        data: [null, null, null, -77.58, -69.7, -58.18],
+                        itemStyle: {
+                            color: '#ef4444',
+                            borderRadius: [4, 0, 0, 4]
+                        },
+                        animationDuration: 1500
+                    }
+                ]
+            };
+            doubleEdgeChart.setOption(doubleEdgeOption);
+
+            // 雷达图数据
+            const radarIndicator = [
+                { name: '情绪稳定性', max: 10 },
+                { name: '媒体依赖度', max: 10 },
+                { name: '社交活跃度', max: 10 },
+                { name: '自我掌控感', max: 10 },
+                { name: '生活满意度', max: 10 }
+            ];
+
+            // 学姐的雷达图
+            const radarXuejie = echarts.init(document.getElementById('radar-xuejie'));
+            radarXuejie.setOption({
+                radar: {
+                    indicator: radarIndicator,
+                    radius: '70%'
+                },
+                series: [{
+                    type: 'radar',
+                    data: [{
+                        value: [8, 2, 7, 9, 8],
+                        name: '学姐',
+                        areaStyle: {
+                            color: 'rgba(16, 185, 129, 0.3)'
+                        },
+                        lineStyle: {
+                            color: '#10b981'
+                        },
+                        itemStyle: {
+                            color: '#10b981'
+                        }
+                    }]
+                }],
+                animationDuration: 1500
+            });
+
+            // 金兰的雷达图
+            const radarJinlan = echarts.init(document.getElementById('radar-jinlan'));
+            radarJinlan.setOption({
+                radar: {
+                    indicator: radarIndicator,
+                    radius: '70%'
+                },
+                series: [{
+                    type: 'radar',
+                    data: [{
+                        value: [4, 8, 5, 3, 6],
+                        name: '金兰',
+                        areaStyle: {
+                            color: 'rgba(168, 85, 247, 0.3)'
+                        },
+                        lineStyle: {
+                            color: '#a855f7'
+                        },
+                        itemStyle: {
+                            color: '#a855f7'
+                        }
+                    }]
+                }],
+                animationDuration: 1500
+            });
+
+            // 她厌的雷达图
+            const radarTayan = echarts.init(document.getElementById('radar-tayan'));
+            radarTayan.setOption({
+                radar: {
+                    indicator: radarIndicator,
+                    radius: '70%'
+                },
+                series: [{
+                    type: 'radar',
+                    data: [{
+                        value: [2, 10, 2, 3, 2],
+                        name: '她厌',
+                        areaStyle: {
+                            color: 'rgba(239, 68, 68, 0.3)'
+                        },
+                        lineStyle: {
+                            color: '#ef4444'
+                        },
+                        itemStyle: {
+                            color: '#ef4444'
+                        }
+                    }]
+                }],
+                animationDuration: 1500
+            });
+
+            const wordCloudNeg = echarts.init(document.getElementById('wordCloudNeg'));
+            wordCloudNeg.setOption({
+                tooltip: { show: true, formatter: '{b}: {c}' },
+                series: [{
+                    type: 'wordCloud',
+                    shape: 'circle',
+                    left: 'center',
+                    top: 'center',
+                    width: '100%',
+                    height: '100%',
+                    sizeRange: [14, 36],
+                    rotationRange: [0, 0],
+                    gridSize: 6,
+                    drawOutOfBound: false,
+                    textStyle: {
+                        fontWeight: 'bold',
+                        color: function () {
+                            const reds = ['#dc2626', '#ef4444', '#f87171', '#fb7185', '#f43f5e'];
+                            return reds[Math.floor(Math.random() * reds.length)];
+                        }
+                    },
+                    emphasis: {
+                        textStyle: { textShadowBlur: 8, textShadowColor: 'rgba(239,68,68,0.5)' }
+                    },
+                    data: [
+                        { name: '想死', value: 100 },
+                        { name: '痛苦', value: 92 },
+                        { name: '焦虑', value: 85 },
+                        { name: '抑郁症', value: 78 },
+                        { name: '难过', value: 68 },
+                        { name: '孤独', value: 60 },
+                        { name: '压力', value: 56 },
+                        { name: '崩溃', value: 50 },
+                        { name: '失眠', value: 44 },
+                        { name: '绝望', value: 40 },
+                        { name: '哭', value: 34 },
+                        { name: '累', value: 30 },
+                        { name: '害怕', value: 28 }
+                    ]
+                }]
+            });
+
+            const wordCloudPos = echarts.init(document.getElementById('wordCloudPos'));
+            wordCloudPos.setOption({
+                tooltip: { show: true, formatter: '{b}: {c}' },
+                series: [{
+                    type: 'wordCloud',
+                    shape: 'circle',
+                    left: 'center',
+                    top: 'center',
+                    width: '100%',
+                    height: '100%',
+                    sizeRange: [14, 36],
+                    rotationRange: [0, 0],
+                    gridSize: 6,
+                    drawOutOfBound: false,
+                    textStyle: {
+                        fontWeight: 'bold',
+                        color: function () {
+                            const greens = ['#059669', '#10b981', '#34d399', '#22c55e', '#16a34a'];
+                            return greens[Math.floor(Math.random() * greens.length)];
+                        }
+                    },
+                    emphasis: {
+                        textStyle: { textShadowBlur: 8, textShadowColor: 'rgba(16,185,129,0.5)' }
+                    },
+                    data: [
+                        { name: '希望', value: 100 },
+                        { name: '爱', value: 92 },
+                        { name: '加油', value: 85 },
+                        { name: '陪伴', value: 76 },
+                        { name: '朋友', value: 70 },
+                        { name: '坚持', value: 64 },
+                        { name: '治愈', value: 55 },
+                        { name: '温暖', value: 50 },
+                        { name: '阳光', value: 44 },
+                        { name: '勇敢', value: 40 },
+                        { name: '努力', value: 36 },
+                        { name: '感谢', value: 32 },
+                        { name: '相信', value: 28 }
+                    ]
+                }]
+            });
+
+            chartRegistry.push(
+                ageChart, genderCityChart, jobChart,
+                attitudeChart, emotionChart,
+                doubleEdgeChart, radarXuejie, radarJinlan, radarTayan,
+                wordCloudNeg, wordCloudPos
+            );
+
+            // 响应式处理
+            window.addEventListener('resize', () => {
+                chartRegistry.forEach(chart => chart && chart.resize());
+            });
+
+            applyChartTheme();
+        }
+
+        // 模型模拟器
+        const positiveSlider = document.getElementById('positive-slider');
+        const negativeSlider = document.getElementById('negative-slider');
+        const positiveValue = document.getElementById('positive-value');
+        const negativeValue = document.getElementById('negative-value');
+        const scoreDisplay = document.getElementById('score-display');
+        const statusTag = document.getElementById('status-tag');
+
+        function updateModel() {
+            const positive = parseFloat(positiveSlider.value);
+            const negative = parseFloat(negativeSlider.value);
+            
+            // 模型公式: Y = 0.25X+ + 0.22X-
+            const score = 0.25 * positive + 0.22 * negative;
+            
+            positiveValue.textContent = positive.toFixed(2);
+            negativeValue.textContent = negative.toFixed(2);
+            scoreDisplay.textContent = score.toFixed(3);
+            
+            // 更新状态标签
+            const scoreBaseClass = 'text-4xl font-bold mb-2 transition-colors duration-300';
+            const tagBaseClass = 'inline-block px-4 py-1 rounded-full text-sm transition-colors duration-300';
+            if (score > 0.5) {
+                statusTag.textContent = '主动掌控型';
+                statusTag.className = `${tagBaseClass} bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300`;
+                scoreDisplay.className = `${scoreBaseClass} text-green-700 dark:text-green-300`;
+            } else if (score > 0) {
+                statusTag.textContent = '被动沉溺型';
+                statusTag.className = `${tagBaseClass} bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300`;
+                scoreDisplay.className = `${scoreBaseClass} text-purple-700 dark:text-purple-300`;
+            } else {
+                statusTag.textContent = '伤害主导型';
+                statusTag.className = `${tagBaseClass} bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300`;
+                scoreDisplay.className = `${scoreBaseClass} text-red-700 dark:text-red-300`;
+            }
+        }
+
+        function setPreset(type) {
+            if (type === 'xuejie') {
+                positiveSlider.value = 3.50;
+                negativeSlider.value = -0.70;
+            } else if (type === 'jinlan') {
+                positiveSlider.value = 2.60;
+                negativeSlider.value = -1.00;
+            } else if (type === 'tayan') {
+                positiveSlider.value = 1.80;
+                negativeSlider.value = -3.60;
+            }
+            updateModel();
+        }
+
+        positiveSlider.addEventListener('input', updateModel);
+        negativeSlider.addEventListener('input', updateModel);
+
+        // 指南卡片展开/折叠
+        function toggleCard(button) {
+            const content = button.nextElementSibling;
+            const arrow = button.querySelector('.card-arrow');
+            
+            content.classList.toggle('hidden');
+            arrow.classList.toggle('rotate-180');
+        }
+
+        // 分享功能
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '新媒体时代的双面镜：抑郁症患者的数字生存图景',
+                    text: '一份关于抑郁症群体数字生存的深度数据报道',
+                    url: window.location.href
+                });
+            } else {
+                // 复制链接到剪贴板
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('链接已复制到剪贴板，你可以分享给需要的人');
+                });
+            }
+        }
+
+        // 初始化
+        function initVennTooltip() {
+            const container = document.getElementById('vennContainer');
+            const tooltip = document.getElementById('vennTooltip');
+            if (!container || !tooltip) return;
+            const tipDot = document.getElementById('vennTooltipDot');
+            const tipName = document.getElementById('vennTooltipName');
+            const tipValue = document.getElementById('vennTooltipValue');
+
+            const regions = [
+                { id: 'vennGreen',   name: '认可抑郁症是疾病',   value: '88.49%', color: '#10b981' },
+                { id: 'vennOverlap', name: '两者皆选',           value: '6.67%',  color: '#b45309' },
+                { id: 'vennOrange',  name: '认为是个人意志薄弱', value: '18.18%', color: '#f59e0b' }
+            ];
+
+            regions.forEach(r => {
+                const el = document.getElementById(r.id);
+                if (!el) return;
+                el.addEventListener('mouseenter', () => {
+                    tipDot.style.background = r.color;
+                    tipName.textContent = r.name;
+                    tipValue.textContent = r.value;
+                    tooltip.style.opacity = '1';
+                });
+                el.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    let x = e.clientX - rect.left + 14;
+                    let y = e.clientY - rect.top + 14;
+                    const tw = tooltip.offsetWidth;
+                    const th = tooltip.offsetHeight;
+                    if (x + tw > rect.width)  x = e.clientX - rect.left - tw - 14;
+                    if (y + th > rect.height) y = e.clientY - rect.top - th - 14;
+                    tooltip.style.left = x + 'px';
+                    tooltip.style.top  = y + 'px';
+                });
+                el.addEventListener('mouseleave', () => {
+                    tooltip.style.opacity = '0';
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 观察所有需要动画的章节
+            document.querySelectorAll('section').forEach(section => {
+                if (section.id !== 'hero') {
+                    observer.observe(section);
+                }
+            });
+
+            // 初始化图表
+            initCharts();
+            initVennTooltip();
+
+            // 初始更新导航状态
+            updateNavbar();
+            updateSideNav();
+            updateModel();
+        });
+    </script>
+</body>
+</html>
