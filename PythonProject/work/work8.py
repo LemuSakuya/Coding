@@ -1,74 +1,50 @@
 import numpy as np
 
+class Perception(object):
+    def __init__(self,lr=0.1,epochs=1000):
+        """
+        初始化
+        :param lr: 学习
+        :param n_iter:
+        """
+        self.lr = lr
+        self.epochs = epochs
 
-def mlp_and(x1, x2):
-    r'''
-    使用感知机实现与逻辑门。
-
-    参数：
-    - x1: int (0 or 1)
-    - x2: int (0 or 1)
-
-    输出：
-    - y: int (0 or 1)
-        y = x1 and x2
-    '''
-    ########## Begin ##########
-    x = np.array([x1, x2]).astype(np.float32)
-    weight = np.array([0.5, 0.5]).astype(np.float32)
-    bias = -0.7
-    y = np.dot(weight, x) + bias
-    if y <= 0:
-        return 0
-    else:
-        return 1
-    ########## End ##########
-
-
-def mlp_or(x1, x2):
-    r'''
-    使用感知机实现或逻辑门。
-
-    参数：
-    - x1: int (0 or 1)
-    - x2: int (0 or 1)
-
-    输出：
-    - y: int (0 or 1)
-        y = x1 or x2
-    '''
-    ########## Begin ##########
-    x = np.array([x1, x2]).astype(np.float32)
-    weight = np.array([0.5, 0.5]).astype(np.float32)
-    bias = -0.2
-    y = np.dot(weight, x) + bias
-    if y <= 0:
-        return 0
-    else:
-        return 1
-    ########## End ##########
+    def fit(self,X,y):
+        """
+        训练
+        :param X: 训练数据的输入
+        :param y: 真实期望
+        """
+        self.w_ = np.random.random(X.shape[1])
+        self.b = np.zeros([1])
+        for _ in range(self.epochs):
+            for x_i, target in zip(X,y):
+                update = self.lr * (target - self.predict(x_i))
+                self.w_ = self.w_ + (update * x_i)
+                self.b += update
 
 
-def mlp_nand(x1, x2):
-    r'''
-    使用感知机实现与非逻辑门。
+    def forward(self,X):
+        """
+        向前传播
+        :param X: 输入
+        :return: 非经激活的预测值
+        """
+        ########## Begin ##########
+        # 将权重向量与训练数据输入单层感知器，进行向前传播
+        y_hat = np.dot(X, self.w_) + self.b
+        ########## End ##########
+        return  y_hat
 
-    参数：
-    - x1: int (0 or 1)
-    - x2: int (0 or 1)
-
-    输出：
-    - y: int (0 or 1)
-        y = x1 nand x2
-    '''
-    ########## Begin ##########
-    x = np.array([x1, x2]).astype(np.float32)
-    weight = np.array([-0.5, -0.5]).astype(np.float32)
-    bias = 0.7
-    y = np.dot(weight, x) + bias
-    if y <= 0:
-        return 0
-    else:
-        return 1
-    ########## End ##########
-
+    def predict(self,X):
+        """
+        预测函数，对前向传播后的结果进行分类
+        :param X:　输入值
+        :return:　对于数据类别的预测结果
+        """
+        ########## Begin ##########
+        # 可以使用 np.where() 函数来实现阶梯式的激活函数
+        prediction = np.where(self.forward(X) >= 0.0, 1, -1)
+        ########## End ##########
+        return prediction

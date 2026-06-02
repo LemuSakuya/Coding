@@ -1,13 +1,23 @@
 import torch
-import numpy as np
 
-def a2t():
-	np_data = np.array([[1, 2],[3,4]])
+# /********** Begin *********/
+# 创建32位有符号整数张量（一维）
+def create():
+    t = torch.IntTensor([0, 1, 2, 3, 4, 5])
+    return t
 
-    #/********** Begin *********/
-    #将np_data转为对应的tensor，赋给变量torch_data
-	torch_data = torch.from_numpy(np_data)
+# 获取张量
+t = create()
+print("原始张量：", t)
+print()
 
+# 正序索引
+print("正序索引 t[2:5]：", t[2:5])
 
-    #/********** End *********/
-	return(torch_data)
+# 逆序索引
+print("逆序索引 t[-4:-2]：", t[-4:-2])
+
+# 步长切片
+print("步长切片 t[2:6:3]：", t[2:6:3])
+
+# /********** End *********/

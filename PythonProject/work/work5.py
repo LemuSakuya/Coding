@@ -1,37 +1,65 @@
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-matplotlib.rcParams['font.family']='SimHei'
-matplotlib.rcParams['font.sans-serif'] = ['SimHei']
-matplotlib.rcParams['font.size']='8'
-plt.figure(figsize=(10,10))
-########### Begin ############
-
-# 导入pandas库，用于实现数据读取和数据筛选处理
-import pandas as pd
+# 导入所需库
+import jieba
+import wordcloud
 import os
 
-# 读取test目录下的gdp.csv文件，指定"年份"列的数据类型为字符串
-data = pd.read_csv('test/gdp.csv', dtype={'年份': str})
+# 1. 原始文本内容
+txt = "湖南师范大学创建于1938年，位于历史文化名城长沙，是国家“211工程”重点建设的大学，国家“双一流”建设高校，教育部与湖南省重点共建“双一流”建设高校，教育部普通高等学校本科教学工作水平评估优秀高校，湖南省“世界一流学科建设高校”。学校现有8个校区，占地2885余亩，建筑面积131万平方米。主校区西偎麓山，东濒湘江，风光秀丽，是全国绿化“400佳”单位之一。"
 
-# 定义子图索引变量i，用于指定后续子图的摆放位置，初始值为1
-i = 1
 
-# 循环遍历2010到2013年（range左闭右开，2014不包含，即遍历2010、2011、2012、2013）
-for y in range(2010, 2014):
-    # 筛选出数据中"年份"列等于当前循环年份的行，仅保留"省份"和"GDP"两列数据
-    sj = data.loc[data['年份'] == str(y), ['省份', 'GDP']]
-    # 创建子图，设置画布为2行2列的布局，当前绘制第i个子图
-    plt.subplot(2, 2, i)
-    # 绘制当前年份的饼图，饼图数据为该年份各省份的GDP，标签为对应省份名称
-    plt.pie(sj['GDP'], labels=sj['省份'])
-    # 设置当前子图的标题，显示为“当前年份+年”的格式，明确子图对应的年份
-    plt.title(str(y) + '年')
-    # 子图索引自增1，为下一次循环绘制下一个子图做准备
-    i += 1
+# 2. 自定义停用词库（过滤无意义词汇、标点、数字、虚词）
+stop_words = {
+    "的", "是", "于", "有", "为", "现有", "余年", "平方米", "8", "131", "2885", "1938",
+    "，", "。", "“", "”", "、", "之一"
+}
+########### Begin #############
+# 3. jieba分词 + 停用词过滤
+# 精准模式分词
+word_cut = jieba.lcut(txt)
 
-# 将绘制完成的2行2列子图（4个年份的GDP饼图）保存到image8目录下，文件名为gdp8.jpg
-os.makedirs('image8', exist_ok=True)
-plt.savefig('image8/gdp8.jpg')
+# 自定义规则完成停用词过滤：剔除停用词、符号、单字无效词汇
+# 判断条件：不在停用词集合内 且 去除空格后词语长度大于等于2
+filter_words = [
+    word.strip()
+    for word in word_cut
+    if word.strip() and word.strip() not in stop_words and len(word.strip()) >= 2
+]
 
-########### End ############
+
+# 将过滤后的关键词以空格拼接，满足wordcloud词云文本输入格式
+final_text = " ".join(filter_words)
+
+# 4. 输出关键结果
+print("文本分词结果：")
+print(word_cut)
+print("\n过滤停用词后有效关键词：")
+print(filter_words)
+
+# 5. 词云可视化配置
+# width/height：设置词云图片尺寸；font_path：指定中文字体路径，解决中文乱码（"/usr/share/fonts/SimHei.ttf"）
+# background_color：设置画布背景；max_words：限制最大展示关键词数量
+# contour_width/contour_color：设置词云外轮廓宽度与颜色，优化展示效果
+font_candidates = [
+    "C:/Windows/Fonts/simhei.ttf",
+    "C:/Windows/Fonts/msyh.ttc",
+    "/usr/share/fonts/SimHei.ttf",
+]
+font_path = next((path for path in font_candidates if os.path.exists(path)), None)
+
+wc = wordcloud.WordCloud(
+    width=1000,
+    height=700,
+    font_path=font_path,
+    background_color="white",
+    max_words=200,
+    contour_width=1,
+    contour_color="steelblue",
+)
+
+########### End #############
+
+# 6. 生成词云
+wc.generate(final_text)
+save_path = "/data/workspace/myshixun/pic/hunnu_wordcloud.png"
+wc.to_file(save_path)
+print(f"\n【词云生成成功】图片已保存至路径：{os.path.abspath(save_path)}")
