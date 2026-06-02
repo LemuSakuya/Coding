@@ -7,6 +7,18 @@
     <!-- 引入外部资源 -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -127,6 +139,42 @@
             table {
                 background: rgba(255, 254, 250, 0.72);
             }
+            .analysis-table {
+                border-color: rgba(180, 226, 216, 0.95);
+                color: #20323D;
+                font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+                font-size: 15px;
+                font-weight: 700;
+                line-height: 1.55;
+                overflow: hidden;
+                border-radius: 8px;
+            }
+            .analysis-table thead th {
+                background: rgba(226, 247, 242, 0.82);
+                color: #143A46;
+                font-family: "Smiley Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+                font-size: 16px;
+                font-weight: 900;
+            }
+            .analysis-table tbody td {
+                background: rgba(255, 254, 250, 0.68);
+            }
+            .analysis-table tbody tr:nth-child(even) td {
+                background: rgba(244, 252, 249, 0.72);
+            }
+            .analysis-table .metric-value {
+                color: #143A46;
+                font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+                font-size: 16px;
+                font-weight: 900;
+                letter-spacing: 0;
+            }
+            .analysis-table-note {
+                color: #405A64;
+                font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+                font-weight: 800;
+                line-height: 1.7;
+            }
             #home h1 {
                 letter-spacing: 0;
                 line-height: 1.16;
@@ -214,6 +262,21 @@
                 height: 400px;
                 width: 100%;
             }
+            #positive-wordcloud,
+            #negative-wordcloud {
+                width: min(100%, 520px);
+                aspect-ratio: 1 / 1;
+                height: auto !important;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #positive-wordcloud + .source-note,
+            #negative-wordcloud + .source-note {
+                width: min(100%, 520px);
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
             .radar-container {
                 height: 500px;
                 width: 100%;
@@ -225,10 +288,116 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            #comparison-radar {
+                width: min(100%, 640px);
+                aspect-ratio: 1 / 1;
+                height: auto !important;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #comparison-radar + .source-note {
+                width: min(100%, 640px);
+                margin-left: auto;
+                margin-right: auto;
+            }
             #network-chart {
                 width: 100%;
                 max-width: 1120px;
+                height: 720px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #network-chart + .source-note,
+            .network-legend {
+                width: 100%;
+                max-width: 1120px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .network-method-card {
+                width: 100%;
+                max-width: 1120px;
+                margin-left: auto;
+                margin-right: auto;
+                background: rgba(255, 254, 250, 0.72);
+                border: 1px solid rgba(204, 225, 220, 0.82);
+                border-radius: 8px;
+                padding: 18px 20px;
+                color: #20323D;
+                font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+                font-weight: 700;
+                line-height: 1.75;
+            }
+            .network-method-card strong {
+                color: #143A46;
+                font-weight: 900;
+            }
+            .network-method-card .method-chip {
+                display: inline-flex;
+                align-items: center;
+                margin: 4px 8px 4px 0;
+                padding: 4px 10px;
+                border-radius: 999px;
+                background: rgba(226, 247, 242, 0.86);
+                color: #256D85;
+                font-size: 13px;
+                font-weight: 900;
+            }
+            .formula-callout {
+                margin: 12px 0;
+                padding: 10px 0 10px 16px;
+                border-left: 4px solid #2F9E73;
+                color: #20323D;
+                font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+                font-style: italic;
+                font-weight: 700;
+                line-height: 1.9;
+            }
+            .formula-callout .formula {
+                display: block;
+                margin-top: 8px;
+            }
+            .formula-callout .math-scroll {
+                display: block;
+                max-width: 100%;
+                overflow-x: visible;
+                padding: 8px 0 2px;
+            }
+            .formula-callout mjx-container {
+                margin: 0 !important;
+                color: #143A46;
+                font-size: 104% !important;
+            }
+            .formula-callout .formula-note {
+                display: block;
+                margin-top: 8px;
+                color: #405A64;
+                font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+                font-size: 13px;
+                font-style: normal;
+                font-weight: 800;
+            }
+            #correlation-chart {
+                width: min(100%, 680px);
                 height: 640px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #correlation-chart + .source-note {
+                width: min(100%, 680px);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #sentiment-chart {
+                height: 560px;
+            }
+            #cognition-chart {
+                width: min(100%, 980px);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #cognition-chart + .source-note {
+                width: min(100%, 980px);
                 margin-left: auto;
                 margin-right: auto;
             }
@@ -296,10 +465,10 @@
                 基于数据挖掘、文本分析与深度访谈的综合实证研究
             </p>
             <div class="flex flex-wrap justify-center gap-4 mb-16">
-                <a href="#background" class="px-8 py-3 bg-primary text-white rounded-full shadow-lg shadow-teal-900/20 hover:shadow-xl hover:bg-primary/90 transition-all duration-300">
+                <a href="#background" class="hero-scroll-link px-8 py-3 bg-primary text-white rounded-full shadow-lg shadow-teal-900/20 hover:shadow-xl hover:bg-primary/90 transition-all duration-300">
                     开始探索
                 </a>
-                <a href="#stories" class="px-8 py-3 bg-white/75 text-primary border border-primary/40 rounded-full shadow-lg shadow-teal-900/10 hover:shadow-xl hover:bg-white transition-all duration-300">
+                <a href="#stories" class="hero-scroll-link px-8 py-3 bg-white/75 text-primary border border-primary/40 rounded-full shadow-lg shadow-teal-900/10 hover:shadow-xl hover:bg-white transition-all duration-300">
                     查看人物故事
                 </a>
             </div>
@@ -366,7 +535,7 @@
                 <div class="grid md:grid-cols-2 gap-8">
                     <div>
                         <h4 class="text-xl font-medium mb-4">效度分析结果</h4>
-                        <table class="w-full border-collapse border border-teal-100">
+                        <table class="analysis-table w-full border-collapse border border-teal-100">
                             <thead>
                                 <tr class="bg-teal-50/70">
                                     <th class="border border-teal-100 px-4 py-2 text-left">指标</th>
@@ -377,34 +546,34 @@
                             <tbody>
                                 <tr>
                                     <td class="border border-teal-100 px-4 py-2">KMO值</td>
-                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">0.691</td>
+                                    <td class="metric-value border border-teal-100 px-4 py-2 text-right">0.691</td>
                                     <td class="border border-teal-100 px-4 py-2">>0.6，适合因子分析</td>
                                 </tr>
                                 <tr>
                                     <td class="border border-teal-100 px-4 py-2">巴特球形检验p值</td>
-                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">0.000</td>
+                                    <td class="metric-value border border-teal-100 px-4 py-2 text-right">0.000</td>
                                     <td class="border border-teal-100 px-4 py-2"><0.05，显著</td>
                                 </tr>
                                 <tr>
                                     <td class="border border-teal-100 px-4 py-2">累积方差解释率</td>
-                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">40.55%</td>
+                                    <td class="metric-value border border-teal-100 px-4 py-2 text-right">40.55%</td>
                                     <td class="border border-teal-100 px-4 py-2">中等水平</td>
                                 </tr>
                                 <tr>
                                     <td class="border border-teal-100 px-4 py-2">因子载荷范围</td>
-                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">0.56-0.72</td>
+                                    <td class="metric-value border border-teal-100 px-4 py-2 text-right">0.56-0.72</td>
                                     <td class="border border-teal-100 px-4 py-2">>0.5，项目有效</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <p class="text-sm text-gray-600 mt-4">
+                        <p class="analysis-table-note text-sm mt-4">
                             结论：量表效度处于可接受范围，数据适合进行因子分析。
                         </p>
                     </div>
                     
                     <div>
                         <h4 class="text-xl font-medium mb-4">信度分析结果</h4>
-                        <table class="w-full border-collapse border border-teal-100">
+                        <table class="analysis-table w-full border-collapse border border-teal-100">
                             <thead>
                                 <tr class="bg-teal-50/70">
                                     <th class="border border-teal-100 px-4 py-2 text-left">指标</th>
@@ -415,22 +584,22 @@
                             <tbody>
                                 <tr>
                                     <td class="border border-teal-100 px-4 py-2">样本量</td>
-                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">167</td>
+                                    <td class="metric-value border border-teal-100 px-4 py-2 text-right">167</td>
                                     <td class="border border-teal-100 px-4 py-2">有效样本</td>
                                 </tr>
                                 <tr>
                                     <td class="border border-teal-100 px-4 py-2">项目数</td>
-                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">4</td>
+                                    <td class="metric-value border border-teal-100 px-4 py-2 text-right">4</td>
                                     <td class="border border-teal-100 px-4 py-2">核心题项</td>
                                 </tr>
                                 <tr>
                                     <td class="border border-teal-100 px-4 py-2">Cronbach's α系数</td>
-                                    <td class="border border-teal-100 px-4 py-2 text-right font-semibold">0.606</td>
+                                    <td class="metric-value border border-teal-100 px-4 py-2 text-right">0.606</td>
                                     <td class="border border-teal-100 px-4 py-2">接近0.6，勉强可接受</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <p class="text-sm text-gray-600 mt-4">
+                        <p class="analysis-table-note text-sm mt-4">
                             结论：量表内部一致性处于勉强可接受范围。
                         </p>
                     </div>
@@ -550,9 +719,38 @@
                 <h3 class="text-2xl font-semibold mb-8">文本网络分析</h3>
                 <div class="chart-container" id="network-chart"></div>
                 <p class="source-note text-sm mt-2">数据来源：微博抑郁症超话（2026.04.26-2026.05.04，n=498）</p>
-                <div class="mt-4 text-sm text-gray-600 font-bold">
-                    <p><span class="inline-block w-8 h-1 bg-primary mr-2"></span>实线：强关联（Jaccard系数&gt;0.08）</p>
-                    <p><span class="inline-block w-8 h-1 border-t-2 border-dashed border-slate-400 mr-2"></span>虚线：弱关联（Jaccard系数≤0.08）</p>
+                <div class="network-legend mt-4 text-sm text-gray-600 font-bold">
+                    <p><span class="inline-block w-8 h-1 bg-primary mr-2"></span>实线：核心关系或强关联（LLR ≥ 10.83）</p>
+                    <p><span class="inline-block w-8 h-1 border-t-2 border-dashed border-slate-400 mr-2"></span>虚线：弱关联（3.84 ≤ LLR &lt; 10.83）</p>
+                </div>
+                <div class="network-method-card mt-4 text-sm">
+                    <p>
+                        <strong>关系筛选校验：</strong>除与“抑郁症”直接相连的核心边外，其余共现关系采用 LLR（对数似然比）进行显著性校验；若 LLR 与 Jaccard 判断冲突，优先采用 LLR。
+                    </p>
+                    <div class="formula-callout">
+                        对数似然比用于衡量两个词的共现是否显著高于随机共现期望。
+                        <span class="formula">
+                            <span class="math-scroll">
+                                \[
+                                \text{LLR} = 2 \times \left[
+                                c_{ab} \ln\!\left(\frac{c_{ab}}{E}\right)
+                                + (a - c_{ab}) \ln\!\left(\frac{a - c_{ab}}{a - E}\right)
+                                + (b - c_{ab}) \ln\!\left(\frac{b - c_{ab}}{b - E}\right)
+                                + (N - a - b + c_{ab}) \ln\!\left(\frac{N - a - b + c_{ab}}{N - a - b + E}\right)
+                                \right]
+                                \]
+                            </span>
+                            <span class="formula-note">其中 $E = \frac{a \times b}{N}$</span>
+                        </span>
+                    </div>
+                    <p class="mt-2">
+                        <strong>标准化输入：</strong>节点词频 a、b，共现次数 cab，总样本量 N=498；其中“吃药-副作用”的共现次数按校验口径修正为 2。
+                    </p>
+                    <p class="mt-2">
+                        <span class="method-chip">强关系：LLR ≥ 10.83</span>
+                        <span class="method-chip">弱关系：3.84 ≤ LLR &lt; 10.83</span>
+                        <span class="method-chip">忽略：LLR &lt; 3.84</span>
+                    </p>
                 </div>
             </div>
             
@@ -928,7 +1126,6 @@
 
     <!-- JavaScript 部分 -->
     <script>
-        // 全局声明子页面雷达图变量（解决渲染问题）
         let xuejieRadar, jinlanRadar, tayanRadar;
         const themeColors = {
             primary: '#256D85',
@@ -1063,7 +1260,7 @@
         function createHeartMask() {
             const canvas = document.createElement('canvas');
             canvas.width = 1000;
-            canvas.height = 760;
+            canvas.height = 900;
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = '#000';
             ctx.beginPath();
@@ -1073,8 +1270,8 @@
                 const x = 16 * Math.pow(Math.sin(t), 3);
                 const y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
                 points.push({
-                    x: 500 + x * 28,
-                    y: 420 - y * 28
+                    x: 500 + x * 26,
+                    y: 420 - y * 26
                 });
             }
             ctx.moveTo(points[0].x, points[0].y);
@@ -1085,13 +1282,41 @@
         }
         const heartMask = createHeartMask();
 
-        // 移动端菜单切换
+        document.querySelectorAll('.hero-scroll-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (!target) return;
+                event.preventDefault();
+                const navbarHeight = document.getElementById('navbar')?.offsetHeight || 0;
+                const startY = window.scrollY;
+                const targetY = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+                const distance = targetY - startY;
+                const duration = 900;
+                const startTime = performance.now();
+
+                function easeInOutCubic(t) {
+                    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+
+                function animateScroll(currentTime) {
+                    const progress = Math.min((currentTime - startTime) / duration, 1);
+                    window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+                    if (progress < 1) {
+                        requestAnimationFrame(animateScroll);
+                    } else {
+                        history.pushState(null, '', link.getAttribute('href'));
+                    }
+                }
+
+                requestAnimationFrame(animateScroll);
+            });
+        });
+
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
         });
 
-        // 导航栏滚动效果
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -1103,7 +1328,6 @@
             }
         });
 
-        // 人物故事切换（分类按钮版）
         document.querySelectorAll('.category-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const target = this.getAttribute('data-target');
@@ -1111,7 +1335,6 @@
                 const storyElement = document.getElementById(`${target}-story`);
                 storyElement.classList.remove('hidden');
                 
-                // 修复子页面雷达图渲染问题（显示后重新计算尺寸）
                 setTimeout(() => {
                     if (target === 'xuejie') {
                         xuejieRadar.resize();
@@ -1120,14 +1343,12 @@
                     } else if (target === 'tayan') {
                         tayanRadar.resize();
                     }
-                }, 10); // 延迟10ms确保DOM更新完成
+                }, 10);
                 
-                // 滚动到人物故事板块顶部
                 window.scrollTo({top: document.getElementById('stories').offsetTop - 80, behavior: 'smooth'});
             });
         });
 
-        // 返回人物列表（回到人物故事主页面，不跳到页面顶部）
         document.querySelectorAll('.back-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('[id$="-story"]').forEach(story => {
@@ -1142,7 +1363,6 @@
             });
         });
 
-        // 复制链接功能
         document.getElementById('copy-btn').addEventListener('click', function() {
             const linkInput = document.getElementById('share-link');
             linkInput.select();
@@ -1155,7 +1375,6 @@
             });
         });
 
-        // 社交媒体分享函数
         function shareToWeibo() {
             const url = encodeURIComponent(window.location.href);
             const title = encodeURIComponent('新媒体视域下抑郁症传播与大众认知研究');
@@ -1172,9 +1391,7 @@
             window.open(`https://connect.qq.com/widget/shareqq/index.html?url=${url}&title=${title}`, '_blank');
         }
 
-        // ECharts 图表初始化
         window.addEventListener('load', function() {
-            // 1. 研究背景 - 发病率趋势图
             const incidenceChart = echarts.init(document.getElementById('incidence-chart'), 'inkTheme');
             incidenceChart.setOption({
                 title: { ...chartTitle, text: '近10年中国抑郁症发病率变化趋势' },
@@ -1226,7 +1443,6 @@
                 }]
             });
 
-            // 2. 研究背景 - 年龄分布图
             const ageChart = echarts.init(document.getElementById('age-distribution-chart'), 'inkTheme');
             ageChart.setOption({
                 title: { ...chartTitle, text: '抑郁症患者年龄分布' },
@@ -1259,7 +1475,6 @@
                 }]
             });
 
-            // 3. 问卷调查 - 性别分布
             const genderChart = echarts.init(document.getElementById('gender-chart'), 'inkTheme');
             genderChart.setOption({
                 title: { ...chartTitle, text: '样本性别分布' },
@@ -1282,7 +1497,6 @@
                 }]
             });
 
-            // 4. 问卷调查 - 年龄分布
             const surveyAgeChart = echarts.init(document.getElementById('age-chart'), 'inkTheme');
             surveyAgeChart.setOption({
                 title: { ...chartTitle, text: '样本年龄分布' },
@@ -1305,7 +1519,6 @@
                 }]
             });
 
-            // 5. 问卷调查 - 抑郁经历分布
             const experienceChart = echarts.init(document.getElementById('experience-chart'), 'inkTheme');
             experienceChart.setOption({
                 title: { ...chartTitle, text: '样本抑郁经历分布' },
@@ -1329,11 +1542,10 @@
                 }]
             });
 
-            // 6. 问卷调查 - 基础认知
             const cognitionChart = echarts.init(document.getElementById('cognition-chart'), 'inkTheme');
             cognitionChart.setOption({
                 title: { ...chartTitle, text: '大众对抑郁症的认知情况' },
-                grid: { ...baseGrid, bottom: 72 },
+                grid: { top: 86, left: 76, right: 76, bottom: 82, containLabel: true },
                 tooltip: {
                     ...baseTooltip,
                     trigger: 'axis',
@@ -1351,7 +1563,8 @@
                     name: '占比',
                     data: [88.62, 20, 10, 5],
                     type: 'bar',
-                    barMaxWidth: 48,
+                    barWidth: 84,
+                    barCategoryGap: '34%',
                     label: {
                         show: true,
                         position: 'top',
@@ -1369,7 +1582,6 @@
                 }]
             });
 
-            // 7. 问卷调查 - 性别×社交意愿
             const genderSocialChart = echarts.init(document.getElementById('gender-social-chart'), 'inkTheme');
             genderSocialChart.setOption({
                 title: { ...chartTitle, text: '不同性别对抑郁症患者的社交接纳意愿' },
@@ -1389,7 +1601,6 @@
                 ]
             });
 
-            // 8. 问卷调查 - 抑郁经历×治疗认同
             const experienceTreatmentChart = echarts.init(document.getElementById('experience-treatment-chart'), 'inkTheme');
             experienceTreatmentChart.setOption({
                 title: { ...chartTitle, text: '不同抑郁经历对治疗的认同度' },
@@ -1409,7 +1620,6 @@
                 ]
             });
 
-            // 9. 问卷调查 - 相关性热力图
             const correlationChart = echarts.init(document.getElementById('correlation-chart'), 'inkTheme');
             const variables = ['性别', '抑郁经历', '疾病认知', '媒体接触', '社交接纳', '平台干预'];
             const correlationData = [
@@ -1424,10 +1634,11 @@
             correlationChart.setOption({
                 title: { ...chartTitle, text: '变量相关性分析热力图' },
                 grid: {
-                    top: 72,
-                    left: 76,
-                    right: 36,
-                    bottom: 82,
+                    width: 360,
+                    height: 360,
+                    top: 96,
+                    left: 'center',
+                    bottom: 112,
                     containLabel: true
                 },
                 tooltip: {
@@ -1454,7 +1665,7 @@
                     calculable: true,
                     orient: 'horizontal',
                     left: 'center',
-                    bottom: 14,
+                    bottom: 28,
                     itemWidth: 16,
                     itemHeight: 140,
                     textStyle: {
@@ -1504,7 +1715,6 @@
                 }]
             });
 
-            // 10. 超话分析 - 正向情绪词阵（固定格子爱心）
             const positiveWordcloud = echarts.init(document.getElementById('positive-wordcloud'), 'inkTheme');
             const positiveWordData = [
                 { name: '好', value: 182 }, { name: '精神', value: 45 }, { name: '知道', value: 43 },
@@ -1528,125 +1738,114 @@
                 { name: '心灵', value: 7 }, { name: '在乎', value: 6 }, { name: '最重要的', value: 6 },
                 { name: '践行', value: 6 }
             ];
-            const positiveWordMap = Object.fromEntries(positiveWordData.map(item => [item.name, item.value]));
-            const positiveHeartRows = [
-                ['最重要的', '休息', '音乐', '温柔', '愿意', '心灵'],
-                ['谢谢', '关心', '爱你', '健康', '理解', '允许', '现实', '快乐'],
-                ['追求', '自由', '支持', '开心', '治疗', '创造', '主动', '幸福', '真正'],
-                ['坚守', '明明', '拥有', '朋友', '精神', '好', '知道', '希望', '发现', '爱', '特别'],
-                ['价值', '活着', '努力', '喜欢', '接受', '学习', '坚持', '本质', '获得', '期待'],
-                ['不同', '决定', '心疼', '实现', '热爱', '简单', '康复', '爱情', '真诚'],
-                ['赋予', '能力', '动力', '在乎'],
-                ['践行']
-            ];
-            function positiveGreen(value) {
-                if (value >= 100) return '#0B6B3A';
-                if (value >= 40) return '#138A52';
-                if (value >= 20) return '#2F9E73';
-                if (value >= 10) return '#58B98F';
-                return '#8BD1B2';
-            }
-            function positiveFontSize(value) {
-                return Math.max(14, Math.min(56, 10 + Math.sqrt(value) * 3.15));
-            }
-            function renderPositiveHeartGrid() {
-                const width = positiveWordcloud.getWidth();
-                const height = positiveWordcloud.getHeight();
-                const centerX = width / 2;
-                const startY = height * 0.22;
-                const rowGap = Math.min(46, height * 0.095);
-                const elements = [];
-                positiveHeartRows.forEach((row, rowIndex) => {
-                    const rowGapX = Math.min(78, width * 0.78 / Math.max(row.length - 1, 1));
-                    const rowWidth = (row.length - 1) * rowGapX;
-                    const y = startY + rowIndex * rowGap;
-                    row.forEach((word, wordIndex) => {
-                        const value = positiveWordMap[word] || 6;
-                        elements.push({
-                            type: 'text',
-                            x: centerX - rowWidth / 2 + wordIndex * rowGapX,
-                            y,
-                            z: value,
-                            style: {
-                                text: word,
-                                fill: positiveGreen(value),
-                                fontSize: positiveFontSize(value),
-                                fontWeight: 800,
-                                fontFamily: '"Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif',
-                                align: 'center',
-                                verticalAlign: 'middle'
-                            }
-                        });
-                    });
-                });
-                positiveWordcloud.setOption({
-                    tooltip: { show: false },
-                    graphic: elements
-                }, true);
-            }
-            renderPositiveHeartGrid();
-
-            // 11. 超话分析 - 负向心形词云
-            const negativeWordcloud = echarts.init(document.getElementById('negative-wordcloud'), 'inkTheme');
-            negativeWordcloud.setOption({
-                tooltip: { ...baseTooltip, trigger: 'item', formatter: '{b}<br/>词频：{c}' },
+            const positiveHeartPalette = ['#0B6B3A', '#138A52', '#2F9E73', '#58B98F', '#73C9A5', '#9AD9BE'];
+            const positiveRenderWordData = positiveWordData.map(item => ({
+                ...item,
+                actualValue: item.value,
+                value: Math.min(item.value, 66)
+            }));
+            const heartWordCloudLayout = {
+                shape: 'circle',
+                maskImage: heartMask,
+                left: 'center',
+                top: 'center',
+                width: '96%',
+                height: '96%',
+                sizeRange: [12, 88],
+                rotationRange: [-12, 12],
+                rotationStep: 12,
+                gridSize: 3,
+                drawOutOfBound: false,
+                layoutAnimation: false
+            };
+            positiveWordcloud.setOption({
+                tooltip: {
+                    ...baseTooltip,
+                    trigger: 'item',
+                    formatter: params => `${params.name}<br/>词频：${params.data.actualValue}`
+                },
                 series: [{
                     type: 'wordCloud',
-                    shape: 'circle',
-                    maskImage: heartMask,
-                    left: 'center',
-                    top: 'center',
-                    width: '90%',
-                    height: '90%',
-                    sizeRange: [13, 62],
-                    rotationRange: [-18, 18],
-                    rotationStep: 18,
-                    gridSize: 5,
-                    drawOutOfBound: false,
+                    ...heartWordCloudLayout,
                     textStyle: {
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif',
+                        fontFamily: '"Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif',
                         fontWeight: 'bold',
-                        color: function() {
-                            const colors = [themeColors.danger, themeColors.warning, '#B45C7A', '#C86F5B', '#8C4966'];
-                            return colors[Math.floor(Math.random() * colors.length)];
+                        color: function(params) {
+                            if (params.data.value >= 60) return '#0B6B3A';
+                            if (params.data.value >= 30) return '#138A52';
+                            return positiveHeartPalette[Math.floor(Math.random() * positiveHeartPalette.length)];
                         }
                     },
                     emphasis: {
                         focus: 'self',
                         textStyle: {
                             textShadowBlur: 0,
-                            color: themeColors.danger
+                            color: '#075A32'
                         }
                     },
-                    data: [
-                        { name: '抑郁', value: 120 },
-                        { name: '焦虑', value: 110 },
-                        { name: '痛苦', value: 100 },
-                        { name: '没有', value: 95 },
-                        { name: '难过', value: 90 },
-                        { name: '失眠', value: 85 },
-                        { name: '孤独', value: 80 },
-                        { name: '崩溃', value: 75 },
-                        { name: '压力', value: 70 },
-                        { name: '癌症', value: 65 },
-                        { name: '内耗', value: 60 },
-                        { name: '无法', value: 55 },
-                        { name: '控制', value: 50 },
-                        { name: '难受', value: 45 },
-                        { name: '绝望', value: 40 }
-                    ]
+                    data: positiveRenderWordData
                 }]
             });
 
-            // 12. 超话分析 - 情绪值散点图
+            const negativeWordcloud = echarts.init(document.getElementById('negative-wordcloud'), 'inkTheme');
+            const negativeWordData = [
+                { name: '痛苦', value: 66 }, { name: '问题', value: 50 }, { name: '抑郁', value: 45 },
+                { name: '焦虑', value: 30 }, { name: '难受', value: 28 }, { name: '虚无', value: 28 },
+                { name: '自我', value: 26 }, { name: '患者', value: 26 }, { name: '难过', value: 25 },
+                { name: '睡不着', value: 23 }, { name: '无法', value: 23 }, { name: '癌症', value: 20 },
+                { name: '不好', value: 18 }, { name: '孤独', value: 18 }, { name: '死', value: 18 },
+                { name: '陷入', value: 18 }, { name: '讨厌', value: 17 }, { name: '控制', value: 16 },
+                { name: '无意义', value: 16 }, { name: '崩溃', value: 15 }, { name: '迷茫', value: 14 },
+                { name: '害怕', value: 13 }, { name: '障碍', value: 13 }, { name: '压力', value: 13 },
+                { name: '创伤', value: 13 }, { name: '伤害', value: 13 }, { name: '失去', value: 12 },
+                { name: '放弃', value: 12 }, { name: '对不起', value: 12 }, { name: '不管', value: 11 },
+                { name: '错', value: 11 }, { name: '担心', value: 11 }, { name: '发作', value: 10 },
+                { name: '疾病', value: 10 }, { name: '难', value: 10 }, { name: '活动', value: 10 },
+                { name: '凹陷', value: 10 }, { name: '抱歉', value: 9 }, { name: '内耗', value: 9 },
+                { name: '骂', value: 9 }, { name: '受害者', value: 9 }, { name: '严重', value: 9 },
+                { name: '刺激', value: 8 }, { name: '对抗', value: 8 }, { name: '绝望', value: 8 },
+                { name: '离开', value: 8 }, { name: '困境', value: 8 }, { name: '苦难', value: 8 },
+                { name: '挣扎', value: 7 }, { name: '抛弃', value: 7 }, { name: '失败', value: 7 },
+                { name: '眼泪', value: 7 }, { name: '不喜欢', value: 7 }, { name: '恐惧', value: 6 },
+                { name: '丧失', value: 6 }, { name: '怀疑', value: 6 }, { name: '异常', value: 6 },
+                { name: '生气', value: 6 }, { name: '不对', value: 6 }, { name: '欺负', value: 6 },
+                { name: '做错', value: 6 }, { name: '怕', value: 6 }, { name: '痛苦的', value: 6 },
+                { name: '脆弱', value: 6 }
+            ];
+            const negativeHeartPalette = ['#9F2635', '#B63A46', '#CF5159', '#DD7074', '#E99998', '#F2BCBA'];
+            negativeWordcloud.setOption({
+                tooltip: { ...baseTooltip, trigger: 'item', formatter: '{b}<br/>词频：{c}' },
+                series: [{
+                    type: 'wordCloud',
+                    ...heartWordCloudLayout,
+                    textStyle: {
+                        fontFamily: '"Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif',
+                        fontWeight: 'bold',
+                        color: function(params) {
+                            if (params.data.value >= 60) return '#8E1F2C';
+                            if (params.data.value >= 30) return '#B63A46';
+                            return negativeHeartPalette[Math.floor(Math.random() * negativeHeartPalette.length)];
+                        }
+                    },
+                    emphasis: {
+                        focus: 'self',
+                        textStyle: {
+                            textShadowBlur: 0,
+                            color: '#8E1F2C'
+                        }
+                    },
+                    data: negativeWordData
+                }]
+            });
+
             const sentimentChart = echarts.init(document.getElementById('sentiment-chart'), 'inkTheme');
             sentimentChart.setOption({
                 title: { ...chartTitle, text: '超话帖子情绪值分布' },
                 grid: {
-                    top: 86,
+                    top: 78,
                     left: 64,
                     right: 48,
-                    bottom: 82,
+                    bottom: 72,
                     containLabel: true
                 },
                 tooltip: {
@@ -1684,11 +1883,14 @@
                     name: '帖子条数',
                     nameLocation: 'middle',
                     nameGap: 48,
+                    min: 0,
+                    max: 120,
+                    interval: 20,
                     ...valueAxisStyle
                 },
                 series: [{
                     symbolSize: function(data) {
-                        return Math.max(8, Math.min(24, 7 + data[1] / 5));
+                        return Math.max(9, Math.min(30, 8 + data[1] / 4));
                     },
                     data: [
                         [-50, 1], [-40, 1], [-36, 2], [-33, 1], [-30, 3], [-28, 1],
@@ -1740,7 +1942,6 @@
                 }]
             });
 
-            // 13. 超话分析 - 文本网络分析图（基于共现与Jaccard系数）
             const networkChart = echarts.init(document.getElementById('network-chart'), 'inkTheme', {
                 devicePixelRatio: Math.max(window.devicePixelRatio || 1, 2)
             });
@@ -1759,7 +1960,7 @@
                 ['工作', '压力', 29, 13, 5, 0.064],
                 ['家庭', '父母', 17, 22, 12, 0.156],
                 ['家庭', '不理解', 17, 7, 4, 0.045],
-                ['吃药', '副作用', 16, 1, 2, 0.029],
+                ['吃药', '副作用', 16, 2, 2, 0.029],
                 ['吃药', '医生', 16, 17, 6, 0.073],
                 ['想死', '意义', 17, 16, 10, 0.128],
                 ['想死', '绝望', 17, 18, 6, 0.068],
@@ -1790,6 +1991,25 @@
                 '康复': '#2F9E73',
                 '坚持': '#D9902F'
             };
+            function llrTerm(observed, expected) {
+                return observed <= 0 || expected <= 0 ? 0 : observed * Math.log(observed / expected);
+            }
+            function calculateLLR(sourceCount, targetCount, coCount, totalCount) {
+                const sourceOnly = sourceCount - coCount;
+                const targetOnly = targetCount - coCount;
+                const neither = totalCount - sourceCount - targetCount + coCount;
+                if (Math.min(coCount, sourceOnly, targetOnly, neither) < 0) return 0;
+                const expectedBoth = sourceCount * targetCount / totalCount;
+                const expectedSourceOnly = sourceCount * (totalCount - targetCount) / totalCount;
+                const expectedTargetOnly = (totalCount - sourceCount) * targetCount / totalCount;
+                const expectedNeither = (totalCount - sourceCount) * (totalCount - targetCount) / totalCount;
+                return 2 * (
+                    llrTerm(coCount, expectedBoth) +
+                    llrTerm(sourceOnly, expectedSourceOnly) +
+                    llrTerm(targetOnly, expectedTargetOnly) +
+                    llrTerm(neither, expectedNeither)
+                );
+            }
             const nodePositions = {
                 '抑郁症': [560, 315],
                 '痛苦': [705, 315],
@@ -1824,14 +2044,17 @@
                 name,
                 value: count,
                 symbolSize: Math.max(26, Math.min(62, 20 + Math.sqrt(count) * 1.8)),
-                x: nodePositions[name][0],
-                y: nodePositions[name][1],
-                fixed: true,
+                x: 80 + nodePositions[name][0] * 0.86,
+                y: 68 + nodePositions[name][1] * 0.86,
+                fixed: false,
+                draggable: true,
                 itemStyle: { color: nodeColorMap[name] || '#A8D2DE' },
                 label: name === '抑郁症' ? { color: '#142C35', fontWeight: 900 } : undefined
             }));
             const networkLinks = networkEdges.map(([source, target, sourceCount, targetCount, coCount, jaccard]) => {
-                const isStrong = jaccard > 0.08;
+                const llr = calculateLLR(sourceCount, targetCount, coCount, 498);
+                const isCoreEdge = source === '抑郁症' || target === '抑郁症';
+                const relationLevel = isCoreEdge || llr >= 10.83 ? 'strong' : llr >= 3.84 ? 'weak' : 'ignore';
                 return {
                     source,
                     target,
@@ -1839,15 +2062,17 @@
                     targetCount,
                     coCount,
                     jaccard,
+                    llr,
+                    relationLevel,
                     value: jaccard,
                     lineStyle: {
-                        width: isStrong ? 2.8 : 1.4,
-                        type: isStrong ? 'solid' : 'dashed',
-                        color: isStrong ? '#8BBEB6' : '#D4E6E2',
-                        opacity: isStrong ? 0.94 : 0.72
+                        width: relationLevel === 'strong' ? 3.2 : 1.8,
+                        type: relationLevel === 'strong' ? 'solid' : 'dashed',
+                        color: relationLevel === 'strong' ? '#76B6AD' : '#C6E2DD',
+                        opacity: relationLevel === 'strong' ? 0.96 : 0.82
                     }
                 };
-            });
+            }).filter(link => link.relationLevel !== 'ignore');
             networkChart.setOption({
                 title: {
                     ...chartTitle,
@@ -1863,7 +2088,7 @@
                     ...baseTooltip,
                     formatter: function(params) {
                         if (params.dataType === 'edge') {
-                            return `${params.data.source} × ${params.data.target}<br/>共现条数：${params.data.coCount}<br/>Jaccard系数：${params.data.jaccard.toFixed(3)}<br/>关联强度：${params.data.jaccard > 0.08 ? '强' : '弱'}`;
+                            return `${params.data.source} × ${params.data.target}<br/>共现条数：${params.data.coCount}<br/>Jaccard系数：${params.data.jaccard.toFixed(3)}<br/>LLR：${params.data.llr.toFixed(2)}<br/>关联强度：${params.data.relationLevel === 'strong' ? '强' : '弱'}`;
                         }
                         return `${params.data.name}<br/>节点词频：${params.data.value}`;
                     }
@@ -1871,34 +2096,35 @@
                 series: [{
                     type: 'graph',
                     layout: 'none',
-                    roam: false,
-                    left: 28,
-                    right: 28,
+                    roam: true,
+                    draggable: true,
+                    left: 24,
+                    right: 96,
                     top: 76,
-                    bottom: 24,
+                    bottom: 56,
                     symbol: 'circle',
                     label: {
                         show: true,
                         position: 'right',
                         color: '#142C35',
-                        fontSize: 14,
-                        fontWeight: 800,
-                        backgroundColor: 'rgba(255, 254, 250, 0.86)',
+                        fontSize: 16,
+                        fontWeight: 900,
+                        backgroundColor: 'rgba(255, 254, 250, 0.92)',
                         borderRadius: 6,
-                        padding: [2, 5],
-                        textBorderColor: 'rgba(255, 254, 250, 0.96)',
-                        textBorderWidth: 2
+                        padding: [3, 6],
+                        textBorderColor: '#fffefa',
+                        textBorderWidth: 3
                     },
                     itemStyle: {
                         borderColor: '#fffefa',
-                        borderWidth: 3,
-                        opacity: 0.96
+                        borderWidth: 4,
+                        opacity: 0.98
                     },
                     lineStyle: {
-                        color: '#9FC8C0',
-                        width: 2.2,
+                        color: '#8BBEB6',
+                        width: 2.6,
                         curveness: 0.14,
-                        opacity: 0.92
+                        opacity: 0.95
                     },
                     edgeSymbol: ['none', 'none'],
                     edgeSymbolSize: 0,
@@ -2007,7 +2233,6 @@
                 }]
             });
 
-            // 17. 她厌个人雷达图（放大版）
             tayanRadar = echarts.init(document.getElementById('tayan-radar'), 'inkTheme', crispChartOptions);
             tayanRadar.setOption({
                 tooltip: { ...baseTooltip },
@@ -2026,7 +2251,6 @@
                 }]
             });
 
-            // 窗口大小变化时重绘所有图表
             window.addEventListener('resize', function() {
                 incidenceChart.resize();
                 ageChart.resize();
@@ -2038,7 +2262,6 @@
                 experienceTreatmentChart.resize();
                 correlationChart.resize();
                 positiveWordcloud.resize();
-                renderPositiveHeartGrid();
                 negativeWordcloud.resize();
                 sentimentChart.resize();
                 networkChart.resize();
