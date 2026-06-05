@@ -1,0 +1,84 @@
+/**
+ * Experiment 06: Dual-MCU Communication - Machine A (Receiver)
+ * Receives chars 0~4 from Machine B, displays on 7-segment via LUT.
+ * Crystal: 11.0592MHz, Baud: 9600
+ *
+ * Hardware:
+ *   P0   -> 7-segment segment (a b c d e f g dp)
+ *   P3.0 -> RXD, connect to Machine B TXD
+ *   GND  -> common with Machine B
+ */
+
+#include <reg51.h>
+
+#define uint unsigned int
+#define uchar unsigned char
+
+/* Common-cathode 7-segment lookup table 0~F */
+uchar code seg_table[] = {
+    0x3f,  // 0
+    0x06,  // 1
+    0x5b,  // 2
+    0x4f,  // 3
+    0x66,  // 4
+    0x6d,  // 5
+    0x7d,  // 6
+    0x07,  // 7
+    0x7f,  // 8
+    0x6f,  // 9
+    0x77,  // A
+    0x7c,  // B
+    0x39,  // C
+    0x5e,  // D
+    0x79,  // E
+    0x71   // F
+};
+
+uchar g_received_char = 0;   /* received char (0~4), default 0 */
+bit g_rx_done = 0;           /* flag: 1 = new data received */
+
+/**
+ * UART init: Mode 1 (8-bit), 9600 baud
+ * TH1 = 256 - 11.0592MHz/(12*32*9600) = 253 = 0xFD
+ */
+void uart_init(void)
+{
+    SCON = 0x50;   /* Mode 1, REN=1 (enable receive) */
+    TMOD &= 0x0f;  /* clear T1 bits */
+    TMOD |= 0x20;  /* T1 Mode 2 (8-bit auto-reload) */
+    TH1  = 0xfd;   /* 9600 baud @ 11.0592MHz */
+    TL1  = 0xfd;
+    TR1  = 1;      /* start T1 */
+    ES   = 1;      /* enable serial interrupt */
+    EA   = 1;      /* enable global interrupt */
+}
+
+/**
+ * Serial ISR: receive char from Machine B, keep only 0~4
+ */
+void uart_isr(void) interrupt 4
+{
+    if (RI) {
+        RI = 0;                    /* clear RX flag */
+        g_received_char = SBUF;    /* read received data */
+        if (g_received_char > 4) {
+            g_received_char = 0;   /* illegal char -> 0 */
+        }
+        g_rx_done = 1;             /* notify main loop */
+    }
+    /* Machine A does not send; TI is ignored */
+}
+
+void main(void)
+{
+    uart_init();
+
+    P0 = seg_table[0];  /* default display '0' */
+
+    while (1) {
+        if (g_rx_done) {
+            g_rx_done = 0;
+            P0 = seg_table[g_received_char];  /* LUT output */
+        }
+    }
+}
