@@ -1,6 +1,6 @@
 /**
  * Experiment 06: Dual-MCU Communication - Machine A (Receiver)
- * Receives printable ASCII '0'~'4' from Machine B, displays on 7-segment via LUT.
+ * Receives two-byte string "00"~"04" from Machine B, displays ones digit on 7-segment.
  * Crystal: 11.0592MHz, Baud: 9600
  *
  * Hardware:
@@ -38,8 +38,9 @@ uchar code seg_table[] = {
     0x71   // F
 };
 
-uchar g_received_char = 0;   /* received char (0~4), default 0 */
-bit g_rx_done = 0;           /* flag: 1 = new data received */
+uchar g_received_char = 0;   /* received char index (0~4), default 0 */
+bit g_rx_done = 0;           /* flag: 1 = a complete 2-byte frame received */
+bit g_rx_state = 0;          /* 0 = expecting tens digit, 1 = expecting ones digit */
 
 /**
  * UART init: Mode 1 (8-bit), 9600 baud
@@ -58,20 +59,31 @@ void uart_init(void)
 }
 
 /**
- * Serial ISR: receive printable ASCII '0'~'4' from Machine B
+ * Serial ISR: receive two-byte frame "00"~"04" from Machine B
+ * State machine synchronises on tens='0', then captures ones digit.
  */
 void uart_isr(void) interrupt 4
 {
     uchar tmp;
     if (RI) {
-        RI = 0;                    /* clear RX flag */
-        tmp = SBUF;                /* read received data */
-        if (tmp >= '0' && tmp <= '4') {
-            g_received_char = tmp - '0';  /* ASCII to index: '0'→0, '4'→4 */
+        RI = 0;                          /* clear RX flag */
+        tmp = SBUF;                      /* read received byte */
+        if (g_rx_state == 0) {
+            /* expecting tens digit — must be '0' */
+            if (tmp == '0') {
+                g_rx_state = 1;          /* valid tens, wait for ones */
+            }
+            /* otherwise resync: stay in state 0, ignore byte */
         } else {
-            g_received_char = 0;          /* illegal char → display 0 */
+            /* expecting ones digit — '0'~'4' */
+            g_rx_state = 0;              /* back to expecting tens */
+            if (tmp >= '0' && tmp <= '4') {
+                g_received_char = tmp - '0';
+            } else {
+                g_received_char = 0;     /* illegal → display 0 */
+            }
+            g_rx_done = 1;               /* notify main loop */
         }
-        g_rx_done = 1;             /* notify main loop */
     }
     /* Machine A does not send; TI is ignored */
 }

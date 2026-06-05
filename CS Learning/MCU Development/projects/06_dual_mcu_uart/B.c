@@ -1,6 +1,6 @@
 /**
  * Experiment 06: Dual-MCU Communication - Machine B (Sender)
- * Sends '0','1','2','3','4' (printable ASCII) cyclically on P1.7 button press.
+ * Sends two-byte string "00"~"04" (printable ASCII) cyclically on P1.7 button press.
  * Crystal: 11.0592MHz, Baud: 9600
  *
  * Hardware:
@@ -69,8 +69,9 @@ void main(void)
             delay_ms(10);  /* software debounce */
             if ((P1 & 0x80) == 0x00) {
                 LED = 0;                            /* LED ON — indicate TX */
-                uart_send('0' + g_send_index);      /* send printable ASCII '0'~'4' */
-                LED = 1;                            /* LED OFF — TX done */
+                uart_send('0');                       /* tens: always '0'           */
+                uart_send('0' + g_send_index);        /* ones: '0'~'4'              */
+                LED = 1;                            /* LED OFF — TX done          */
 
                 /* update index: 0->1->2->3->4->0 wrap */
                 g_send_index++;
