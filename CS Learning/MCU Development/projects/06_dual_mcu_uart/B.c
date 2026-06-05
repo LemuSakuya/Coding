@@ -71,6 +71,7 @@ void main(void)
                 LED = 0;                            /* LED ON — indicate TX */
                 uart_send('0');                       /* tens: always '0'           */
                 uart_send('0' + g_send_index);        /* ones: '0'~'4'              */
+                uart_send(' ');                       /* space between numbers      */
                 LED = 1;                            /* LED OFF — TX done          */
 
                 /* update index: 0->1->2->3->4->0 wrap */
