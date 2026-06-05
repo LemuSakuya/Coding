@@ -27,10 +27,18 @@
     ├── 02_timer_interrupt_counter/
     │   ├── README.md
     │   └── main.c
-    └── 03_seven_segment_display/
-        ├── README.md
-        ├── main.c
-        └── notes_for_report.md
+    ├── 03_seven_segment_display/
+    │   ├── README.md
+    │   ├── main.c
+    │   └── notes_for_report.md
+    ├── 04_LCD_learning/
+    ├── 05_countdown_timer/
+    ├── 06_dual_mcu_uart/
+    │   ├── README.md
+    │   ├── 甲机.c
+    │   ├── 乙机.c
+    │   └── notes_for_report.md
+    └── 07_lcd1602_digital_clock/
 ```
 
 ---
@@ -40,7 +48,7 @@
 1. 第 1 周：环境搭建 + C51 基础 + GPIO
 2. 第 2 周：按键消抖 + 流水灯 + 状态机
 3. 第 3 周：定时器 + 中断 + 数码管
-4. 第 4 周：串口通信 + 综合实验
+4. 第 4 周：串口通信 + 双机通信 + 综合实验
 5. 进阶：迁移到 STM32（时钟树、HAL、RTOS）
 
 ---
