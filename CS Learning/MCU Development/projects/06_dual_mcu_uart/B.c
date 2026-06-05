@@ -1,13 +1,18 @@
 /**
- * Experiment 06: Dual-MCU Communication - Machine B (Sender)
- * Sends two-byte string "00"~"04" (printable ASCII) cyclically on P1.7 button press.
+ * Experiment 06: Dual-MCU UART - Machine B
+ *
+ * Function according to the schematic:
+ *   1. K2 on Machine B sends one digit to Machine A, then Machine A displays it.
+ *   2. Machine B receives a command from Machine A and blinks its LEDs.
+ *
  * Crystal: 11.0592MHz, Baud: 9600
  *
  * Hardware:
- *   P1.7 -> button (active low, external pull-up)
- *   P3.0 -> TX indicator LED (active low, via resistor to VCC)
- *   P3.1 -> TXD, connect to Machine A RXD
- *   GND  -> common with Machine A
+ *   P1.0/P1.3 -> LEDs through 220R to VCC, active low
+ *   P1.7      -> K2 button, active low
+ *   P3.0/RXD  -> Machine A P3.1/TXD
+ *   P3.1/TXD  -> Machine A P3.0/RXD
+ *   GND       -> common with Machine A
  */
 
 #include <reg51.h>
@@ -15,17 +20,20 @@
 #define uint unsigned int
 #define uchar unsigned char
 
-sbit LED = P3^0;                /* TX indicator LED (active low: 0 = ON) */
+#define CMD_BLINK 'L'
 
-uchar g_send_index = 0;  /* current char index (0~4, wrap) */
+sbit LED1 = P1^0;
+sbit LED2 = P1^3;
+sbit KEY_B = P1^7;
 
-/**
- * Rough millisecond delay
- */
+uchar g_send_num = 0;
+bit g_blink_request = 0;
+
 void delay_ms(uint ms)
 {
     uint i;
     uchar j;
+
     for (i = 0; i < ms; i++) {
         for (j = 0; j < 120; j++) {
             ;
@@ -33,58 +41,90 @@ void delay_ms(uint ms)
     }
 }
 
-/**
- * UART init: Mode 1 (8-bit), 9600 baud, TX only
- * TH1 = 256 - 11.0592MHz/(12*32*9600) = 253 = 0xFD
- */
 void uart_init(void)
 {
-    SCON = 0x40;   /* Mode 1, REN=0 (no receive) */
-    TMOD &= 0x0f;  /* clear T1 bits */
-    TMOD |= 0x20;  /* T1 Mode 2 (8-bit auto-reload) */
-    TH1  = 0xfd;   /* 9600 baud @ 11.0592MHz */
-    TL1  = 0xfd;
-    TR1  = 1;      /* start T1 */
-    /* Machine B only sends; no serial interrupt needed */
+    SCON = 0x50;   /* mode 1, REN=1 */
+    TMOD &= 0x0f;
+    TMOD |= 0x20;  /* Timer1 mode 2 */
+    TH1 = 0xfd;    /* 9600bps @ 11.0592MHz */
+    TL1 = 0xfd;
+    TR1 = 1;
+    ES = 1;
+    EA = 1;
 }
 
-/**
- * Send one byte
- */
 void uart_send(uchar dat)
 {
+    ES = 0;        /* avoid TI causing a serial interrupt while polling */
+    TI = 0;
     SBUF = dat;
-    while (!TI);    /* wait for TX complete */
-    TI = 0;         /* clear TX flag */
+    while (!TI) {
+        ;
+    }
+    TI = 0;
+    ES = 1;
+}
+
+void blink_leds(void)
+{
+    uchar i;
+
+    for (i = 0; i < 3; i++) {
+        LED1 = 0;
+        LED2 = 0;
+        delay_ms(200);
+        LED1 = 1;
+        LED2 = 1;
+        delay_ms(200);
+    }
+}
+
+void uart_isr(void) interrupt 4
+{
+    uchar dat;
+
+    if (RI) {
+        RI = 0;
+        dat = SBUF;
+
+        if (dat == CMD_BLINK) {
+            g_blink_request = 1;
+        }
+    }
+
+    if (TI) {
+        TI = 0;
+    }
 }
 
 void main(void)
 {
     uart_init();
-    LED = 1;  /* LED OFF initially (active low) */
+    LED1 = 1;      /* LED off, active low */
+    LED2 = 1;
+    KEY_B = 1;     /* release P1.7 for input */
 
     while (1) {
-        /* detect button press (P1.7 == 0, active low) */
-        if ((P1 & 0x80) == 0x00) {
-            delay_ms(10);  /* software debounce */
-            if ((P1 & 0x80) == 0x00) {
-                LED = 0;                            /* LED ON — indicate TX */
-                uart_send('0');                       /* tens: always '0'           */
-                uart_send('0' + g_send_index);        /* ones: '0'~'4'              */
-                uart_send(' ');                       /* space between numbers      */
-                LED = 1;                            /* LED OFF — TX done          */
+        if (g_blink_request) {
+            g_blink_request = 0;
+            blink_leds();
+        }
 
-                /* update index: 0->1->2->3->4->0 wrap */
-                g_send_index++;
-                if (g_send_index > 4) {
-                    g_send_index = 0;
+        if (KEY_B == 0) {
+            delay_ms(10);
+            if (KEY_B == 0) {
+                uart_send('0' + g_send_num);
+
+                g_send_num++;
+                if (g_send_num > 9) {
+                    g_send_num = 0;
                 }
             }
-            /* wait for button release (prevent repeat) */
-            while ((P1 & 0x80) == 0x00) {
+
+            while (KEY_B == 0) {
                 ;
             }
-            delay_ms(10);  /* release debounce */
+            delay_ms(10);
         }
     }
 }

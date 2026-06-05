@@ -1,16 +1,19 @@
 /**
- * Experiment 06: Dual-MCU Communication - Machine A (Receiver)
- * Receives two-byte string "00"~"04" from Machine B, displays ones digit on 7-segment.
+ * Experiment 06: Dual-MCU UART - Machine A
+ *
+ * Function according to the schematic:
+ *   1. K1 on Machine A sends a command to Machine B.
+ *   2. Machine A receives a digit from Machine B and displays it on the
+ *      common-cathode 7-segment display connected to P0.
+ *
  * Crystal: 11.0592MHz, Baud: 9600
  *
  * Hardware:
- *   P0   -> 7-segment segment (a b c d e f g dp) — needs pull-up resistors!
- *   P3.0 -> RXD, connect to Machine B TXD
- *   GND  -> common with Machine B
- *
- * Note: P0 is open-drain on standard 8051. For common-cathode 7-segment,
- *       add 10kΩ pull-up resistor network (e.g., 8x 10kΩ SIP) on P0.
- *       For common-anode, invert seg_table values: P0 = ~seg_table[idx].
+ *   P0.0~P0.7 -> 7-segment a,b,c,d,e,f,g,dp through pull-up resistor pack
+ *   P1.7      -> K1 button, active low
+ *   P3.0/RXD  -> Machine B P3.1/TXD
+ *   P3.1/TXD  -> Machine B P3.0/RXD
+ *   GND       -> common with Machine B
  */
 
 #include <reg51.h>
@@ -18,86 +21,104 @@
 #define uint unsigned int
 #define uchar unsigned char
 
-/* Common-cathode 7-segment lookup table 0~F */
+#define CMD_BLINK 'L'
+
+sbit KEY_A = P1^7;
+
+/* Common-cathode 7-segment code: bit0~bit7 = a,b,c,d,e,f,g,dp */
 uchar code seg_table[] = {
-    0x3f,  // 0
-    0x06,  // 1
-    0x5b,  // 2
-    0x4f,  // 3
-    0x66,  // 4
-    0x6d,  // 5
-    0x7d,  // 6
-    0x07,  // 7
-    0x7f,  // 8
-    0x6f,  // 9
-    0x77,  // A
-    0x7c,  // B
-    0x39,  // C
-    0x5e,  // D
-    0x79,  // E
-    0x71   // F
+    0x3f,  /* 0 */
+    0x06,  /* 1 */
+    0x5b,  /* 2 */
+    0x4f,  /* 3 */
+    0x66,  /* 4 */
+    0x6d,  /* 5 */
+    0x7d,  /* 6 */
+    0x07,  /* 7 */
+    0x7f,  /* 8 */
+    0x6f   /* 9 */
 };
 
-uchar g_received_char = 0;   /* received char index (0~4), default 0 */
-bit g_rx_done = 0;           /* flag: 1 = a complete 2-byte frame received */
-bit g_rx_state = 0;          /* 0 = expecting tens digit, 1 = expecting ones digit */
+uchar g_display_num = 0;
+bit g_display_update = 0;
 
-/**
- * UART init: Mode 1 (8-bit), 9600 baud
- * TH1 = 256 - 11.0592MHz/(12*32*9600) = 253 = 0xFD
- */
-void uart_init(void)
+void delay_ms(uint ms)
 {
-    SCON = 0x50;   /* Mode 1, REN=1 (enable receive) */
-    TMOD &= 0x0f;  /* clear T1 bits */
-    TMOD |= 0x20;  /* T1 Mode 2 (8-bit auto-reload) */
-    TH1  = 0xfd;   /* 9600 baud @ 11.0592MHz */
-    TL1  = 0xfd;
-    TR1  = 1;      /* start T1 */
-    ES   = 1;      /* enable serial interrupt */
-    EA   = 1;      /* enable global interrupt */
-}
+    uint i;
+    uchar j;
 
-/**
- * Serial ISR: receive two-byte frame "00"~"04" from Machine B
- * State machine synchronises on tens='0', then captures ones digit.
- */
-void uart_isr(void) interrupt 4
-{
-    uchar tmp;
-    if (RI) {
-        RI = 0;                          /* clear RX flag */
-        tmp = SBUF;                      /* read received byte */
-        if (g_rx_state == 0) {
-            /* expecting tens digit — must be '0' */
-            if (tmp == '0') {
-                g_rx_state = 1;          /* valid tens, wait for ones */
-            }
-            /* otherwise resync: stay in state 0, ignore byte */
-        } else {
-            /* expecting ones digit — '0'~'4' */
-            g_rx_state = 0;              /* back to expecting tens */
-            if (tmp >= '0' && tmp <= '4') {
-                g_received_char = tmp - '0';
-            } else {
-                g_received_char = 0;     /* illegal → display 0 */
-            }
-            g_rx_done = 1;               /* notify main loop */
+    for (i = 0; i < ms; i++) {
+        for (j = 0; j < 120; j++) {
+            ;
         }
     }
-    /* Machine A does not send; TI is ignored */
+}
+
+void uart_init(void)
+{
+    SCON = 0x50;   /* mode 1, REN=1 */
+    TMOD &= 0x0f;
+    TMOD |= 0x20;  /* Timer1 mode 2 */
+    TH1 = 0xfd;    /* 9600bps @ 11.0592MHz */
+    TL1 = 0xfd;
+    TR1 = 1;
+    ES = 1;
+    EA = 1;
+}
+
+void uart_send(uchar dat)
+{
+    ES = 0;        /* avoid TI causing a serial interrupt while polling */
+    TI = 0;
+    SBUF = dat;
+    while (!TI) {
+        ;
+    }
+    TI = 0;
+    ES = 1;
+}
+
+void uart_isr(void) interrupt 4
+{
+    uchar dat;
+
+    if (RI) {
+        RI = 0;
+        dat = SBUF;
+
+        if (dat >= '0' && dat <= '9') {
+            g_display_num = dat - '0';
+            g_display_update = 1;
+        }
+    }
+
+    if (TI) {
+        TI = 0;
+    }
 }
 
 void main(void)
 {
     uart_init();
-
-    P0 = seg_table[0];  /* default display '0' */
+    KEY_A = 1;             /* release P1.7 for input */
+    P0 = seg_table[0];     /* default display 0 */
 
     while (1) {
-        if (g_rx_done) {
-            g_rx_done = 0;
-            P0 = seg_table[g_received_char];  /* LUT output */
+        if (g_display_update) {
+            g_display_update = 0;
+            P0 = seg_table[g_display_num];
+        }
+
+        if (KEY_A == 0) {
+            delay_ms(10);
+            if (KEY_A == 0) {
+                uart_send(CMD_BLINK);
+            }
+
+            while (KEY_A == 0) {
+                ;
+            }
+            delay_ms(10);
         }
     }
 }
