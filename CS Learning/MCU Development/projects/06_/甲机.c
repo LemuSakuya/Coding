@@ -1,12 +1,16 @@
 /**
  * Experiment 06: Dual-MCU Communication - Machine A (Receiver)
- * Receives chars 0~4 from Machine B, displays on 7-segment via LUT.
+ * Receives printable ASCII '0'~'4' from Machine B, displays on 7-segment via LUT.
  * Crystal: 11.0592MHz, Baud: 9600
  *
  * Hardware:
- *   P0   -> 7-segment segment (a b c d e f g dp)
+ *   P0   -> 7-segment segment (a b c d e f g dp) — needs pull-up resistors!
  *   P3.0 -> RXD, connect to Machine B TXD
  *   GND  -> common with Machine B
+ *
+ * Note: P0 is open-drain on standard 8051. For common-cathode 7-segment,
+ *       add 10kΩ pull-up resistor network (e.g., 8x 10kΩ SIP) on P0.
+ *       For common-anode, invert seg_table values: P0 = ~seg_table[idx].
  */
 
 #include <reg51.h>
@@ -54,15 +58,18 @@ void uart_init(void)
 }
 
 /**
- * Serial ISR: receive char from Machine B, keep only 0~4
+ * Serial ISR: receive printable ASCII '0'~'4' from Machine B
  */
 void uart_isr(void) interrupt 4
 {
+    uchar tmp;
     if (RI) {
         RI = 0;                    /* clear RX flag */
-        g_received_char = SBUF;    /* read received data */
-        if (g_received_char > 4) {
-            g_received_char = 0;   /* illegal char -> 0 */
+        tmp = SBUF;                /* read received data */
+        if (tmp >= '0' && tmp <= '4') {
+            g_received_char = tmp - '0';  /* ASCII to index: '0'→0, '4'→4 */
+        } else {
+            g_received_char = 0;          /* illegal char → display 0 */
         }
         g_rx_done = 1;             /* notify main loop */
     }

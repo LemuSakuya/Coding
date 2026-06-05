@@ -1,10 +1,11 @@
 /**
  * Experiment 06: Dual-MCU Communication - Machine B (Sender)
- * Sends 0,1,2,3,4 cyclically on P1.7 button press.
+ * Sends '0','1','2','3','4' (printable ASCII) cyclically on P1.7 button press.
  * Crystal: 11.0592MHz, Baud: 9600
  *
  * Hardware:
  *   P1.7 -> button (active low, external pull-up)
+ *   P3.0 -> TX indicator LED (active low, via resistor to VCC)
  *   P3.1 -> TXD, connect to Machine A RXD
  *   GND  -> common with Machine A
  */
@@ -13,6 +14,8 @@
 
 #define uint unsigned int
 #define uchar unsigned char
+
+sbit LED = P3^0;                /* TX indicator LED (active low: 0 = ON) */
 
 uchar g_send_index = 0;  /* current char index (0~4, wrap) */
 
@@ -58,13 +61,16 @@ void uart_send(uchar dat)
 void main(void)
 {
     uart_init();
+    LED = 1;  /* LED OFF initially (active low) */
 
     while (1) {
         /* detect button press (P1.7 == 0, active low) */
         if ((P1 & 0x80) == 0x00) {
             delay_ms(10);  /* software debounce */
             if ((P1 & 0x80) == 0x00) {
-                uart_send(g_send_index);  /* send current char */
+                LED = 0;                            /* LED ON — indicate TX */
+                uart_send('0' + g_send_index);      /* send printable ASCII '0'~'4' */
+                LED = 1;                            /* LED OFF — TX done */
 
                 /* update index: 0->1->2->3->4->0 wrap */
                 g_send_index++;
