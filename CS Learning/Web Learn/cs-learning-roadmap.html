@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>计算机软件类学习路线与效率工具分享</title>
+<link rel="stylesheet" href="../../.claude/skills/html-ppt/assets/fonts.css">
+<link rel="stylesheet" href="../../.claude/skills/html-ppt/assets/base.css">
+<link rel="stylesheet" href="../../.claude/skills/html-ppt/assets/animations/animations.css">
+<style>
+/* ===== Enhanced Obsidian-Claude-Gradient Theme ===== */
+:root {
+  --oc-bg: #0a0e17;
+  --oc-surface: #131824;
+  --oc-surface2: #1a1f2e;
+  --oc-border: #252a3a;
+  --oc-accent: #6c3ce0;
+  --oc-accent2: #8b5cf6;
+  --oc-accent3: #a78bfa;
+  --oc-blue: #60a5fa;
+  --oc-cyan: #22d3ee;
+  --oc-green: #34d399;
+  --oc-orange: #f59e0b;
+  --oc-red: #f87171;
+  --oc-pink: #f472b6;
+  --oc-text: #e2e8f0;
+  --oc-dim: #94a3b8;
+  --oc-dimmer: #475569;
+  --oc-code-bg: #060910;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'SF Mono', monospace;
+}
+
+body {
+  background: var(--oc-bg);
+  color: var(--oc-text);
+  font-family: 'Inter', 'Noto Sans SC', 'PingFang SC', -apple-system, sans-serif;
+}
+
+.slide {
+  background: var(--oc-bg);
+  color: var(--oc-text);
+  padding: 52px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Ambient background */
+.oc-cbg {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 25% 30%, rgba(108,60,224,.28) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 60%, rgba(96,165,250,.20) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 15%, rgba(34,211,238,.10) 0%, transparent 40%);
+}
+
+/* Grid overlay */
+.oc-cgrid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(37,42,58,.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,42,58,.35) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+}
+
+.slide > * { position: relative; z-index: 2; }
+
+/* Slide number */
+.oc-snum {
+  position: absolute; top: 22px; right: 32px;
+  color: var(--oc-dimmer); font-size: 12px;
+  font-family: var(--font-mono); letter-spacing: .08em; z-index: 3;
+}
+
+/* Tag pill */
+.oc-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--oc-accent3); background: rgba(108,60,224,.15);
+  border: 1px solid rgba(139,92,246,.3); padding: 5px 16px; border-radius: 999px; margin-bottom: 18px;
+}
+
+/* Headlines */
+.oc-h1 {
+  font-size: 64px; font-weight: 800; line-height: 1.1; letter-spacing: -.02em;
+  margin: 0 0 10px; color: var(--oc-text);
+}
+.oc-h2 {
+  font-size: 38px; font-weight: 700; line-height: 1.2; letter-spacing: -.015em;
+  margin: 0 0 12px;
+}
+.oc-h3 {
+  font-size: 26px; font-weight: 600; line-height: 1.3; margin: 0 0 8px;
+}
+
+/* Subtitle */
+.oc-sub {
+  font-size: 17px; color: var(--oc-dim); line-height: 1.65; max-width: 680px; margin-top: 10px;
+}
+
+/* Gradient text */
+.oc-g {
+  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 45%, #34d399 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.oc-g2 {
+  background: linear-gradient(135deg, #c084fc 0%, #818cf8 50%, #38bdf8 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Cards */
+.oc-card {
+  background: var(--oc-surface); border: 1px solid var(--oc-border);
+  border-radius: 14px; padding: 20px 24px; text-align: left; position: relative; overflow: hidden;
+}
+.oc-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139,92,246,.35), transparent);
+}
+.oc-card-accent {
+  background: var(--oc-surface); border: 1px solid rgba(139,92,246,.35);
+  border-radius: 14px; padding: 20px 24px; text-align: left; position: relative;
+  box-shadow: 0 0 30px rgba(108,60,224,.08);
+}
+
+/* Grids */
+.oc-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: 100%; max-width: 1000px; margin-top: 20px; }
+.oc-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; width: 100%; max-width: 1080px; margin-top: 20px; }
+.oc-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; width: 100%; max-width: 1100px; margin-top: 20px; }
+
+/* Badges */
+.oc-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 600; padding: 3px 11px; border-radius: 999px; margin-bottom: 8px;
+}
+.oc-bp { background: rgba(139,92,246,.18); color: var(--oc-accent3); }
+.oc-bb { background: rgba(96,165,250,.18); color: var(--oc-blue); }
+.oc-bg { background: rgba(52,211,153,.18); color: var(--oc-green); }
+.oc-bo { background: rgba(245,158,11,.18); color: var(--oc-orange); }
+.oc-br { background: rgba(248,113,113,.18); color: var(--oc-red); }
+
+/* Code blocks */
+.oc-code {
+  background: var(--oc-code-bg); border: 1px solid var(--oc-border);
+  border-radius: 12px; padding: 18px 22px;
+  font-family: var(--font-mono); font-size: 13.5px; line-height: 1.8;
+  width: 100%; max-width: 860px; text-align: left; color: #e2e8f0;
+  overflow-x: auto;
+}
+.oc-code .kw { color: #c084fc; }
+.oc-code .fn { color: #60a5fa; }
+.oc-code .str { color: #34d399; }
+.oc-code .cm { color: #64748b; font-style: italic; }
+.oc-code .num { color: #f59e0b; }
+.oc-code .op { color: #f472b6; }
+.oc-code .builtin { color: #22d3ee; }
+
+/* Highlight box */
+.oc-hl {
+  background: rgba(108,60,224,.08); border: 1px solid rgba(139,92,246,.3);
+  border-left: 4px solid var(--oc-accent2); border-radius: 0 12px 12px 0;
+  padding: 14px 20px; font-size: 15px; line-height: 1.7;
+  max-width: 860px; text-align: left;
+}
+
+/* Steps */
+.oc-steps {
+  display: flex; flex-direction: column; gap: 0;
+  width: 100%; max-width: 820px; text-align: left;
+}
+.oc-step {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 16px 0; border-bottom: 1px solid var(--oc-border);
+}
+.oc-step:last-child { border-bottom: none; }
+.oc-sn {
+  width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px;
+  background: linear-gradient(135deg, var(--oc-accent), var(--oc-blue)); color: #fff;
+}
+.oc-sc h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: var(--oc-text); }
+.oc-sc p { font-size: 13px; color: var(--oc-dim); line-height: 1.6; }
+
+/* Pills */
+.oc-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--oc-surface2); border: 1px solid var(--oc-border);
+  border-radius: 999px; padding: 6px 16px; font-size: 13px; font-weight: 500;
+  color: var(--oc-text); margin: 3px 5px;
+}
+
+/* Quote */
+.oc-quote { max-width: 780px; }
+.oc-quote blockquote {
+  font-size: 24px; font-weight: 500; line-height: 1.6;
+  position: relative; padding: 0 32px; margin: 0; color: var(--oc-text);
+}
+.oc-quote blockquote::before {
+  content: '"'; position: absolute; left: -4px; top: -20px;
+  font-size: 70px; color: var(--oc-accent); opacity: .35;
+  font-family: Georgia, serif; line-height: 1;
+}
+.oc-quote .attr { margin-top: 16px; font-size: 13px; color: var(--oc-dim); }
+
+/* Flow diagram */
+.flow {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; max-width: 1100px; margin-top: 24px;
+}
+.flow .node {
+  flex: 1; background: var(--oc-surface); border: 1px solid var(--oc-border);
+  border-radius: 12px; padding: 16px 10px; text-align: center;
+  transition: all .25s;
+}
+.flow .node .ic { font-size: 28px; margin-bottom: 4px; }
+.flow .node h4 { font-size: 14px; font-weight: 600; margin: 0; }
+.flow .node p { font-size: 11px; color: var(--oc-dim); margin: 2px 0 0; }
+.flow .arr {
+  color: var(--oc-accent2); font-size: 22px; flex-shrink: 0; font-weight: 700;
+}
+.flow .node.hl {
+  border-color: var(--oc-accent2);
+  box-shadow: 0 0 24px rgba(108,60,224,.2);
+}
+
+/* Timeline */
+.tl { position: relative; width: 100%; max-width: 1100px; margin-top: 28px; }
+.tl::before {
+  content: ""; position: absolute; left: 40px; right: 40px; top: 36px;
+  height: 2px; background: linear-gradient(90deg, var(--oc-accent), var(--oc-blue), var(--oc-cyan));
+}
+.tl .row { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; align-items: start; }
+.tl .item { position: relative; padding-top: 72px; text-align: center; }
+.tl .dot {
+  position: absolute; top: 25px; left: 50%; transform: translateX(-50%);
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--oc-accent2); border: 4px solid var(--oc-bg);
+  box-shadow: 0 0 0 2px var(--oc-accent2), 0 0 18px rgba(139,92,246,.4);
+}
+.tl .year {
+  font-size: 10px; color: var(--oc-dimmer); letter-spacing: .08em;
+  text-transform: uppercase; position: absolute; top: -2px; left: 0; right: 0; font-weight: 600;
+  font-family: var(--font-mono);
+}
+.tl h4 { font-size: 13px; font-weight: 600; margin: 0; }
+.tl p { font-size: 10px; color: var(--oc-dim); margin: 1px 0 0; }
+
+/* Terminal */
+.term {
+  font-family: var(--font-mono); font-size: 14px;
+  background: #05080f; border: 1px solid rgba(139,92,246,.25);
+  border-radius: 10px; padding: 20px 24px;
+  width: 100%; max-width: 820px; text-align: left;
+  box-shadow: 0 0 50px rgba(108,60,224,.1) inset;
+}
+.term .bar { display: flex; gap: 7px; margin-bottom: 14px; }
+.term .bar span { width: 11px; height: 11px; border-radius: 50%; background: #333; }
+.term .bar span:nth-child(1) { background: #f87171; }
+.term .bar span:nth-child(2) { background: #fbbf24; }
+.term .bar span:nth-child(3) { background: #34d399; }
+.term .p { color: var(--oc-green); }
+.term .c { color: var(--oc-text); }
+.term .o { color: var(--oc-dim); }
+.term .caret { display: inline-block; width: 8px; height: 16px; background: var(--oc-accent3); vertical-align: middle; animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Two column markdown preview */
+.md-col {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  width: 100%; max-width: 1080px; margin-top: 20px; align-items: start;
+}
+.md-col .md-src {
+  background: var(--oc-code-bg); border: 1px solid var(--oc-border);
+  border-radius: 10px; padding: 16px 20px; text-align: left;
+  font-family: var(--font-mono); font-size: 13px; line-height: 1.9; color: var(--oc-dim);
+}
+.md-col .md-src .md-c { color: #64748b; }
+.md-col .md-preview {
+  background: var(--oc-surface); border: 1px solid var(--oc-border);
+  border-radius: 10px; padding: 16px 20px; text-align: left;
+  font-size: 14px; line-height: 1.8;
+}
+.md-col .md-preview h3 { font-size: 20px; font-weight: 700; margin: 0 0 6px; }
+.md-col .md-preview ul { margin: 0; padding-left: 18px; }
+.md-col .md-preview strong { color: var(--oc-accent3); }
+.md-col .md-preview blockquote {
+  border-left: 3px solid var(--oc-accent2); padding-left: 12px; color: var(--oc-dim); margin: 6px 0;
+}
+.md-col .md-preview hr { border: none; border-top: 1px solid var(--oc-border); margin: 8px 0; }
+
+/* Star rating */
+.stars { color: #f59e0b; font-size: 13px; letter-spacing: 1px; }
+
+/* Features list */
+.oc-features {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  width: 100%; max-width: 900px; margin-top: 18px; text-align: left;
+}
+.oc-feat {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--oc-surface); border: 1px solid var(--oc-border);
+  border-radius: 10px; padding: 14px 16px;
+}
+.oc-feat .fi { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.oc-feat h4 { font-size: 14px; font-weight: 600; margin: 0 0 3px; }
+.oc-feat p { font-size: 12px; color: var(--oc-dim); margin: 0; line-height: 1.5; }
+
+/* Card wall */
+.card-wall {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  width: 100%; max-width: 1100px; margin-top: 20px;
+}
+.card-wall .cw-card {
+  background: var(--oc-surface); border: 1px solid var(--oc-border);
+  border-radius: 14px; padding: 22px 16px; text-align: center;
+  transition: all .25s;
+}
+.card-wall .cw-card .cw-icon { font-size: 36px; margin-bottom: 8px; }
+.card-wall .cw-card h4 { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
+.card-wall .cw-card p { font-size: 12px; color: var(--oc-dim); line-height: 1.5; margin: 0; }
+.card-wall .cw-card .cw-tag {
+  display: inline-block; font-size: 10px; font-weight: 600; margin-top: 8px;
+  padding: 2px 10px; border-radius: 999px;
+  background: rgba(139,92,246,.15); color: var(--oc-accent3);
+}
+
+/* Platform cards */
+.plat-card {
+  background: var(--oc-surface); border: 1px solid var(--oc-border);
+  border-radius: 14px; padding: 20px 22px; text-align: left;
+  position: relative;
+}
+.plat-card .plat-name { font-size: 20px; font-weight: 700; margin: 0 0 6px; display: flex; align-items: center; gap: 8px; }
+.plat-card .plat-desc { font-size: 13px; color: var(--oc-dim); line-height: 1.6; }
+.plat-card .plat-stars { margin-top: 6px; }
+
+/* Large number */
+.oc-big { font-size: 120px; font-weight: 900; line-height: .95; letter-spacing: -.04em; }
+
+/* Comparison */
+.compare {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px;
+  width: 100%; max-width: 1000px; margin-top: 22px; align-items: center;
+}
+.compare .vs { font-size: 28px; font-weight: 900; color: var(--oc-accent2); }
+.compare .comp-col {
+  background: var(--oc-surface); border: 1px solid var(--oc-border);
+  border-radius: 14px; padding: 20px 22px; text-align: left;
+}
+.compare .comp-col h4 { font-size: 16px; font-weight: 700; margin: 0 0 10px; }
+.compare .comp-col .step { font-size: 13px; color: var(--oc-dim); line-height: 2; padding: 3px 0; border-bottom: 1px solid rgba(37,42,58,.5); }
+.compare .comp-col .step:last-child { border-bottom: none; }
+.compare .comp-col .step .arrow { color: var(--oc-accent2); margin-right: 6px; }
+
+/* Responsive tweaks for 16:9 */
+@media (max-width: 1280px) {
+  .oc-h1 { font-size: 48px; }
+  .oc-h2 { font-size: 30px; }
+  .oc-h3 { font-size: 22px; }
+  .slide { padding: 40px 48px; }
+}
+
+/* Covered slide list */
+.oc-list {
+  width: 100%; max-width: 800px; text-align: left; margin-top: 14px;
+}
+.oc-list li {
+  font-size: 14px; line-height: 2; color: var(--oc-dim);
+  padding: 4px 0; border-bottom: 1px solid rgba(37,42,58,.4);
+  list-style: none;
+}
+.oc-list li::before { content: '▸ '; color: var(--oc-accent2); }
+
+/* Spec table */
+.spec-table {
+  width: 100%; max-width: 820px; border-collapse: collapse; margin-top: 16px;
+  font-size: 13px; text-align: left;
+}
+.spec-table th {
+  background: var(--oc-surface2); padding: 10px 14px;
+  font-weight: 600; border-bottom: 2px solid var(--oc-border);
+}
+.spec-table td {
+  padding: 9px 14px; border-bottom: 1px solid var(--oc-border);
+  color: var(--oc-dim);
+}
+.spec-table td:first-child { color: var(--oc-text); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- ====== SLIDE 1: COVER ====== -->
+<section class="slide is-active" data-title="封面">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">01 / 16</div>
+  <div class="oc-tag">🔷 计算机协会 · 新生经验分享</div>
+  <h1 class="oc-h1 anim-fade-up" data-anim="fade-up" style="font-size:58px;">
+    计算机软件类<br>学习路线与<span class="oc-g">效率工具</span>分享
+  </h1>
+  <p class="oc-sub anim-fade-up" data-anim="fade-up" style="font-size:18px; margin-top:16px;">
+    从刷题、Python 入门到 Claude Code + AI 编程实践
+  </p>
+  <div style="margin-top:28px;" class="anim-fade-up" data-anim="fade-up">
+    <span class="oc-pill">🏷️ LeetCode</span>
+    <span class="oc-pill">🐍 Python</span>
+    <span class="oc-pill">📓 Jupyter</span>
+    <span class="oc-pill">📝 Markdown</span>
+    <span class="oc-pill">🤖 Claude Code</span>
+  </div>
+  <p style="margin-top:36px; font-size:15px; color:var(--oc-accent3); font-weight:500;" class="anim-fade-up" data-anim="fade-up">
+    23级人工智能 · 刘吉哲
+  </p>
+  <div class="oc-hl" style="margin-top:24px; max-width:600px; text-align:center; font-size:13px;">
+    本 PPT 可作为学习资料：每页包含 <b>为什么学</b> · <b>如何使用</b> · <b>推荐资源</b> · <b>Step by Step 路线</b>
+  </div>
+</section>
+
+<!-- ====== SLIDE 2: WHY LEARN SOFTWARE ====== -->
+<section class="slide" data-title="为什么学习软件开发">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">02 / 16</div>
+  <div class="oc-tag">🧭 方向 · WHY</div>
+  <h2 class="oc-h2">为什么<span class="oc-g">学习软件开发</span>？</h2>
+  <p class="oc-sub">软件能力不仅是计算机专业的核心，也是 AI、数据分析、机器人等方向的共同基础。</p>
+
+  <div class="flow anim-stagger-list" data-anim-target style="max-width:1150px;">
+    <div class="node"><div class="ic">📖</div><h4>编程基础</h4><p>Python / C++</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">🧩</div><h4>算法能力</h4><p>LeetCode 刷题</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">🔨</div><h4>项目能力</h4><p>Git / 协作</p></div>
+    <div class="arr">→</div>
+    <div class="node hl"><div class="ic">🤖</div><h4>AI 工具辅助</h4><p>Claude Code</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">🏆</div><h4>竞赛</h4><p>蓝桥杯 / ACM</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">💼</div><h4>实习</h4><p>积累经验</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">🎯</div><h4>就业</h4><p>大厂 / 深造</p></div>
+  </div>
+
+  <div class="oc-hl" style="margin-top:22px; max-width:900px;">
+    <b>💡 关键认知：</b>无论你未来做 AI 研究、数据分析、嵌入式开发还是后端——写代码是基础能力，就像数学之于理工科。
+    大一就把编程基础打牢，后面学什么都快。
+  </div>
+</section>
+
+<!-- ====== SLIDE 3: ALGORITHM PLATFORMS ====== -->
+<section class="slide" data-title="算法刷题平台推荐">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">03 / 16</div>
+  <div class="oc-tag">📊 刷题 · PLATFORMS</div>
+  <h2 class="oc-h2">算法刷题<span class="oc-g">平台推荐</span></h2>
+
+  <div class="oc-grid-2" style="max-width:1000px;">
+    <div class="plat-card anim-fade-right" data-anim="fade-right">
+      <div class="plat-name">
+        <span style="font-size:28px;">🏆</span> LeetCode
+      </div>
+      <div class="plat-desc">
+        全球最主流算法平台，2000+ 题目，涵盖所有数据结构与算法。面试题库最全，社区活跃，题解丰富。
+      </div>
+      <div class="plat-stars"><span class="stars">★★★★★</span> <span style="font-size:11px;color:var(--oc-dim)">面试必备</span></div>
+    </div>
+    <div class="plat-card anim-fade-left" data-anim="fade-left">
+      <div class="plat-name">
+        <span style="font-size:28px;">🐮</span> 牛客网
+      </div>
+      <div class="plat-desc">
+        国内互联网笔试真题库，各大厂历年笔试题一网打尽。还有面经、简历模板、求职社区。
+      </div>
+      <div class="plat-stars"><span class="stars">★★★★★</span> <span style="font-size:11px;color:var(--oc-dim)">笔试真题</span></div>
+    </div>
+    <div class="plat-card anim-fade-right" data-anim="fade-right">
+      <div class="plat-name">
+        <span style="font-size:28px;">🇨🇳</span> 力扣中国版
+      </div>
+      <div class="plat-desc">
+        LeetCode 中文站，全中文界面 + 中文题解。对于英语不太好的同学更友好，题目和全球站同步。
+      </div>
+      <div class="plat-stars"><span class="stars">★★★★☆</span> <span style="font-size:11px;color:var(--oc-dim)">中文友好</span></div>
+    </div>
+    <div class="plat-card anim-fade-left" data-anim="fade-left">
+      <div class="plat-name">
+        <span style="font-size:28px;">🐴</span> 码蹄集
+      </div>
+      <div class="plat-desc">
+        适合纯新手入门，题目按知识点分类清晰，难度曲线平缓。配有视频讲解，适合自学起步。
+      </div>
+      <div class="plat-stars"><span class="stars">★★★★☆</span> <span style="font-size:11px;color:var(--oc-dim)">新手友好</span></div>
+    </div>
+  </div>
+
+  <div class="oc-hl" style="margin-top:16px;">
+    <b>📋 建议顺序：</b>码蹄集（入门）→ 力扣（中文 + 简单题）→ LeetCode（英文 + 中等题）→ 牛客网（笔试真题）
+  </div>
+</section>
+
+<!-- ====== SLIDE 4: HOW TO START ====== -->
+<section class="slide" data-title="如何开始刷题">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">04 / 16</div>
+  <div class="oc-tag">🚀 路线 · STEP BY STEP</div>
+  <h2 class="oc-h2">如何<span class="oc-g">开始刷题</span>？</h2>
+
+  <div class="oc-steps anim-stagger-list" data-anim-target>
+    <div class="oc-step">
+      <div class="oc-sn">1</div>
+      <div class="oc-sc">
+        <h4>第一阶段：Python 基础语法（2~3 周）</h4>
+        <p>变量、循环、函数、列表、字典。在 <b>Educoder</b> 或 <b>菜鸟教程</b> 上练习。不需要学得很深，能看懂基本代码即可。</p>
+      </div>
+    </div>
+    <div class="oc-step">
+      <div class="oc-sn">2</div>
+      <div class="oc-sc">
+        <h4>第二阶段：简单题 100 道（4~6 周）</h4>
+        <p>按「数组 → 字符串 → 哈希表 → 链表 → 栈」顺序刷。每天 1~2 题，先自己想 10 分钟，不会再看题解。重点：<b>理解思路 > 抄代码</b>。</p>
+      </div>
+    </div>
+    <div class="oc-step">
+      <div class="oc-sn">3</div>
+      <div class="oc-sc">
+        <h4>第三阶段：专题突破（4~8 周）</h4>
+        <p>二分查找、双指针、滑动窗口、递归/回溯、动态规划入门。每个专题先看视频理解原理，再集中刷 10~20 题巩固。</p>
+      </div>
+    </div>
+    <div class="oc-step">
+      <div class="oc-sn">4</div>
+      <div class="oc-sc">
+        <h4>第四阶段：竞赛实战（持续）</h4>
+        <p>参加 <b>蓝桥杯</b>（适合新手）、<b>ACM 校赛</b>（进阶）、LeetCode 周赛。比赛是最好的检验方式，也能认识志同道合的同学。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="oc-hl" style="margin-top:14px;">
+    <b>🔥 核心原则：</b>每天 1~2 题，坚持比数量更重要。100 天后回头看，你会惊讶自己的成长。<br>
+    <b>📌 避坑：</b>不要一上来就刷 Hard 题，不要只看不写，不要死磕一道题超过 30 分钟。
+  </div>
+</section>
+
+<!-- ====== SLIDE 5: TWO SUM DEMO ====== -->
+<section class="slide" data-title="LeetCode 实战 Two Sum">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">05 / 16</div>
+  <div class="oc-tag">💻 实战 · LIVE DEMO</div>
+  <h2 class="oc-h2">LeetCode 实战：<span class="oc-g">Two Sum</span></h2>
+
+  <div class="oc-grid-2" style="align-items:start; max-width:1050px;">
+    <div>
+      <div class="oc-card-accent">
+        <h4 style="margin:0 0 8px; font-size:18px;">📌 题目：两数之和 (LeetCode #1)</h4>
+        <p style="color:var(--oc-dim);font-size:13px;line-height:1.7;margin:0;">
+          给定一个整数数组 <code style="color:var(--oc-blue)">nums</code> 和一个目标值 <code style="color:var(--oc-blue)">target</code>，找出数组中和为目标值的两个数的下标。<br><br>
+          <b>输入：</b>nums = [2, 7, 11, 15], target = 9<br>
+          <b>输出：</b>[0, 1]（因为 nums[0] + nums[1] = 9）
+        </p>
+      </div>
+      <div class="oc-hl" style="margin-top:12px;">
+        <b>💡 解法：哈希表，O(n)</b><br>
+        遍历数组，用字典存储「值 → 下标」。对于每个数，检查 <code>target - num</code> 是否已在字典中。
+      </div>
+    </div>
+    <div>
+      <pre class="oc-code" style="max-width:100%;"><span class="cm"># Two Sum — 哈希表 O(n) 解法</span>
+<span class="kw">def</span> <span class="fn">twoSum</span>(nums, target):
+    dic = {}
+    <span class="kw">for</span> i, num <span class="kw">in</span> <span class="fn">enumerate</span>(nums):
+        complement = target - num
+        <span class="kw">if</span> complement <span class="kw">in</span> dic:
+            <span class="kw">return</span> [dic[complement], i]
+        dic[num] = i
+    <span class="kw">return</span> []
+
+<span class="cm"># 测试</span>
+nums = [2, 7, 11, 15]
+target = 9
+<span class="fn">print</span>(<span class="fn">twoSum</span>(nums, target))  <span class="cm"># [0, 1]</span></pre>
+    </div>
+  </div>
+
+  <div class="flow" style="max-width:800px; margin-top:18px;">
+    <div class="node"><div class="ic">🔍</div><h4>搜索题目</h4></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">✏️</div><h4>编写代码</h4></div>
+    <div class="arr">→</div>
+    <div class="node hl"><div class="ic">📤</div><h4>提交</h4></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">✅</div><h4>AC!</h4></div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 6: PYTHON ROADMAP ====== -->
+<section class="slide" data-title="Python 学习路线">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">06 / 16</div>
+  <div class="oc-tag">🐍 语言 · PYTHON</div>
+  <h2 class="oc-h2"><span class="oc-g">Python</span> 学习路线</h2>
+
+  <div class="tl" style="max-width:1150px;">
+    <div class="row anim-stagger-list" data-anim-target>
+      <div class="item"><div class="year">Week 1</div><div class="dot"></div><h4>变量</h4><p>int/str/float</p></div>
+      <div class="item"><div class="year">Week 2</div><div class="dot"></div><h4>输入输出</h4><p>input/print</p></div>
+      <div class="item"><div class="year">Week 3</div><div class="dot"></div><h4>循环</h4><p>for/while</p></div>
+      <div class="item"><div class="year">Week 4</div><div class="dot"></div><h4>函数</h4><p>def/return</p></div>
+      <div class="item"><div class="year">Week 5</div><div class="dot"></div><h4>列表</h4><p>list/slice</p></div>
+      <div class="item"><div class="year">Week 6</div><div class="dot"></div><h4>字典</h4><p>dict/set</p></div>
+      <div class="item"><div class="year">Week 7</div><div class="dot"></div><h4>文件</h4><p>open/read</p></div>
+      <div class="item"><div class="year">Week 8</div><div class="dot"></div><h4>面向对象</h4><p>class/self</p></div>
+      <div class="item"><div class="year">Week 9+</div><div class="dot"></div><h4>NumPy</h4><p>矩阵/运算</p></div>
+      <div class="item"><div class="year">Week 12+</div><div class="dot"></div><h4>机器学习</h4><p>sklearn</p></div>
+    </div>
+  </div>
+
+  <div class="oc-grid-3" style="max-width:1000px; margin-top:22px;">
+    <div class="oc-card" style="text-align:center;">
+      <div style="font-size:28px;margin-bottom:4px;">🎓</div>
+      <h4 style="margin:0 0 4px;">Educoder</h4>
+      <p style="font-size:12px;color:var(--oc-dim);margin:0;">在线实验平台，边学边练</p>
+    </div>
+    <div class="oc-card" style="text-align:center;">
+      <div style="font-size:28px;margin-bottom:4px;">📘</div>
+      <h4 style="margin:0 0 4px;">菜鸟教程</h4>
+      <p style="font-size:12px;color:var(--oc-dim);margin:0;">中文文档，快速查阅</p>
+    </div>
+    <div class="oc-card" style="text-align:center;">
+      <div style="font-size:28px;margin-bottom:4px;">🎬</div>
+      <h4 style="margin:0 0 4px;">黑马程序员</h4>
+      <p style="font-size:12px;color:var(--oc-dim);margin:0;">B站免费视频教程</p>
+    </div>
+  </div>
+  <p style="margin-top:14px;font-size:13px;color:var(--oc-dim);">
+    📖 推荐书：《Python编程：从入门到实践》 · GitHub 项目：<span style="font-family:var(--font-mono);color:var(--oc-blue);">Python-100-Days</span>
+  </p>
+</section>
+
+<!-- ====== SLIDE 7: JUPYTER NOTEBOOK ====== -->
+<section class="slide" data-title="Jupyter Notebook">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">07 / 16</div>
+  <div class="oc-tag">📓 工具 · JUPYTER</div>
+  <h2 class="oc-h2">Jupyter Notebook：<span class="oc-g">代码 + 文档 = 学习神器</span></h2>
+  <p class="oc-sub">Jupyter Notebook 将代码、文字、公式和图表放在一个文件中，特别适合实验性编程和学习记录。</p>
+
+  <div class="oc-grid-2" style="align-items:start; max-width:1050px;">
+    <div>
+      <div class="oc-features">
+        <div class="oc-feat"><div class="fi">🧪</div><div><h4>机器学习实验</h4><p>分段运行代码，实时查看中间结果，调试模型参数非常方便。</p></div></div>
+        <div class="oc-feat"><div class="fi">🧠</div><div><h4>深度学习</h4><p>PyTorch/TensorFlow 官方教程都用 Notebook，可视化训练过程。</p></div></div>
+        <div class="oc-feat"><div class="fi">📊</div><div><h4>数据分析</h4><p>Pandas + Matplotlib 直接内嵌图表，数据探索效率极高。</p></div></div>
+        <div class="oc-feat"><div class="fi">📝</div><div><h4>实验报告</h4><p>代码 + 公式(Markdown) + 运行结果在一个文件，导出 PDF 即报告。</p></div></div>
+      </div>
+    </div>
+    <div>
+      <pre class="oc-code" style="max-width:100%; font-size:12.5px;"><span class="cm"># Cell 1: Hello World</span>
+<span class="fn">print</span>(<span class="str">"Hello, Jupyter!"</span>)
+
+<span class="cm"># Cell 2: NumPy 快速演示</span>
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+a = np.<span class="fn">arange</span>(<span class="num">10</span>)
+<span class="fn">print</span>(<span class="str">"数组:"</span>, a)
+<span class="fn">print</span>(<span class="str">"均值:"</span>, np.<span class="fn">mean</span>(a))
+
+<span class="cm"># Cell 3: 可视化</span>
+plt.<span class="fn">plot</span>(a, a**<span class="num">2</span>)
+plt.<span class="fn">title</span>(<span class="str">"y = x²"</span>)
+plt.<span class="fn">show</span>()</pre>
+      <p style="font-size:12px;color:var(--oc-green);margin-top:6px;text-align:left;">
+        ✅ 每段代码独立运行，结果直接显示在下方
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 8: WHY MARKDOWN ====== -->
+<section class="slide" data-title="Markdown 为什么值得学习">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">08 / 16</div>
+  <div class="oc-tag">📝 文档 · MARKDOWN</div>
+  <h2 class="oc-h2">Markdown 为什么<span class="oc-g">值得学习</span>？</h2>
+  <p class="oc-sub">Markdown 是程序员最常用的文档语言——简单、纯文本、跨平台、Git 友好。</p>
+
+  <div class="oc-grid-3" style="max-width:1000px;">
+    <div class="oc-card-accent" style="text-align:center;">
+      <div style="font-size:36px;">📋</div>
+      <h4 style="margin:8px 0 4px;">实验报告</h4>
+      <p style="font-size:12px;color:var(--oc-dim);">代码 + 公式 + 表格，一份 .md 就够了。导出 PDF 直接交。</p>
+    </div>
+    <div class="oc-card-accent" style="text-align:center;">
+      <div style="font-size:36px;">📖</div>
+      <h4 style="margin:8px 0 4px;">README</h4>
+      <p style="font-size:12px;color:var(--oc-dim);">每个 GitHub 项目的门面。好的 README = 好的第一印象。</p>
+    </div>
+    <div class="oc-card-accent" style="text-align:center;">
+      <div style="font-size:36px;">✍️</div>
+      <h4 style="margin:8px 0 4px;">学习笔记</h4>
+      <p style="font-size:12px;color:var(--oc-dim);">配合 Obsidian/Typora，知识库越积累越有价值。</p>
+    </div>
+  </div>
+
+  <div class="oc-hl" style="margin-top:16px; max-width:900px;">
+    <b>🎯 推荐工具：</b>
+    <span class="oc-pill">Typora（所见即所得）</span>
+    <span class="oc-pill">VSCode（写代码顺便写笔记）</span>
+    <span class="oc-pill">Obsidian（双链知识库）</span>
+    <span style="margin-left:8px;font-size:13px;color:var(--oc-dim);">三款都免费，选一个上手即可。</span>
+  </div>
+</section>
+
+<!-- ====== SLIDE 9: MARKDOWN BASIC SYNTAX ====== -->
+<section class="slide" data-title="Markdown 基础语法">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">09 / 16</div>
+  <div class="oc-tag">📝 语法 · MARKDOWN 基础</div>
+  <h2 class="oc-h2">Markdown <span class="oc-g">基础语法</span></h2>
+  <p class="oc-sub">左边写源码，右边看效果——5 分钟就能掌握。</p>
+
+  <div class="md-col">
+    <div class="md-src">
+<span class="md-c"># 一级标题</span>
+<span style="color:#e2e8f0;"># 一级标题</span>
+
+<span class="md-c">## 二级标题</span>
+<span style="color:#e2e8f0;">## 二级标题</span>
+
+<span class="md-c">- 无序列表项 1</span>
+<span style="color:#e2e8f0;">- 苹果
+- 香蕉
+- 橘子</span>
+
+<span class="md-c">**加粗文字**</span>
+<span style="color:#e2e8f0;">这是一段**重要内容**。</span>
+
+<span class="md-c">&gt; 引用</span>
+<span style="color:#e2e8f0;">&gt; 学而不思则罔，思而不学则殆。</span>
+
+<span class="md-c">--- 分割线</span>
+<span style="color:#e2e8f0;">段落一
+
+---
+
+段落二</span>
+    </div>
+    <div class="md-preview">
+      <h3 style="font-size:22px;border-bottom:2px solid var(--oc-border);padding-bottom:6px;">一级标题</h3>
+      <h3 style="font-size:18px;">二级标题</h3>
+      <ul>
+        <li>苹果</li>
+        <li>香蕉</li>
+        <li>橘子</li>
+      </ul>
+      <p>这是一段<strong>重要内容</strong>。</p>
+      <blockquote>学而不思则罔，思而不学则殆。</blockquote>
+      <p>段落一</p>
+      <hr>
+      <p>段落二</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 10: MARKDOWN ADVANCED ====== -->
+<section class="slide" data-title="Markdown 进阶语法">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">10 / 16</div>
+  <div class="oc-tag">📝 语法 · MARKDOWN 进阶</div>
+  <h2 class="oc-h2">Markdown <span class="oc-g">进阶语法</span></h2>
+
+  <div class="oc-grid-2" style="align-items:start; max-width:1050px;">
+    <div>
+      <div class="oc-card" style="margin-bottom:12px;">
+        <h4 style="margin:0 0 6px; font-family:var(--font-mono); font-size:14px; color:var(--oc-blue);">📦 代码块</h4>
+        <pre style="background:var(--oc-code-bg);padding:8px 12px;border-radius:6px;font-family:var(--font-mono);font-size:12px;color:var(--oc-dim);margin:0;">```python
+print("hello world")
+```</pre>
+        <p style="font-size:11px;color:var(--oc-green);margin:4px 0 0;">✅ 指定语言可获得语法高亮</p>
+      </div>
+      <div class="oc-card" style="margin-bottom:12px;">
+        <h4 style="margin:0 0 6px; font-family:var(--font-mono); font-size:14px; color:var(--oc-blue);">📊 表格</h4>
+        <pre style="background:var(--oc-code-bg);padding:8px 12px;border-radius:6px;font-family:var(--font-mono);font-size:12px;color:var(--oc-dim);margin:0;">| 姓名 | 分数 |
+|------|------|
+| 张三 |  100 |
+| 李四 |   95 |</pre>
+      </div>
+    </div>
+    <div>
+      <div class="oc-card" style="margin-bottom:12px;">
+        <h4 style="margin:0 0 6px; font-family:var(--font-mono); font-size:14px; color:var(--oc-blue);">✅ 任务列表</h4>
+        <pre style="background:var(--oc-code-bg);padding:8px 12px;border-radius:6px;font-family:var(--font-mono);font-size:12px;color:var(--oc-dim);margin:0;">- [x] 学 Python 基础
+- [x] 刷 100 道题
+- [ ] 参加蓝桥杯
+- [ ] 找实习</pre>
+      </div>
+      <div class="oc-card">
+        <h4 style="margin:0 0 6px; font-family:var(--font-mono); font-size:14px; color:var(--oc-blue);">🔗 图片 & 超链接</h4>
+        <pre style="background:var(--oc-code-bg);padding:8px 12px;border-radius:6px;font-family:var(--font-mono);font-size:12px;color:var(--oc-dim);margin:0;">![图片描述](image.png)
+
+[GitHub](https://github.com)</pre>
+        <p style="font-size:11px;color:var(--oc-dim);margin:4px 0 0;">图片 + 链接 = 图文并茂的笔记</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 11: AI PROGRAMMING ====== -->
+<section class="slide" data-title="AI 编程时代">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">11 / 16</div>
+  <div class="oc-tag">🤖 变革 · AI PROGRAMMING</div>
+  <h2 class="oc-h2"><span class="oc-g">AI 编程</span>时代</h2>
+
+  <div class="compare">
+    <div class="comp-col">
+      <h4 style="color:var(--oc-orange);">😰 传统编程</h4>
+      <div class="step"><span class="arrow">1.</span> 需求分析</div>
+      <div class="step"><span class="arrow">2.</span> 自己查资料 / 翻文档</div>
+      <div class="step"><span class="arrow">3.</span> 手写全部代码</div>
+      <div class="step"><span class="arrow">4.</span> Debug → 查 Stack Overflow</div>
+      <div class="step"><span class="arrow">5.</span> 修改 → 再调试 → 再修改</div>
+      <div class="step"><span class="arrow">6.</span> 😩 终于完成</div>
+    </div>
+    <div class="vs">VS</div>
+    <div class="comp-col" style="border-color:rgba(139,92,246,.4);box-shadow:0 0 30px rgba(108,60,224,.1);">
+      <h4 style="color:var(--oc-green);">🚀 AI 编程</h4>
+      <div class="step"><span class="arrow" style="color:var(--oc-green);">1.</span> 需求分析（你来想）</div>
+      <div class="step"><span class="arrow" style="color:var(--oc-green);">2.</span> 描述给 Claude Code</div>
+      <div class="step"><span class="arrow" style="color:var(--oc-green);">3.</span> AI 生成代码</div>
+      <div class="step"><span class="arrow" style="color:var(--oc-green);">4.</span> AI 自动 Debug</div>
+      <div class="step"><span class="arrow" style="color:var(--oc-green);">5.</span> 你来 Review + 修改</div>
+      <div class="step"><span class="arrow" style="color:var(--oc-green);">6.</span> 😎 高效完成</div>
+    </div>
+  </div>
+
+  <div class="oc-hl" style="margin-top:18px; max-width:900px;">
+    <b>⚠️ 重要提醒：</b>AI 不能代替学习。<b>你必须自己理解代码逻辑</b>，AI 是「加速器」不是「代驾」。
+    先打好基础，再借助 AI 提高效率——顺序不能反。
+  </div>
+</section>
+
+<!-- ====== SLIDE 12: CLAUDE CODE ====== -->
+<section class="slide" data-title="Claude Code 是什么">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">12 / 16</div>
+  <div class="oc-tag">🤖 工具 · CLAUDE CODE ⭐重点</div>
+  <h2 class="oc-h2">Claude Code <span class="oc-g">是什么？</span></h2>
+
+  <div class="oc-features" style="max-width:1000px;">
+    <div class="oc-feat"><div class="fi">💻</div><div><h4>命令行 AI 编程工具</h4><p>在终端里直接用自然语言让 AI 写代码、改代码。不需要复制粘贴，不需要 IDE 插件。</p></div></div>
+    <div class="oc-feat"><div class="fi">📂</div><div><h4>直接读取整个项目</h4><p>理解项目结构、文件关系、代码上下文。不是只给一个文件，而是理解整个工程。</p></div></div>
+    <div class="oc-feat"><div class="fi">⚡</div><div><h4>自动生成 & 修改代码</h4><p>「帮我写一个贪心算法」、「把这个函数改成异步的」——一句话，自动完成。</p></div></div>
+    <div class="oc-feat"><div class="fi">🔧</div><div><h4>自动 Debug</h4><p>报错了？把错误信息发给 Claude Code，它能定位问题并直接修改代码修复。</p></div></div>
+    <div class="oc-feat"><div class="fi">🌐</div><div><h4>多语言支持</h4><p>Python · C++ · Java · JavaScript · HTML/CSS · Go · Rust · 机器学习项目，全都能处理。</p></div></div>
+    <div class="oc-feat"><div class="fi">🔄</div><div><h4>Git 友好</h4><p>AI 帮你写 commit message、review 代码、解决冲突。整个工作流在终端一气呵成。</p></div></div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <span class="oc-pill">🐍 Python</span>
+    <span class="oc-pill">⚙️ C++</span>
+    <span class="oc-pill">☕ Java</span>
+    <span class="oc-pill">🌐 HTML/CSS/JS</span>
+    <span class="oc-pill">🧠 ML/DL</span>
+  </div>
+</section>
+
+<!-- ====== SLIDE 13: CLAUDE CODE SETUP ====== -->
+<section class="slide" data-title="Claude Code + DeepSeek 配置教程">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">13 / 16</div>
+  <div class="oc-tag">🔧 配置 · SETUP GUIDE ⭐重点</div>
+  <h2 class="oc-h2">Claude Code + <span class="oc-g">DeepSeek</span> 配置教程</h2>
+
+  <div class="oc-grid-2" style="align-items:start; max-width:1050px;">
+    <div class="oc-steps" style="max-width:100%;">
+      <div class="oc-step">
+        <div class="oc-sn">1</div>
+        <div class="oc-sc"><h4>安装 Claude Code</h4><p>终端运行安装命令，自动配置环境。</p></div>
+      </div>
+      <div class="oc-step">
+        <div class="oc-sn">2</div>
+        <div class="oc-sc"><h4>安装 ccswitch</h4><p>模型切换工具，让你可以使用 DeepSeek 等国产模型。</p></div>
+      </div>
+      <div class="oc-step">
+        <div class="oc-sn">3</div>
+        <div class="oc-sc"><h4>运行 ccswitch</h4><p>选择 DeepSeek 作为后端模型，配置 API key。</p></div>
+      </div>
+      <div class="oc-step">
+        <div class="oc-sn">4</div>
+        <div class="oc-sc"><h4>启动 Claude</h4><p>在项目目录运行启动命令，进入 AI 编程环境。</p></div>
+      </div>
+      <div class="oc-step">
+        <div class="oc-sn">5</div>
+        <div class="oc-sc"><h4>开始 AI 编程</h4><p>输入自然语言指令：写算法、生成网站、调试代码…</p></div>
+      </div>
+    </div>
+    <div class="term" style="max-width:100%;">
+      <div class="bar"><span></span><span></span><span></span><span style="color:var(--oc-dim);margin-left:8px;font-size:12px;">Terminal — zsh</span></div>
+      <div><span class="p">$ </span><span class="c">npm install -g @anthropic-ai/claude-code</span></div>
+      <div class="o">  ✔ installed claude-code v2.x</div>
+      <div style="margin-top:10px"><span class="p">$ </span><span class="c">npm install -g ccswitch</span></div>
+      <div class="o">  ✔ ccswitch ready</div>
+      <div style="margin-top:10px"><span class="p">$ </span><span class="c">ccswitch</span></div>
+      <div class="o">  → 选择模型: <span style="color:var(--oc-green);">DeepSeek</span></div>
+      <div class="o">  → API key configured</div>
+      <div style="margin-top:10px"><span class="p">$ </span><span class="c">mkdir my-first-project && cd my-first-project</span></div>
+      <div style="margin-top:8px"><span class="p">$ </span><span class="c">claude</span></div>
+      <div class="o">  ▸ Claude Code ready. Type your request.</div>
+      <div style="margin-top:10px"><span class="p">$ </span><span class="c" style="color:var(--oc-accent3);">帮我写一个贪心算法解决背包问题</span></div>
+      <div class="o">  ✔ Generated greedy_knapsack.py</div>
+      <div style="margin-top:8px"><span class="p">$ </span><span class="caret"></span></div>
+    </div>
+  </div>
+  <p style="margin-top:14px;font-size:13px;color:var(--oc-dim);">
+    💡 小技巧：用 <code style="color:var(--oc-blue);">claude</code> 命令进入项目目录后，可以直接说「帮我生成一个 Flask 网站」或「解释这个项目的结构」。
+  </p>
+</section>
+
+<!-- ====== SLIDE 14: RECOMMENDED SOFTWARE ====== -->
+<section class="slide" data-title="推荐软件 ALL IN ONE">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">14 / 16</div>
+  <div class="oc-tag">🧰 工具箱 · ALL IN ONE</div>
+  <h2 class="oc-h2">推荐软件 <span class="oc-g">ALL IN ONE</span></h2>
+
+  <div class="card-wall">
+    <div class="cw-card anim-fade-up" data-anim="fade-up">
+      <div class="cw-icon">💙</div>
+      <h4>VSCode</h4>
+      <p>最流行的代码编辑器，插件生态极强。Python/C++/Web 一个搞定。</p>
+      <span class="cw-tag">代码编辑器</span>
+    </div>
+    <div class="cw-card anim-fade-up" data-anim="fade-up">
+      <div class="cw-icon">🐍</div>
+      <h4>Python</h4>
+      <p>AI/数据科学第一语言。语法简单，库丰富，新手最佳选择。</p>
+      <span class="cw-tag">编程语言</span>
+    </div>
+    <div class="cw-card anim-fade-up" data-anim="fade-up">
+      <div class="cw-icon">📓</div>
+      <h4>Jupyter</h4>
+      <p>代码 + 文档 + 图表一体化。实验、学习、写报告的神器。</p>
+      <span class="cw-tag">交互编程</span>
+    </div>
+    <div class="cw-card anim-fade-up" data-anim="fade-up">
+      <div class="cw-icon">📝</div>
+      <h4>Typora</h4>
+      <p>所见即所得的 Markdown 编辑器，写笔记、写报告超顺手。</p>
+      <span class="cw-tag">Markdown</span>
+    </div>
+    <div class="cw-card anim-fade-up" data-anim="fade-up">
+      <div class="cw-icon">🔀</div>
+      <h4>Git</h4>
+      <p>版本管理标配。管理代码历史、团队协作、备份项目的必备技能。</p>
+      <span class="cw-tag">版本管理</span>
+    </div>
+    <div class="cw-card anim-fade-up" data-anim="fade-up">
+      <div class="cw-icon">🤖</div>
+      <h4>Claude Code</h4>
+      <p>终端 AI 编程助手。一句话生成代码、修改项目、自动调试。</p>
+      <span class="cw-tag">AI 编程</span>
+    </div>
+    <div class="cw-card anim-fade-up" data-anim="fade-up">
+      <div class="cw-icon">🌐</div>
+      <h4>Chrome</h4>
+      <p>F12 开发者工具是前端调试必备。Network/Console/Elements 三板斧。</p>
+      <span class="cw-tag">浏览器</span>
+    </div>
+    <div class="cw-card anim-fade-up" data-anim="fade-up">
+      <div class="cw-icon">🧠</div>
+      <h4>Obsidian</h4>
+      <p>双链笔记，打造个人知识库。配合 Markdown 使用效果翻倍。</p>
+      <span class="cw-tag">知识管理</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIDE 15: LEARNING PATH ====== -->
+<section class="slide" data-title="推荐学习路线">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">15 / 16</div>
+  <div class="oc-tag">🗺️ 路线 · ROADMAP ⭐重点</div>
+  <h2 class="oc-h2">推荐<span class="oc-g">学习路线</span>（大一版）</h2>
+
+  <div class="flow anim-stagger-list" data-anim-target style="max-width:1150px;">
+    <div class="node"><div class="ic">🐍</div><h4>Python 基础</h4><p>1~2 个月</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">🧩</div><h4>算法刷题</h4><p>每天 1~2 题</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">📝</div><h4>Markdown</h4><p>1 周上手</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">🔀</div><h4>Git</h4><p>1~2 周</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">📓</div><h4>Jupyter</h4><p>边学边用</p></div>
+    <div class="arr">→</div>
+    <div class="node hl"><div class="ic">🔨</div><h4>项目实践</h4><p>持续积累</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">🤖</div><h4>AI 工具</h4><p>Claude Code</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">🏆</div><h4>竞赛</h4><p>蓝桥杯/ACM</p></div>
+    <div class="arr">→</div>
+    <div class="node"><div class="ic">🎯</div><h4>就业/保研</h4><p>水到渠成</p></div>
+  </div>
+
+  <div class="oc-hl" style="margin-top:18px; max-width:1000px;font-size:15px;">
+    <b>💡 核心建议：</b>不要急于学习框架（Django/Spring/Vue...）。<b>大一先把基础打牢</b>——语言、算法、工具。
+    基础扎实了，框架只是查文档的事。再利用 AI 工具（Claude Code）提高效率，事半功倍。<br><br>
+    <b>📅 大一上学期建议节奏：</b>前 8 周搞定 Python 基础 → 中 8 周开始刷简单算法题 + 学 Markdown/Git →
+    寒假做一个自己的小项目（比如个人网站、爬虫、小游戏），开学回来你会比 90% 的同学领先。
+  </div>
+</section>
+
+<!-- ====== SLIDE 16: THANK YOU ====== -->
+<section class="slide" data-title="THANK YOU">
+  <div class="oc-cbg"></div>
+  <div class="oc-cgrid"></div>
+  <div class="oc-snum">16 / 16</div>
+  <div class="oc-tag">🎉 THANK YOU</div>
+
+  <div class="oc-quote" style="text-align:center;">
+    <div class="oc-big oc-g2" style="font-size:100px; margin-bottom:20px;">Thank You</div>
+    <blockquote style="font-size:28px;text-align:center;">
+      保持热爱 · 持续学习 · <span class="oc-g">Keep Coding</span>
+    </blockquote>
+  </div>
+
+  <div style="margin-top:32px;">
+    <span class="oc-pill">💬 有任何问题欢迎找我交流</span>
+  </div>
+
+  <p style="margin-top:28px; font-size:16px; color:var(--oc-accent3); font-weight:600;">
+    23级人工智能 · 刘吉哲
+  </p>
+
+  <div style="margin-top:30px; display:flex; gap:40px; justify-content:center; font-size:13px; color:var(--oc-dim);">
+    <div style="display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">📧</span> GitHub: github.com/your-id</div>
+    <div style="display:flex;align-items:center;gap:6px;"><span style="font-size:18px;">💬</span> QQ群: xxx-xxx-xxx</div>
+  </div>
+</section>
+
+</div>
+<script src="../../.claude/skills/html-ppt/assets/runtime.js"></script>
+</body>
+</html>

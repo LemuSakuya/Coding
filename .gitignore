@@ -1,3 +1,6 @@
 *.exe
 .venv/
 .vscode/
+.claude/
+.agents/
+.DS_Store
