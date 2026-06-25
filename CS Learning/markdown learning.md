@@ -64,7 +64,7 @@
    - [Thank you for your subscribtion][链接]
         (要放在注释前面)
 8. **图片**
-    ![THproject](Markdown/Picture/TH8.jpg)
+    `![图片说明](相对路径/图片文件名.jpg)`
 9. **Latex**
     - 行内显示数学公式
     $f(x)=ax+b$

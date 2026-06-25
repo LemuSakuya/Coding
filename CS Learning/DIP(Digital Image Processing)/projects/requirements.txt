@@ -8,6 +8,6 @@ pillow>=10.0
 pywavelets>=1.4
 imageio>=2.31
 # Project 10 (deep learning) - 可选，想跑 CNN 分类时安装
-torch>=2.1
-torchvision>=0.16
+torch>=2.12.1
+torchvision>=0.27.1
 tqdm>=4.66
