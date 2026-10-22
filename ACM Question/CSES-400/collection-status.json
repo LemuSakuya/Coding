@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-22",
+  "timezone": "Asia/Shanghai",
+  "task_count": 400,
+  "categories": 18,
+  "notes_count": 400,
+  "covered_tasks": 400,
+  "cpp_files": 403,
+  "python_files": 2,
+  "sample_pairs": 394,
+  "secondary_source_links": 328,
+  "source_issue_entries": 22,
+  "runtime_execution": false,
+  "compilation": false,
+  "judge_submissions": false,
+  "main_source_commit": "e5e35e104d1131b0bf4cbc0334658c4e1a90377b",
+  "secondary_source_commit": "56a1847dbc80494d688544aee6b9005fe917f23f"
+}
